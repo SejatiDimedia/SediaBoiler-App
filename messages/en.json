@@ -1,0 +1,95 @@
+{
+    "metadata": {
+        "title": "SediaBoiler - Ready-Made Foundation, Smooth Coding",
+        "description": "Ready-to-use UI component library with copy-paste code for Next.js and Tailwind CSS"
+    },
+    "nav": {
+        "home": "Home",
+        "library": "Library",
+        "components": "Components",
+        "docs": "Documentation",
+        "getStarted": "Get Started"
+    },
+    "hero": {
+        "badge": "🚀 Indonesian UI Library",
+        "title": "Ready-Made Foundation,",
+        "titleHighlight": "Smooth Coding",
+        "description": "A collection of modern UI components with copy-paste ready code. Built with Next.js and Tailwind CSS for Indonesian developers.",
+        "cta": "Explore Library",
+        "ctaSecondary": "View Documentation"
+    },
+    "features": {
+        "title": "Why SediaBoiler?",
+        "subtitle": "Everything you need to build modern websites quickly",
+        "items": {
+            "copyPaste": {
+                "title": "Instant Copy-Paste",
+                "description": "Copy JSX/Tailwind code with a single click. No complicated setup required."
+            },
+            "responsive": {
+                "title": "Responsive by Default",
+                "description": "All components are optimized for mobile, tablet, and desktop."
+            },
+            "bilingual": {
+                "title": "Bilingual Documentation",
+                "description": "Complete descriptions in Indonesian and English."
+            },
+            "modern": {
+                "title": "Modern Design",
+                "description": "Components with clean and professional design for SaaS, landing pages, and dashboards."
+            },
+            "customizable": {
+                "title": "Easy to Customize",
+                "description": "Built with Tailwind CSS for easy color and styling customization."
+            },
+            "openSource": {
+                "title": "Open Source",
+                "description": "Use for commercial or personal projects without restrictions."
+            }
+        }
+    },
+    "library": {
+        "title": "Component Library",
+        "subtitle": "Explore our collection of ready-to-use UI components",
+        "search": "Search components...",
+        "categories": {
+            "all": "All",
+            "navbar": "Navbar",
+            "hero": "Hero",
+            "features": "Features",
+            "pricing": "Pricing",
+            "footer": "Footer"
+        },
+        "viewDemo": "View Demo",
+        "copyCode": "Copy Code",
+        "copied": "Copied!"
+    },
+    "componentViewer": {
+        "preview": "Preview",
+        "code": "Code",
+        "copyCode": "Copy Code",
+        "copied": "Copied!",
+        "responsive": {
+            "mobile": "Mobile",
+            "tablet": "Tablet",
+            "desktop": "Desktop"
+        }
+    },
+    "footer": {
+        "description": "Ready-to-use UI component library for Indonesian developers.",
+        "quickLinks": "Quick Links",
+        "resources": "Resources",
+        "legal": "Legal",
+        "terms": "Terms of Service",
+        "privacy": "Privacy Policy",
+        "copyright": "© 2026 SejatiDimedia. All rights reserved."
+    },
+    "search": {
+        "trigger": "Search components...",
+        "placeholder": "Search components...",
+        "components": "components",
+        "available": "components available",
+        "noResults": "No components found",
+        "escToClose": "Press to close"
+    }
+}

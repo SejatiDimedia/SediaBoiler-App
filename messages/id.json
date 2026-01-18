@@ -1,0 +1,95 @@
+{
+  "metadata": {
+    "title": "SediaBoiler - Fondasi Siap Pakai, Coding Jadi Lancar",
+    "description": "Library komponen UI siap pakai dengan kode copy-paste untuk Next.js dan Tailwind CSS"
+  },
+  "nav": {
+    "home": "Beranda",
+    "library": "Library",
+    "components": "Komponen",
+    "docs": "Dokumentasi",
+    "getStarted": "Mulai Sekarang"
+  },
+  "hero": {
+    "badge": "🚀 UI Library Indonesia",
+    "title": "Fondasi Siap Pakai,",
+    "titleHighlight": "Coding Jadi Lancar",
+    "description": "Koleksi komponen UI modern dengan kode siap copy-paste. Dibangun dengan Next.js dan Tailwind CSS untuk developer Indonesia.",
+    "cta": "Jelajahi Library",
+    "ctaSecondary": "Lihat Dokumentasi"
+  },
+  "features": {
+    "title": "Mengapa SediaBoiler?",
+    "subtitle": "Semua yang Anda butuhkan untuk membangun website modern dengan cepat",
+    "items": {
+      "copyPaste": {
+        "title": "Copy-Paste Instan",
+        "description": "Salin kode JSX/Tailwind dengan sekali klik. Tidak perlu setup yang rumit."
+      },
+      "responsive": {
+        "title": "Responsive by Default",
+        "description": "Semua komponen sudah dioptimalkan untuk mobile, tablet, dan desktop."
+      },
+      "bilingual": {
+        "title": "Dokumentasi Bilingual",
+        "description": "Deskripsi lengkap dalam Bahasa Indonesia dan English."
+      },
+      "modern": {
+        "title": "Desain Modern",
+        "description": "Komponen dengan desain clean dan profesional untuk SaaS, landing page, dan dashboard."
+      },
+      "customizable": {
+        "title": "Mudah Dikustomisasi",
+        "description": "Dibangun dengan Tailwind CSS untuk kemudahan kustomisasi warna dan styling."
+      },
+      "openSource": {
+        "title": "Open Source",
+        "description": "Gunakan untuk proyek komersial maupun personal tanpa batasan."
+      }
+    }
+  },
+  "library": {
+    "title": "Library Komponen",
+    "subtitle": "Jelajahi koleksi komponen UI siap pakai",
+    "search": "Cari komponen...",
+    "categories": {
+      "all": "Semua",
+      "navbar": "Navbar",
+      "hero": "Hero",
+      "features": "Features",
+      "pricing": "Pricing",
+      "footer": "Footer"
+    },
+    "viewDemo": "Lihat Demo",
+    "copyCode": "Salin Kode",
+    "copied": "Tersalin!"
+  },
+  "componentViewer": {
+    "preview": "Preview",
+    "code": "Kode",
+    "copyCode": "Salin Kode",
+    "copied": "Tersalin!",
+    "responsive": {
+      "mobile": "Mobile",
+      "tablet": "Tablet",
+      "desktop": "Desktop"
+    }
+  },
+  "footer": {
+    "description": "Library komponen UI siap pakai untuk developer Indonesia.",
+    "quickLinks": "Tautan Cepat",
+    "resources": "Resources",
+    "legal": "Legal",
+    "terms": "Ketentuan Layanan",
+    "privacy": "Kebijakan Privasi",
+    "copyright": "© 2026 SejatiDimedia. Hak cipta dilindungi."
+  },
+  "search": {
+    "trigger": "Cari komponen...",
+    "placeholder": "Cari komponen...",
+    "components": "komponen",
+    "available": "komponen tersedia",
+    "noResults": "Tidak ada komponen ditemukan",
+    "escToClose": "Tekan untuk menutup"
+  }
+}
