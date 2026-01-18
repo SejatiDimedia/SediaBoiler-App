@@ -2,24 +2,24 @@
 // In production, this would come from a database
 
 export interface ComponentData {
-    slug: string;
-    name: { id: string; en: string };
-    description: { id: string; en: string };
-    category: 'navbar' | 'hero' | 'features' | 'pricing' | 'footer';
-    code: string;
+  slug: string;
+  name: { id: string; en: string };
+  description: { id: string; en: string };
+  category: 'navbar' | 'hero' | 'features' | 'pricing' | 'footer' | 'cta' | 'testimonial' | 'faq' | 'contact' | 'blog' | 'gallery' | 'team' | 'stats' | 'sidebar' | 'modal' | 'card' | 'form' | 'table' | 'chart' | 'other';
+  code: string;
 }
 
 export const components: ComponentData[] = [
-    // NAVBAR COMPONENTS
-    {
-        slug: 'navbar-modern',
-        name: { id: 'Navbar Modern', en: 'Modern Navbar' },
-        description: {
-            id: 'Navbar minimalis dengan efek blur saat scroll dan menu mobile responsive',
-            en: 'Minimalist navbar with scroll blur effect and responsive mobile menu'
-        },
-        category: 'navbar',
-        code: `export function NavbarModern() {
+  // NAVBAR COMPONENTS
+  {
+    slug: 'navbar-modern',
+    name: { id: 'Navbar Modern', en: 'Modern Navbar' },
+    description: {
+      id: 'Navbar minimalis dengan efek blur saat scroll dan menu mobile responsive',
+      en: 'Minimalist navbar with scroll blur effect and responsive mobile menu'
+    },
+    category: 'navbar',
+    code: `export function NavbarModern() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -70,16 +70,16 @@ export const components: ComponentData[] = [
     </header>
   );
 }`,
+  },
+  {
+    slug: 'navbar-sticky',
+    name: { id: 'Navbar Sticky', en: 'Sticky Navbar' },
+    description: {
+      id: 'Navbar dengan posisi sticky dan border bawah halus',
+      en: 'Navbar with sticky position and subtle bottom border'
     },
-    {
-        slug: 'navbar-sticky',
-        name: { id: 'Navbar Sticky', en: 'Sticky Navbar' },
-        description: {
-            id: 'Navbar dengan posisi sticky dan border bawah halus',
-            en: 'Navbar with sticky position and subtle bottom border'
-        },
-        category: 'navbar',
-        code: `export function NavbarSticky() {
+    category: 'navbar',
+    code: `export function NavbarSticky() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur">
       <div className="max-w-7xl mx-auto px-4 flex h-14 items-center justify-between">
@@ -109,16 +109,16 @@ export const components: ComponentData[] = [
     </header>
   );
 }`,
+  },
+  {
+    slug: 'navbar-transparent',
+    name: { id: 'Navbar Transparan', en: 'Transparent Navbar' },
+    description: {
+      id: 'Navbar transparan cocok untuk hero section dengan gambar latar',
+      en: 'Transparent navbar perfect for hero sections with background images'
     },
-    {
-        slug: 'navbar-transparent',
-        name: { id: 'Navbar Transparan', en: 'Transparent Navbar' },
-        description: {
-            id: 'Navbar transparan cocok untuk hero section dengan gambar latar',
-            en: 'Transparent navbar perfect for hero sections with background images'
-        },
-        category: 'navbar',
-        code: `export function NavbarTransparent() {
+    category: 'navbar',
+    code: `export function NavbarTransparent() {
   return (
     <header className="absolute top-0 left-0 right-0 z-50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -142,18 +142,18 @@ export const components: ComponentData[] = [
     </header>
   );
 }`,
-    },
+  },
 
-    // HERO COMPONENTS
-    {
-        slug: 'hero-centered',
-        name: { id: 'Hero Tengah', en: 'Centered Hero' },
-        description: {
-            id: 'Hero section dengan teks terpusat dan dua tombol CTA',
-            en: 'Hero section with centered text and two CTA buttons'
-        },
-        category: 'hero',
-        code: `export function HeroCentered() {
+  // HERO COMPONENTS
+  {
+    slug: 'hero-centered',
+    name: { id: 'Hero Tengah', en: 'Centered Hero' },
+    description: {
+      id: 'Hero section dengan teks terpusat dan dua tombol CTA',
+      en: 'Hero section with centered text and two CTA buttons'
+    },
+    category: 'hero',
+    code: `export function HeroCentered() {
   return (
     <section className="relative overflow-hidden bg-white py-24 sm:py-32">
       {/* Background gradient */}
@@ -191,16 +191,16 @@ export const components: ComponentData[] = [
     </section>
   );
 }`,
+  },
+  {
+    slug: 'hero-split',
+    name: { id: 'Hero Split', en: 'Split Hero' },
+    description: {
+      id: 'Hero dengan layout split - teks di kiri, gambar di kanan',
+      en: 'Hero with split layout - text on left, image on right'
     },
-    {
-        slug: 'hero-split',
-        name: { id: 'Hero Split', en: 'Split Hero' },
-        description: {
-            id: 'Hero dengan layout split - teks di kiri, gambar di kanan',
-            en: 'Hero with split layout - text on left, image on right'
-        },
-        category: 'hero',
-        code: `export function HeroSplit() {
+    category: 'hero',
+    code: `export function HeroSplit() {
   return (
     <section className="bg-white py-16 lg:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -251,16 +251,16 @@ export const components: ComponentData[] = [
     </section>
   );
 }`,
+  },
+  {
+    slug: 'hero-gradient',
+    name: { id: 'Hero Gradien', en: 'Gradient Hero' },
+    description: {
+      id: 'Hero dengan latar gradien biru-ungu yang dramatis',
+      en: 'Hero with dramatic blue-purple gradient background'
     },
-    {
-        slug: 'hero-gradient',
-        name: { id: 'Hero Gradien', en: 'Gradient Hero' },
-        description: {
-            id: 'Hero dengan latar gradien biru-ungu yang dramatis',
-            en: 'Hero with dramatic blue-purple gradient background'
-        },
-        category: 'hero',
-        code: `export function HeroGradient() {
+    category: 'hero',
+    code: `export function HeroGradient() {
   return (
     <section className="relative min-h-[600px] flex items-center overflow-hidden">
       {/* Gradient background */}
@@ -293,18 +293,18 @@ export const components: ComponentData[] = [
     </section>
   );
 }`,
-    },
+  },
 
-    // FEATURES COMPONENTS
-    {
-        slug: 'features-grid',
-        name: { id: 'Features Grid', en: 'Grid Features' },
-        description: {
-            id: 'Tampilan features dalam grid 3 kolom dengan ikon',
-            en: 'Features displayed in a 3-column grid with icons'
-        },
-        category: 'features',
-        code: `export function FeaturesGrid() {
+  // FEATURES COMPONENTS
+  {
+    slug: 'features-grid',
+    name: { id: 'Features Grid', en: 'Grid Features' },
+    description: {
+      id: 'Tampilan features dalam grid 3 kolom dengan ikon',
+      en: 'Features displayed in a 3-column grid with icons'
+    },
+    category: 'features',
+    code: `export function FeaturesGrid() {
   const features = [
     { icon: '⚡', title: 'Lightning Fast', desc: 'Optimized for speed and performance' },
     { icon: '🔒', title: 'Secure by Default', desc: 'Enterprise-grade security built-in' },
@@ -341,16 +341,16 @@ export const components: ComponentData[] = [
     </section>
   );
 }`,
+  },
+  {
+    slug: 'features-icons',
+    name: { id: 'Features Ikon', en: 'Icon Features' },
+    description: {
+      id: 'Features dengan ikon besar dan deskripsi singkat',
+      en: 'Features with large icons and short descriptions'
     },
-    {
-        slug: 'features-icons',
-        name: { id: 'Features Ikon', en: 'Icon Features' },
-        description: {
-            id: 'Features dengan ikon besar dan deskripsi singkat',
-            en: 'Features with large icons and short descriptions'
-        },
-        category: 'features',
-        code: `export function FeaturesIcons() {
+    category: 'features',
+    code: `export function FeaturesIcons() {
   const features = [
     { icon: '🚀', title: 'Fast Deployment', desc: 'Deploy in seconds with zero configuration' },
     { icon: '🛡️', title: 'Built-in Security', desc: 'Automatic SSL and DDoS protection' },
@@ -376,16 +376,16 @@ export const components: ComponentData[] = [
     </section>
   );
 }`,
+  },
+  {
+    slug: 'features-bento',
+    name: { id: 'Features Bento', en: 'Bento Features' },
+    description: {
+      id: 'Layout bento grid untuk menampilkan features dengan ukuran bervariasi',
+      en: 'Bento grid layout for displaying features in varied sizes'
     },
-    {
-        slug: 'features-bento',
-        name: { id: 'Features Bento', en: 'Bento Features' },
-        description: {
-            id: 'Layout bento grid untuk menampilkan features dengan ukuran bervariasi',
-            en: 'Bento grid layout for displaying features in varied sizes'
-        },
-        category: 'features',
-        code: `export function FeaturesBento() {
+    category: 'features',
+    code: `export function FeaturesBento() {
   return (
     <section className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -426,18 +426,18 @@ export const components: ComponentData[] = [
     </section>
   );
 }`,
-    },
+  },
 
-    // PRICING COMPONENTS
-    {
-        slug: 'pricing-simple',
-        name: { id: 'Pricing Simpel', en: 'Simple Pricing' },
-        description: {
-            id: 'Tampilan harga 3 tier dengan desain minimalis',
-            en: '3-tier pricing display with minimalist design'
-        },
-        category: 'pricing',
-        code: `export function PricingSimple() {
+  // PRICING COMPONENTS
+  {
+    slug: 'pricing-simple',
+    name: { id: 'Pricing Simpel', en: 'Simple Pricing' },
+    description: {
+      id: 'Tampilan harga 3 tier dengan desain minimalis',
+      en: '3-tier pricing display with minimalist design'
+    },
+    category: 'pricing',
+    code: `export function PricingSimple() {
   const plans = [
     { name: 'Starter', price: '$9', features: ['5 Projects', '10GB Storage', 'Email Support', 'Basic Analytics'] },
     { name: 'Pro', price: '$29', popular: true, features: ['Unlimited Projects', '100GB Storage', 'Priority Support', 'Advanced Analytics', 'Custom Domain'] },
@@ -483,16 +483,16 @@ export const components: ComponentData[] = [
     </section>
   );
 }`,
+  },
+  {
+    slug: 'pricing-toggle',
+    name: { id: 'Pricing Toggle', en: 'Toggle Pricing' },
+    description: {
+      id: 'Pricing dengan toggle bulanan/tahunan',
+      en: 'Pricing with monthly/yearly toggle'
     },
-    {
-        slug: 'pricing-toggle',
-        name: { id: 'Pricing Toggle', en: 'Toggle Pricing' },
-        description: {
-            id: 'Pricing dengan toggle bulanan/tahunan',
-            en: 'Pricing with monthly/yearly toggle'
-        },
-        category: 'pricing',
-        code: `export function PricingToggle() {
+    category: 'pricing',
+    code: `export function PricingToggle() {
   const [isYearly, setIsYearly] = useState(false);
   
   const plans = [
@@ -542,16 +542,16 @@ export const components: ComponentData[] = [
     </section>
   );
 }`,
+  },
+  {
+    slug: 'pricing-comparison',
+    name: { id: 'Pricing Perbandingan', en: 'Comparison Pricing' },
+    description: {
+      id: 'Tabel perbandingan fitur lengkap antar paket',
+      en: 'Full feature comparison table between plans'
     },
-    {
-        slug: 'pricing-comparison',
-        name: { id: 'Pricing Perbandingan', en: 'Comparison Pricing' },
-        description: {
-            id: 'Tabel perbandingan fitur lengkap antar paket',
-            en: 'Full feature comparison table between plans'
-        },
-        category: 'pricing',
-        code: `export function PricingComparison() {
+    category: 'pricing',
+    code: `export function PricingComparison() {
   return (
     <section className="py-20 bg-white">
       <div className="max-w-5xl mx-auto px-4">
@@ -590,18 +590,18 @@ export const components: ComponentData[] = [
     </section>
   );
 }`,
-    },
+  },
 
-    // FOOTER COMPONENTS
-    {
-        slug: 'footer-simple',
-        name: { id: 'Footer Simpel', en: 'Simple Footer' },
-        description: {
-            id: 'Footer minimalis dengan logo dan link essensial',
-            en: 'Minimalist footer with logo and essential links'
-        },
-        category: 'footer',
-        code: `export function FooterSimple() {
+  // FOOTER COMPONENTS
+  {
+    slug: 'footer-simple',
+    name: { id: 'Footer Simpel', en: 'Simple Footer' },
+    description: {
+      id: 'Footer minimalis dengan logo dan link essensial',
+      en: 'Minimalist footer with logo and essential links'
+    },
+    category: 'footer',
+    code: `export function FooterSimple() {
   return (
     <footer className="bg-gray-900 text-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -623,16 +623,16 @@ export const components: ComponentData[] = [
     </footer>
   );
 }`,
+  },
+  {
+    slug: 'footer-columns',
+    name: { id: 'Footer Kolom', en: 'Column Footer' },
+    description: {
+      id: 'Footer dengan beberapa kolom kategori link',
+      en: 'Footer with multiple link category columns'
     },
-    {
-        slug: 'footer-columns',
-        name: { id: 'Footer Kolom', en: 'Column Footer' },
-        description: {
-            id: 'Footer dengan beberapa kolom kategori link',
-            en: 'Footer with multiple link category columns'
-        },
-        category: 'footer',
-        code: `export function FooterColumns() {
+    category: 'footer',
+    code: `export function FooterColumns() {
   const columns = [
     { title: 'Product', links: ['Features', 'Pricing', 'Integrations', 'Updates'] },
     { title: 'Company', links: ['About', 'Blog', 'Careers', 'Press'] },
@@ -672,16 +672,16 @@ export const components: ComponentData[] = [
     </footer>
   );
 }`,
+  },
+  {
+    slug: 'footer-cta',
+    name: { id: 'Footer CTA', en: 'CTA Footer' },
+    description: {
+      id: 'Footer dengan section CTA dan form newsletter',
+      en: 'Footer with CTA section and newsletter form'
     },
-    {
-        slug: 'footer-cta',
-        name: { id: 'Footer CTA', en: 'CTA Footer' },
-        description: {
-            id: 'Footer dengan section CTA dan form newsletter',
-            en: 'Footer with CTA section and newsletter form'
-        },
-        category: 'footer',
-        code: `export function FooterCTA() {
+    category: 'footer',
+    code: `export function FooterCTA() {
   return (
     <footer className="bg-gray-900">
       {/* CTA Section */}
@@ -721,18 +721,18 @@ export const components: ComponentData[] = [
     </footer>
   );
 }`,
-    },
+  },
 ];
 
 export function getComponentBySlug(slug: string): ComponentData | undefined {
-    return components.find(c => c.slug === slug);
+  return components.find(c => c.slug === slug);
 }
 
 export function getComponentsByCategory(category: string): ComponentData[] {
-    if (category === 'all') return components;
-    return components.filter(c => c.category === category);
+  if (category === 'all') return components;
+  return components.filter(c => c.category === category);
 }
 
 export function getAllCategories(): string[] {
-    return ['all', ...new Set(components.map(c => c.category))];
+  return ['all', ...new Set(components.map(c => c.category))];
 }
