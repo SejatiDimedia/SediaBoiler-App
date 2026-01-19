@@ -70,18 +70,6 @@ export function ComponentViewer({ slug, code, className }: ComponentViewerProps)
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script>
         window.__componentCode__ = ${JSON.stringify(componentCode)};
-        
-        const observer = new ResizeObserver(entries => {
-            const height = document.body.scrollHeight;
-            window.parent.postMessage({ type: 'preview-resize', height: height }, '*');
-        });
-        
-        window.addEventListener('DOMContentLoaded', () => {
-            observer.observe(document.body);
-            setTimeout(() => {
-                window.parent.postMessage({ type: 'preview-resize', height: document.body.scrollHeight }, '*');
-            }, 200);
-        });
     </script>
     <script>
         function initPreview() {
@@ -153,18 +141,6 @@ export function ComponentViewer({ slug, code, className }: ComponentViewerProps)
 
         return () => URL.revokeObjectURL(url);
     }, [code, resolvedTheme, iframeKey, createPreviewContent, isStaticComponent]);
-
-    // Listen for resize messages from iframe
-    useEffect(() => {
-        const handleMessage = (event: MessageEvent) => {
-            if (event.data.type === 'preview-resize' && event.data.height) {
-                setDynamicHeight(`${Math.max(400, event.data.height + 20)}px`);
-            }
-        };
-
-        window.addEventListener('message', handleMessage);
-        return () => window.removeEventListener('message', handleMessage);
-    }, []);
 
     // Sync theme with iframe (for static components)
     useEffect(() => {
@@ -259,8 +235,7 @@ export function ComponentViewer({ slug, code, className }: ComponentViewerProps)
                                 ref={iframeRef}
                                 className="w-full border-0"
                                 style={{
-                                    height: dynamicHeight,
-                                    minHeight: '400px',
+                                    height: viewMode === 'mobile' ? '500px' : viewMode === 'tablet' ? '600px' : '700px',
                                 }}
                                 title={`Preview of ${slug}`}
                                 sandbox="allow-scripts"
