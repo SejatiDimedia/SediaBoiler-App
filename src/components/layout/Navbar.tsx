@@ -72,7 +72,7 @@ export function Navbar() {
                         <ThemeToggle />
                         <LanguageSwitcher />
                         <Link href="/library">
-                            <Button size="sm">{t('getStarted')}</Button>
+                            <Button size="sm" variant="premium">{t('getStarted')}</Button>
                         </Link>
                     </div>
 
@@ -112,7 +112,7 @@ export function Navbar() {
                                     <LanguageSwitcher />
                                 </div>
                                 <Link href="/library">
-                                    <Button className="w-full">{t('getStarted')}</Button>
+                                    <Button className="w-full" variant="premium">{t('getStarted')}</Button>
                                 </Link>
                             </div>
                         </div>

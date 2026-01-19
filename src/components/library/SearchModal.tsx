@@ -176,9 +176,12 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
             />
 
             {/* Modal Container */}
-            <div className="fixed inset-0 overflow-y-auto">
+            <div className="fixed inset-0 overflow-y-auto" onClick={onClose}>
                 <div className="flex min-h-full items-start justify-center pt-[10vh] px-4 pb-4">
-                    <div className="relative w-full max-w-2xl bg-background border border-border rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                    <div
+                        className="relative w-full max-w-2xl bg-background border border-border rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200"
+                        onClick={(e) => e.stopPropagation()}
+                    >
                         {/* Header */}
                         <div
                             className={cn(

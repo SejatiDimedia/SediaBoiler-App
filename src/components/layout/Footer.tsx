@@ -87,8 +87,10 @@ export function Footer() {
                 </div>
 
                 {/* Copyright */}
-                <div className="border-t border-border py-6 text-center">
-                    <p className="text-sm text-muted">{t('copyright')}</p>
+                <div className="border-t border-border py-8 text-center">
+                    <p className="text-sm text-muted-foreground/80 font-medium tracking-wide">
+                        &copy; 2026 SediaBoiler. <span className="mx-1 opacity-50">|</span> Part of <span className="font-bold text-foreground tracking-tight hover:bg-gradient-to-r hover:from-blue-600 hover:to-cyan-500 hover:bg-clip-text hover:text-transparent transition-all cursor-default relative">SejatiDimedia</span>. <span className="mx-1 opacity-50">|</span> All rights reserved.
+                    </p>
                 </div>
             </div>
         </footer>

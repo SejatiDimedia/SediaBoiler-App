@@ -21,13 +21,25 @@ export function ComponentView({ component, preview, locale }: ComponentViewProps
         <div className="py-8 md:py-12">
             <div className="mx-auto max-w-7xl">
                 {/* Breadcrumb */}
-                <Link
-                    href={`/library/${component.category}`}
-                    className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition mb-8"
-                >
-                    <ArrowLeft className="h-4 w-4" />
-                    {locale === 'id' ? 'Kembali ke Kategori' : 'Back to Category'}
-                </Link>
+                <nav className="flex items-center gap-2 text-sm text-muted-foreground mb-8">
+                    <Link
+                        href="/library"
+                        className="hover:text-foreground transition-colors"
+                    >
+                        {t('title')}
+                    </Link>
+                    <span className="text-muted-foreground/40">/</span>
+                    <Link
+                        href={`/library/${component.category}`}
+                        className="hover:text-foreground transition-colors capitalize"
+                    >
+                        {component.category}
+                    </Link>
+                    <span className="text-muted-foreground/40">/</span>
+                    <span className="font-medium text-foreground">
+                        {component.name[locale]}
+                    </span>
+                </nav>
 
                 {/* Header */}
                 <div className="mb-10">

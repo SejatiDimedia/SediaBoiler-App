@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { useTranslations } from 'next-intl';
 import { useTheme } from 'next-themes';
 import { cn } from '@/lib/utils';
@@ -8,6 +8,7 @@ import { CodeBlock } from './CodeBlock';
 import { CopyButton } from '@/components/ui/CopyButton';
 import { ResponsiveSwitcher, getPreviewWidth } from './ResponsiveSwitcher';
 import { Eye, Code, RotateCcw } from 'lucide-react';
+import { componentRegistry } from '@/components/preview/registry';
 
 type ViewMode = 'mobile' | 'tablet' | 'desktop';
 type TabMode = 'preview' | 'code';
@@ -24,22 +25,156 @@ export function ComponentViewer({ slug, code, className }: ComponentViewerProps)
     const [activeTab, setActiveTab] = useState<TabMode>('preview');
     const [viewMode, setViewMode] = useState<ViewMode>('desktop');
     const [iframeKey, setIframeKey] = useState(0);
+    const [dynamicHeight, setDynamicHeight] = useState('600px');
     const iframeRef = useRef<HTMLIFrameElement>(null);
+
+    // Check if component exists in static registry
+    const isStaticComponent = useMemo(() => !!componentRegistry[slug], [slug]);
 
     const tabs: { key: TabMode; icon: typeof Eye; label: string }[] = [
         { key: 'preview', icon: Eye, label: t('preview') },
         { key: 'code', icon: Code, label: t('code') },
     ];
 
-    // Sync theme with iframe
+    // Create blob URL content for dynamic preview (matches AdminComponentPreview)
+    const createPreviewContent = useCallback(
+        (componentCode: string, isDark: boolean) => {
+            return `
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { min-height: 100%; width: 100%; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            ${isDark ? "background: #0a0a0a; color: #fafafa;" : "background: #ffffff; color: #0a0a0a;"}
+        }
+        #root { width: 100%; }
+        .min-h-screen { min-height: auto !important; }
+        h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.25; }
+        p { line-height: 1.75; }
+        button, input, select, textarea { font-family: inherit; }
+        a { color: ${isDark ? "#60a5fa" : "#3b82f6"}; text-decoration: none; }
+        a:hover { color: ${isDark ? "#93c5fd" : "#2563eb"}; }
+        button { cursor: pointer; border: none; outline: none; }
+        nav, header { width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="root"><div style="display:flex;align-items:center;justify-content:center;padding:2rem;color:#666;">Loading preview...</div></div>
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script>
+        window.__componentCode__ = ${JSON.stringify(componentCode)};
+        
+        const observer = new ResizeObserver(entries => {
+            const height = document.body.scrollHeight;
+            window.parent.postMessage({ type: 'preview-resize', height: height }, '*');
+        });
+        
+        window.addEventListener('DOMContentLoaded', () => {
+            observer.observe(document.body);
+            setTimeout(() => {
+                window.parent.postMessage({ type: 'preview-resize', height: document.body.scrollHeight }, '*');
+            }, 200);
+        });
+    </script>
+    <script>
+        function initPreview() {
+            if (typeof React === 'undefined' || typeof ReactDOM === 'undefined' || typeof Babel === 'undefined') {
+                setTimeout(initPreview, 50);
+                return;
+            }
+            
+            try {
+                var code = window.__componentCode__;
+                code = code.replace(/export\\s+default\\s+/g, '').replace(/export\\s+/g, '');
+                
+                var functionMatch = code.match(/function\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*\\(/);
+                var functionName = functionMatch ? functionMatch[1] : null;
+                
+                if (!functionName) {
+                    throw new Error('Could not find a function component.');
+                }
+                
+                var transformed = Babel.transform(code, {
+                    presets: ['react'],
+                    filename: 'component.tsx',
+                }).code;
+                
+                var wrapperCode = 
+                    'var useState = React.useState;' +
+                    'var useEffect = React.useEffect;' +
+                    'var useCallback = React.useCallback;' +
+                    'var useMemo = React.useMemo;' +
+                    'var useRef = React.useRef;' +
+                    'var useContext = React.useContext;' +
+                    'var useReducer = React.useReducer;' +
+                    transformed +
+                    ';return ' + functionName + ';';
+                
+                var Component = new Function('React', wrapperCode)(React);
+                
+                if (typeof Component !== 'function') {
+                    throw new Error('Component is not a valid React function component');
+                }
+                
+                var rootEl = document.getElementById('root');
+                ReactDOM.createRoot(rootEl).render(React.createElement(Component));
+            } catch (err) {
+                document.getElementById('root').innerHTML = 
+                    '<div style="color: #dc2626; padding: 2rem; text-align: center;">' +
+                        '<h2 style="margin-bottom:0.5rem;">Preview Error</h2>' +
+                        '<p style="font-family: monospace; background: #fef2f2; padding: 0.5rem; border-radius: 0.25rem; font-size: 0.875rem;">' + err.message + '</p>' +
+                    '</div>';
+            }
+        }
+        initPreview();
+    </script>
+</body>
+</html>`;
+        },
+        []
+    );
+
+    // For dynamic components, create blob URL directly
     useEffect(() => {
-        if (iframeRef.current?.contentWindow) {
+        if (isStaticComponent || !iframeRef.current || !code) return;
+
+        const isDark = resolvedTheme === 'dark';
+        const html = createPreviewContent(code, isDark);
+        const blob = new Blob([html], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        iframeRef.current.src = url;
+
+        return () => URL.revokeObjectURL(url);
+    }, [code, resolvedTheme, iframeKey, createPreviewContent, isStaticComponent]);
+
+    // Listen for resize messages from iframe
+    useEffect(() => {
+        const handleMessage = (event: MessageEvent) => {
+            if (event.data.type === 'preview-resize' && event.data.height) {
+                setDynamicHeight(`${Math.max(400, event.data.height + 20)}px`);
+            }
+        };
+
+        window.addEventListener('message', handleMessage);
+        return () => window.removeEventListener('message', handleMessage);
+    }, []);
+
+    // Sync theme with iframe (for static components)
+    useEffect(() => {
+        if (iframeRef.current?.contentWindow && isStaticComponent) {
             iframeRef.current.contentWindow.postMessage(
                 { type: 'theme-change', theme: resolvedTheme },
                 '*'
             );
         }
-    }, [resolvedTheme]);
+    }, [resolvedTheme, isStaticComponent]);
 
     const refreshPreview = () => {
         setIframeKey((prev) => prev + 1);
@@ -105,16 +240,32 @@ export function ComponentViewer({ slug, code, className }: ComponentViewerProps)
                             width: '100%',
                         }}
                     >
-                        <iframe
-                            key={iframeKey}
-                            ref={iframeRef}
-                            src={`/preview/${slug}?theme=${resolvedTheme}`}
-                            className="w-full border-0"
-                            style={{
-                                height: viewMode === 'mobile' ? '500px' : viewMode === 'tablet' ? '600px' : '700px',
-                            }}
-                            title={`Preview of ${slug}`}
-                        />
+                        {isStaticComponent ? (
+                            // Static component - use route (instant)
+                            <iframe
+                                key={iframeKey}
+                                ref={iframeRef}
+                                src={`/preview/${slug}?theme=${resolvedTheme}`}
+                                className="w-full border-0"
+                                style={{
+                                    height: viewMode === 'mobile' ? '500px' : viewMode === 'tablet' ? '600px' : '700px',
+                                }}
+                                title={`Preview of ${slug}`}
+                            />
+                        ) : (
+                            // Dynamic component - use blob URL (no extra network hop)
+                            <iframe
+                                key={iframeKey}
+                                ref={iframeRef}
+                                className="w-full border-0"
+                                style={{
+                                    height: dynamicHeight,
+                                    minHeight: '400px',
+                                }}
+                                title={`Preview of ${slug}`}
+                                sandbox="allow-scripts"
+                            />
+                        )}
                     </div>
                 </div>
 
