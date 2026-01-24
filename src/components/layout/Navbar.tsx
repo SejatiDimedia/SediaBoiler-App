@@ -9,10 +9,22 @@ import { SearchTrigger } from '@/components/library/SearchTrigger';
 import { Button } from '@/components/ui/Button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { components } from '@/lib/components-data';
 import { Logo } from '@/components/ui/Logo';
 
-export function Navbar() {
+interface ComponentItem {
+    slug: string;
+    name: { id: string; en: string };
+    description: { id: string; en: string };
+    category: string;
+}
+
+interface NavbarProps {
+    components?: ComponentItem[];
+}
+
+import { components as staticComponents } from '@/lib/components-data';
+
+export function Navbar({ components = staticComponents }: NavbarProps) {
     const t = useTranslations('nav');
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -32,6 +44,7 @@ export function Navbar() {
     const navLinks = [
         { href: '/', label: t('home') },
         { href: '/library', label: t('library') },
+        { href: '/templates', label: t('templates') },
     ];
 
     // During SSR and initial hydration, always render transparent (matches server)

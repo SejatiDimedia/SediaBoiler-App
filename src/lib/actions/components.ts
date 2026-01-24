@@ -2,7 +2,7 @@
 
 import { db } from '@/db';
 import { components, NewComponent, Component } from '@/db/schema';
-import { eq } from 'drizzle-orm';
+import { eq, ne, desc } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 // Get all components
@@ -15,6 +15,38 @@ export async function getAllComponents(): Promise<Component[]> {
         return await db.select().from(components).orderBy(components.createdAt);
     } catch (error) {
         console.error('Error fetching components:', error);
+        return [];
+    }
+}
+
+// Get UI components only (excluding landing-page templates)
+export async function getUIComponents(): Promise<Component[]> {
+    try {
+        if (!db) {
+            console.log('Database not available, returning empty array');
+            return [];
+        }
+        return await db.select().from(components)
+            .where(ne(components.category, 'landing-page'))
+            .orderBy(desc(components.createdAt));
+    } catch (error) {
+        console.error('Error fetching UI components:', error);
+        return [];
+    }
+}
+
+// Get templates only (landing-page category)
+export async function getTemplates(): Promise<Component[]> {
+    try {
+        if (!db) {
+            console.log('Database not available, returning empty array');
+            return [];
+        }
+        return await db.select().from(components)
+            .where(eq(components.category, 'landing-page'))
+            .orderBy(desc(components.createdAt));
+    } catch (error) {
+        console.error('Error fetching templates:', error);
         return [];
     }
 }
@@ -59,6 +91,7 @@ export async function createComponent(data: NewComponent): Promise<Component> {
     if (!db) throw new Error('Database not available');
     const result = await db.insert(components).values(data).returning();
     revalidatePath('/admin/components');
+    revalidatePath('/admin/templates');
     revalidatePath('/[locale]/library', 'layout');
     return result[0];
 }
@@ -72,6 +105,7 @@ export async function updateComponent(id: number, data: Partial<NewComponent>): 
         .where(eq(components.id, id))
         .returning();
     revalidatePath('/admin/components');
+    revalidatePath('/admin/templates');
     revalidatePath('/[locale]/library', 'layout');
     return result[0];
 }
@@ -81,6 +115,7 @@ export async function deleteComponent(id: number): Promise<void> {
     if (!db) throw new Error('Database not available');
     await db.delete(components).where(eq(components.id, id));
     revalidatePath('/admin/components');
+    revalidatePath('/admin/templates');
     revalidatePath('/[locale]/library', 'layout');
 }
 

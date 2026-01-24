@@ -41,9 +41,18 @@ interface ComponentFormProps {
 		previewImage?: string | null;
 	};
 	mode: "create" | "edit";
+	redirectBaseUrl?: string;
+	entityName?: string;
+	fixedCategory?: string;
 }
 
-export function ComponentForm({ initialData, mode }: ComponentFormProps) {
+export function ComponentForm({
+	initialData,
+	mode,
+	redirectBaseUrl = "/admin/components",
+	entityName = "Component",
+	fixedCategory
+}: ComponentFormProps) {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -77,17 +86,32 @@ export function ComponentForm({ initialData, mode }: ComponentFormProps) {
 		fetchCategories();
 	}, []);
 
+	// Logic to determine initial type
+	const initialType = (initialData?.category === 'landing-page' || fixedCategory === 'landing-page') ? 'template' : 'component';
+	const [entryType, setEntryType] = useState<'component' | 'template'>(initialType);
+
 	const [formData, setFormData] = useState({
+		// ... (existing fields)
 		slug: initialData?.slug || "",
 		nameId: initialData?.name?.id || "",
 		nameEn: initialData?.name?.en || "",
 		descriptionId: initialData?.description?.id || "",
 		descriptionEn: initialData?.description?.en || "",
-		category: initialData?.category || "navbar",
+		category: initialData?.category || fixedCategory || "navbar",
 		code: initialData?.code || "",
 		isPublished: initialData?.isPublished || "true",
 		previewImage: initialData?.previewImage || "",
 	});
+
+	// Effect to handle type switching
+	useEffect(() => {
+		if (entryType === 'template') {
+			setFormData(prev => ({ ...prev, category: 'landing-page' }));
+		} else if (entryType === 'component' && formData.category === 'landing-page') {
+			// Reset to default component category if switching back from template
+			setFormData(prev => ({ ...prev, category: 'navbar' }));
+		}
+	}, [entryType]);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -121,7 +145,12 @@ export function ComponentForm({ initialData, mode }: ComponentFormProps) {
 				throw new Error(data.error || "Failed to save component");
 			}
 
-			router.push("/admin/components");
+			// Determine redirect destination based on the actual saved type
+			const destination = (formData.category === 'landing-page' || entryType === 'template')
+				? '/admin/templates'
+				: '/admin/components';
+
+			router.push(destination);
 			router.refresh();
 		} catch (err) {
 			setError(err instanceof Error ? err.message : "An error occurred");
@@ -144,7 +173,8 @@ export function ComponentForm({ initialData, mode }: ComponentFormProps) {
 			setFormData((prev) => ({
 				...prev,
 				slug: metadata.slug,
-				category: metadata.category,
+				// Only update category if NOT locked by template mode or fixed prop
+				category: (fixedCategory || entryType === 'template') ? 'landing-page' : metadata.category,
 				nameId: metadata.name.id,
 				nameEn: metadata.name.en,
 				descriptionId: metadata.description.id,
@@ -204,18 +234,18 @@ export function ComponentForm({ initialData, mode }: ComponentFormProps) {
 			<div className="flex items-center justify-between mb-8">
 				<div>
 					<h2 className="text-2xl font-bold tracking-tight text-slate-900">
-						{mode === "create" ? "Create Component" : "Edit Component"}
+						{mode === "create" ? `Create ${entityName}` : `Edit ${entityName}`}
 					</h2>
 					<p className="text-slate-500 mt-1">
 						{mode === "create"
-							? "Add a new component to your library."
-							: "Update existing component details."}
+							? `Add a new ${entityName.toLowerCase()} to your library.`
+							: `Update existing ${entityName.toLowerCase()} details.`}
 					</p>
 				</div>
 				<div className="flex items-center gap-3">
 					<button
 						type="button"
-						onClick={() => router.back()}
+						onClick={() => router.push(redirectBaseUrl)}
 						className="px-4 py-2 bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 rounded-lg transition flex items-center gap-2 font-medium shadow-sm"
 					>
 						Cancel
@@ -230,12 +260,40 @@ export function ComponentForm({ initialData, mode }: ComponentFormProps) {
 						) : (
 							<Save className="w-4 h-4" />
 						)}
-						{mode === "create" ? "Publish Component" : "Save Changes"}
+						{mode === "create" ? `Publish ${entityName}` : "Save Changes"}
 					</button>
 				</div>
 			</div>
 
 			<div className="space-y-8">
+				{/* Type Selection - Only show if NO fixed category is provided (create mode generic) or strictly for visual feedback */}
+				{!fixedCategory && mode === 'create' && (
+					<div className="bg-white p-1 rounded-xl border border-slate-200 inline-flex shadow-sm mb-2">
+						<button
+							type="button"
+							onClick={() => setEntryType('component')}
+							className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${entryType === 'component'
+								? 'bg-slate-900 text-white shadow-md'
+								: 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+								}`}
+						>
+							<Code className="w-4 h-4" />
+							UI Component
+						</button>
+						<button
+							type="button"
+							onClick={() => setEntryType('template')}
+							className={`flex items-center gap-2 px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${entryType === 'template'
+								? 'bg-primary text-white shadow-md'
+								: 'text-slate-500 hover:text-slate-900 hover:bg-slate-50'
+								}`}
+						>
+							<LayoutTemplate className="w-4 h-4" />
+							Full Page Template
+						</button>
+					</div>
+				)}
+
 				{/* Component Details Panel - Full Width - Hidden in Preview Only mode */}
 				<div className={`${panelClasses} ${panelView === "preview" ? "hidden" : ""}`}>
 					<div className={sectionClasses}>
@@ -246,7 +304,7 @@ export function ComponentForm({ initialData, mode }: ComponentFormProps) {
 							</div>
 							<div>
 								<h3 className="text-lg font-semibold text-slate-900">
-									Component Details
+									{entityName} Details
 								</h3>
 								<p className="text-sm text-slate-500">
 									Essential information and identification
@@ -391,13 +449,24 @@ export function ComponentForm({ initialData, mode }: ComponentFormProps) {
 													category: e.target.value as ComponentCategory,
 												})
 											}
-											className={`${inputClasses} appearance-none cursor-pointer`}
+											className={`${inputClasses} appearance-none cursor-pointer ${fixedCategory || entryType === 'template' ? 'bg-slate-100 text-slate-500 cursor-not-allowed' : ''}`}
+											disabled={!!fixedCategory || entryType === 'template'}
 										>
-											{availableCategories.map((cat) => (
-												<option key={cat.slug} value={cat.slug}>
-													{cat.name}
-												</option>
-											))}
+											{availableCategories
+												.filter(cat => entryType === 'component' ? cat.slug !== 'landing-page' : cat.slug === 'landing-page')
+												.map((cat) => (
+													<option key={cat.slug} value={cat.slug}>
+														{cat.name}
+													</option>
+												))}
+											{/* Fallback option if filtered list is empty or specifically selecting landing-page */}
+											{entryType === 'template' && (
+												<option value="landing-page">Landing Page</option>
+											)}
+											{/* Generic fallbacks */}
+											{fixedCategory && !availableCategories.find(c => c.slug === fixedCategory) && (
+												<option value={fixedCategory}>{fixedCategory}</option>
+											)}
 										</select>
 										<div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
 											<LayoutTemplate className="w-4 h-4" />
@@ -561,7 +630,7 @@ export function ComponentForm({ initialData, mode }: ComponentFormProps) {
 
 							{/* Live Preview */}
 							<div
-								className={`bg-slate-50 rounded-xl border border-slate-200 overflow-hidden flex flex-col ${panelView === "code" ? "hidden" : "block"} ${panelView === "both" ? "h-[600px]" : ""} ${panelView === "preview" ? "min-h-[700px]" : ""}`}
+								className={`bg-slate-50 rounded-xl border border-slate-200 overflow-hidden flex flex-col ${panelView === "code" ? "hidden" : "block"} ${panelView === "both" ? "h-[600px]" : ""} ${panelView === "preview" ? "min-h-[900px]" : ""}`}
 							>
 								<div className="bg-white px-4 py-2 border-b border-slate-200 flex items-center justify-between">
 									<span className="text-xs font-semibold text-slate-500 uppercase tracking-wider flex items-center gap-2">
@@ -569,7 +638,7 @@ export function ComponentForm({ initialData, mode }: ComponentFormProps) {
 										Live Preview
 									</span>
 								</div>
-								<div className={`flex-1 bg-slate-100/50 overflow-y-auto ${panelView === "preview" ? "max-h-[calc(100vh-350px)]" : "h-full"}`}>
+								<div className={`flex-1 bg-slate-100/50 overflow-y-auto ${panelView === "preview" ? "min-h-[900px]" : "h-full"}`}>
 									<AdminComponentPreview
 										code={formData.code}
 										className="w-full"

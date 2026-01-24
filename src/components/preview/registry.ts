@@ -17,4 +17,7 @@ export const componentRegistry: Record<string, ComponentType<any>> = {
   'footer-simple': dynamic(() => import('./items/footer-simple').then(mod => ({ default: mod.FooterSimple }))),
   'footer-columns': dynamic(() => import('./items/footer-columns').then(mod => ({ default: mod.FooterColumns }))),
   'footer-cta': dynamic(() => import('./items/footer-cta').then(mod => ({ default: mod.FooterCTA }))),
+  'landing-saas-startup': dynamic(() => import('./items/landing-saas-startup').then(mod => ({ default: mod.LandingSaaSStartup }))),
+  'landing-portfolio-agency': dynamic(() => import('./items/landing-portfolio-agency').then(mod => ({ default: mod.LandingPortfolioAgency }))),
+  'landing-neubrutalism': dynamic(() => import('./items/landing-neubrutalism').then(mod => ({ default: mod.LandingNeubrutalism }))),
 };

@@ -5,7 +5,8 @@
     },
     "nav": {
         "home": "Home",
-        "library": "Library",
+        "library": "Components",
+        "templates": "Templates",
         "components": "Components",
         "docs": "Documentation",
         "getStarted": "Get Started"

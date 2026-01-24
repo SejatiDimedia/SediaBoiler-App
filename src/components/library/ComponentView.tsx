@@ -30,10 +30,10 @@ export function ComponentView({ component, preview, locale }: ComponentViewProps
                     </Link>
                     <span className="text-muted-foreground/40">/</span>
                     <Link
-                        href={`/library/${component.category}`}
+                        href={component.category === 'landing-page' ? '/templates' : `/library?category=${component.category}`}
                         className="hover:text-foreground transition-colors capitalize"
                     >
-                        {component.category}
+                        {component.category === 'landing-page' ? (locale === 'id' ? 'Template' : 'Templates') : component.category}
                     </Link>
                     <span className="text-muted-foreground/40">/</span>
                     <span className="font-medium text-foreground">

@@ -22,7 +22,9 @@ export function ComponentCard({
     preview,
     image
 }: ComponentCardProps) {
-    const href = category ? `/library/${category}/${slug}` : `/library/${slug}`;
+    const href = category === 'landing-page'
+        ? `/library/template/${slug}`
+        : `/library/component/${category}/${slug}`;
 
     return (
         <div className="group relative h-full rounded-xl border border-border bg-background overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300">

@@ -27,6 +27,7 @@ export const componentCategories = [
     'form',
     'table',
     'chart',
+    'landing-page',
     'other',
 ] as const;
 export type ComponentCategory = typeof componentCategories[number];

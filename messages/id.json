@@ -5,7 +5,8 @@
   },
   "nav": {
     "home": "Beranda",
-    "library": "Library",
+    "library": "Komponen",
+    "templates": "Template",
     "components": "Komponen",
     "docs": "Dokumentasi",
     "getStarted": "Mulai Sekarang"

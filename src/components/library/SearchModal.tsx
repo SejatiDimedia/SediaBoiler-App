@@ -43,6 +43,7 @@ const categoryIcons: Record<string, typeof Navigation> = {
     features: Grid3X3,
     pricing: CreditCard,
     footer: LayoutTemplate,
+    'landing-page': LayoutTemplate,
 };
 
 const categoryDescriptions: Record<string, { id: string; en: string }> = {
@@ -65,6 +66,10 @@ const categoryDescriptions: Record<string, { id: string; en: string }> = {
     footer: {
         id: 'Footer dengan berbagai layout dan informasi',
         en: 'Footers with various layouts and information'
+    },
+    'landing-page': {
+        id: 'Template halaman lengkap siap pakai',
+        en: 'Ready-to-use full page templates'
     },
 };
 
@@ -155,7 +160,11 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
     }, [isOpen, onClose]);
 
     const handleCategoryClick = (category: string) => {
-        router.push(`/${locale}/library?category=${category}`);
+        if (category === 'landing-page') {
+            router.push(`/${locale}/templates`);
+        } else {
+            router.push(`/${locale}/library?category=${category}`);
+        }
         onClose();
     };
 

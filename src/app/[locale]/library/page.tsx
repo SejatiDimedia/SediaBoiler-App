@@ -35,33 +35,39 @@ export default async function LibraryPage({
     try {
         const dbComponents = await getPublishedComponents();
         if (dbComponents.length > 0) {
-            components = dbComponents.map(c => ({
-                slug: c.slug,
-                name: c.name,
-                description: c.description,
-                category: c.category,
-                previewImage: c.previewImage,
-            }));
+            components = dbComponents
+                .filter(c => c.category !== 'landing-page') // Exclude templates
+                .map(c => ({
+                    slug: c.slug,
+                    name: c.name,
+                    description: c.description,
+                    category: c.category,
+                    previewImage: c.previewImage,
+                }));
         } else {
             // Use static data if database is empty
-            components = staticComponents.map(c => ({
+            components = staticComponents
+                .filter(c => c.category !== 'landing-page') // Exclude templates
+                .map(c => ({
+                    slug: c.slug,
+                    name: c.name,
+                    description: c.description,
+                    category: c.category,
+                    previewImage: undefined,
+                }));
+        }
+    } catch (error) {
+        // Fallback to static data on error
+        console.error('Failed to fetch from database, using static data:', error);
+        components = staticComponents
+            .filter(c => c.category !== 'landing-page') // Exclude templates
+            .map(c => ({
                 slug: c.slug,
                 name: c.name,
                 description: c.description,
                 category: c.category,
                 previewImage: undefined,
             }));
-        }
-    } catch (error) {
-        // Fallback to static data on error
-        console.error('Failed to fetch from database, using static data:', error);
-        components = staticComponents.map(c => ({
-            slug: c.slug,
-            name: c.name,
-            description: c.description,
-            category: c.category,
-            previewImage: undefined,
-        }));
     }
 
     const categories = getAllCategories();
