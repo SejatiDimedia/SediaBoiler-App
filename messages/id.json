@@ -123,5 +123,182 @@
     "available": "komponen tersedia",
     "noResults": "Tidak ada komponen ditemukan",
     "escToClose": "Tekan untuk menutup"
+  },
+  "docs": {
+    "badge": "Dokumentasi",
+    "title": "SediaBoiler",
+    "titleHighlight": "Dokumentasi",
+    "subtitle": "Semua yang Anda butuhkan untuk memulai dengan SediaBoiler",
+    "sections": {
+      "getting-started": {
+        "title": "Memulai",
+        "description": "Selamat datang di SediaBoiler! Berikut adalah semua yang Anda butuhkan untuk mulai membangun komponen UI yang menakjubkan.",
+        "features": {
+          "title": "Fitur Utama",
+          "items": {
+            "copyPaste": "Siap Copy-Paste - Tidak perlu instalasi, cukup salin dan tempel",
+            "responsive": "Sepenuhnya Responsif - Dioptimalkan untuk seluler, tablet, dan desktop",
+            "bilingual": "Dukungan Dua Bahasa - Dokumentasi dalam Bahasa Indonesia dan Inggris",
+            "modern": "Desain Modern - Bersih, profesional, dan dapat diakses",
+            "openSource": "Open Source - Gratis digunakan untuk proyek komersial"
+          }
+        },
+        "useCases": {
+          "title": "Cocok Untuk",
+          "items": {
+            "saas": {
+              "title": "Produk SaaS",
+              "description": "Bangun halaman arahan dan dasbor yang menakjubkan"
+            },
+            "portfolio": {
+              "title": "Website Portofolio",
+              "description": "Pamerkan karya Anda dengan desain modern"
+            },
+            "ecommerce": {
+              "title": "E-commerce",
+              "description": "Buat halaman produk dan alur pembayaran yang indah"
+            },
+            "dashboard": {
+              "title": "Dasbor Admin",
+              "description": "Bangun panel admin dan tampilan analitik yang kuat"
+            }
+          }
+        }
+      },
+      "installation": {
+        "title": "Instalasi",
+        "description": "Tidak perlu instalasi! SediaBoiler adalah perpustakaan komponen copy-paste.",
+        "prerequisites": {
+          "title": "Prasyarat",
+          "items": {
+            "nodejs": "Node.js 18+ terinstal di mesin Anda",
+            "npm": "manajer paket npm, yarn, atau pnpm",
+            "git": "Git (opsional, untuk kontrol versi)"
+          }
+        },
+        "step1": {
+          "title": "Langkah 1: Temukan Komponen",
+          "description": "Telusuri perpustakaan komponen kami untuk menemukan komponen yang sempurna untuk proyek Anda.",
+          "code": "1. Buka halaman Komponen\n2. Telusuri berdasarkan kategori\n3. Pratinjau komponen secara langsung\n4. Klik 'Salin Kode'"
+        },
+        "step2": {
+          "title": "Langkah 2: Tempel ke Proyek Anda",
+          "description": "Buat file komponen baru di proyek Next.js Anda dan tempel kodenya.",
+          "code": "// 1. Buat file baru: src/components/Navbar.tsx\n// 2. Salin kode komponen dari SediaBoiler\n// 3. Tempel ke file Anda\n// 4. Impor dan gunakan di halaman Anda"
+        },
+        "tip": "Tip Pro",
+        "tipText": "Anda dapat menyesuaikan komponen apa pun dengan memodifikasi kelas Tailwind CSS agar sesuai dengan warna dan gaya merek Anda."
+      },
+      "components": {
+        "title": "Menggunakan Komponen",
+        "description": "Pelajari cara menyalin, menyesuaikan, dan menggunakan komponen SediaBoiler di proyek Anda.",
+        "howToUse": {
+          "title": "Cara Menggunakan",
+          "steps": {
+            "browse": "Telusuri perpustakaan komponen berdasarkan kategori",
+            "preview": "Pratinjau komponen dalam berbagai ukuran layar (seluler, tablet, desktop)",
+            "copy": "Klik tombol 'Salin Kode' untuk menyalin kode komponen",
+            "paste": "Tempel kode ke proyek Anda dan sesuaikan jika diperlukan"
+          }
+        },
+        "example": {
+          "title": "Contoh: Menggunakan Komponen Navbar",
+          "code": "import { NavbarModern } from '@/components/ui/Navbar';\n\nexport default function Header() {\n  return (\n    <header className=\"w-full\">\n      <NavbarModern />\n    </header>\n  );\n}"
+        },
+        "customization": {
+          "title": "Menyesuaikan Komponen",
+          "description": "Semua komponen menggunakan Tailwind CSS, membuatnya mudah disesuaikan:",
+          "code": "import { NavbarModern } from '@/components/ui/Navbar';\n\nexport default function Header() {\n  return (\n    <header className=\"w-full\">\n      <NavbarModern className=\"bg-blue-500 text-white\" />\n    </header>\n  );\n}"
+        }
+      },
+      "templates": {
+        "title": "Menggunakan Template",
+        "description": "Template adalah tata letak halaman lengkap siap pakai yang dibangun dari beberapa komponen.",
+        "available": {
+          "title": "Template Tersedia",
+          "items": {
+            "saasStartup": {
+              "title": "Halaman Arahan Startup SaaS",
+              "description": "Halaman arahan modern dengan bagian hero, fitur, harga, dan CTA",
+              "category": "SaaS"
+            },
+            "portfolioAgency": {
+              "title": "Agensi Portofolio",
+              "description": "Tata letak portofolio kreatif untuk agensi dan pekerja lepas",
+              "category": "Portofolio"
+            },
+            "neubrutalism": {
+              "title": "Gaya Neubrutalisme",
+              "description": "Desain berani, penuh warna dengan gaya visual unik",
+              "category": "Kreatif"
+            }
+          }
+        },
+        "howToUse": {
+          "title": "Cara Menggunakan Template",
+          "steps": {
+            "choose": "Pilih template yang sesuai dengan proyek Anda",
+            "view": "Lihat template dalam pratinjau langsung",
+            "copy": "Salin seluruh kode template",
+            "customize": "Sesuaikan konten, warna, dan bagian jika diperlukan"
+          }
+        }
+      },
+      "customization": {
+        "title": "Panduan Kustomisasi",
+        "description": "Pelajari cara menyesuaikan komponen SediaBoiler agar sesuai dengan merek Anda.",
+        "colors": {
+          "title": "Mengubah Warna",
+          "code": "bg-blue-500 → bg-red-500\ntext-gray-900 → text-white\nborder-gray-200 → border-blue-500"
+        },
+        "spacing": {
+          "title": "Menyesuaikan Spasi",
+          "code": "p-4 → p-8 (tambah padding)\ngap-4 → gap-8 (tambah jarak)\nmy-4 → my-8 (tambah margin vertikal)"
+        },
+        "responsive": {
+          "title": "Desain Responsif",
+          "code": "md:p-6 (desktop: padding 6)\nlg:grid-cols-3 (layar besar: 3 kolom)\nsm:hidden (layar kecil: sembunyikan elemen)"
+        }
+      },
+      "faq": {
+        "title": "FAQ",
+        "description": "Pertanyaan umum tentang SediaBoiler.",
+        "items": {
+          "license": {
+            "question": "Bolehkah saya menggunakan SediaBoiler untuk proyek komersial?",
+            "answer": "Ya! SediaBoiler adalah open source dan gratis digunakan untuk proyek pribadi maupun komersial. Tidak perlu atribusi."
+          },
+          "support": {
+            "question": "Bagaimana cara mendapatkan bantuan?",
+            "answer": "Anda dapat menghubungi melalui email atau bergabung dengan komunitas Discord kami untuk bantuan menggunakan komponen SediaBoiler."
+          },
+          "updates": {
+            "question": "Seberapa sering Anda menambahkan komponen baru?",
+            "answer": "Kami memiliki komponen baru secara berkala berdasarkan umpan balik dan permintaan pengguna. Berlangganan buletin kami untuk pembaruan."
+          },
+          "commercial": {
+            "question": "Apakah Anda menawarkan pengembangan komponen kustom?",
+            "answer": "Ya! Kami menawarkan layanan pengembangan komponen kustom. Hubungi kami untuk harga dan ketersediaan."
+          }
+        },
+        "resources": {
+          "title": "Sumber Daya Tambahan",
+          "links": {
+            "github": {
+              "label": "Repositori GitHub",
+              "url": "https://github.com/sejatidimedia/sedia-boiler"
+            },
+            "discord": {
+              "label": "Komunitas Discord",
+              "url": "https://discord.gg/sediaboiler"
+            },
+            "email": {
+              "label": "Dukungan Email",
+              "url": "mailto:support@sediaboiler.com"
+            }
+          }
+        }
+      }
+    }
   }
 }

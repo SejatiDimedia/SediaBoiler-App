@@ -18,9 +18,24 @@ interface SearchTriggerProps {
     className?: string;
 }
 
-export function SearchTrigger({ components, className }: SearchTriggerProps) {
+export function SearchTrigger({ components: initialComponents = [], className }: SearchTriggerProps) {
     const [isOpen, setIsOpen] = useState(false);
+    const [components, setComponents] = useState<ComponentItem[]>(initialComponents);
     const t = useTranslations('search');
+
+    // Fetch components on mount if not provided
+    useEffect(() => {
+        if (components.length === 0) {
+            fetch('/api/search-index')
+                .then(res => res.json())
+                .then(data => {
+                    if (Array.isArray(data)) {
+                        setComponents(data);
+                    }
+                })
+                .catch(err => console.error('Failed to load search index:', err));
+        }
+    }, [components.length]);
 
     // Handle Cmd+K / Ctrl+K keyboard shortcut
     const handleKeyDown = useCallback((e: KeyboardEvent) => {

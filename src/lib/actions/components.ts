@@ -62,6 +62,25 @@ export async function getPublishedComponents(): Promise<Component[]> {
     }
 }
 
+// Get component search index (lightweight, no code)
+export async function getComponentSearchIndex(): Promise<Pick<Component, 'slug' | 'name' | 'description' | 'category'>[]> {
+    try {
+        if (!db) return [];
+        return await db.select({
+            slug: components.slug,
+            name: components.name,
+            description: components.description,
+            category: components.category,
+        })
+            .from(components)
+            .where(eq(components.isPublished, 'true'))
+            .orderBy(components.createdAt);
+    } catch (error) {
+        console.error('Error fetching component index:', error);
+        return [];
+    }
+}
+
 // Get component by ID
 export async function getComponentById(id: number): Promise<Component | undefined> {
     if (!db) return undefined;

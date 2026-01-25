@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { useLocale, useTranslations } from 'next-intl';
@@ -87,7 +87,7 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
     }, []);
 
     // Group components by category
-    const categories = useCallback((): CategoryInfo[] => {
+    const categories: CategoryInfo[] = useMemo(() => {
         const grouped: Record<string, ComponentItem[]> = {};
 
         components.forEach(comp => {
@@ -107,11 +107,11 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
     }, [components]);
 
     // Filter categories and components based on query
-    const filteredCategories = useCallback(() => {
-        if (!query.trim()) return categories();
+    const filteredCategories = useMemo(() => {
+        if (!query.trim()) return categories;
 
         const q = query.toLowerCase();
-        return categories().filter(cat => {
+        return categories.filter(cat => {
             // Check if category name matches
             if (cat.name.toLowerCase().includes(q)) return true;
             // Check if any component in category matches
@@ -136,7 +136,9 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
         }));
     }, [query, categories, locale]);
 
-    const totalResults = filteredCategories().reduce((sum, cat) => sum + cat.components.length, 0);
+    const totalResults = useMemo(() =>
+        filteredCategories.reduce((sum: number, cat: CategoryInfo) => sum + cat.components.length, 0),
+        [filteredCategories]);
 
     // Focus input when modal opens
     useEffect(() => {
@@ -237,9 +239,9 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
 
                         {/* Results */}
                         <div className="max-h-[60vh] overflow-y-auto p-4">
-                            {filteredCategories().length > 0 ? (
+                            {filteredCategories.length > 0 ? (
                                 <div className="grid gap-3">
-                                    {filteredCategories().map((category) => {
+                                    {filteredCategories.map((category) => {
                                         const Icon = category.icon;
                                         return (
                                             <button

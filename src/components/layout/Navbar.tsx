@@ -22,9 +22,9 @@ interface NavbarProps {
     components?: ComponentItem[];
 }
 
-import { components as staticComponents } from '@/lib/components-data';
 
-export function Navbar({ components = staticComponents }: NavbarProps) {
+
+export function Navbar({ components = [] }: NavbarProps) {
     const t = useTranslations('nav');
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -45,6 +45,7 @@ export function Navbar({ components = staticComponents }: NavbarProps) {
         { href: '/', label: t('home') },
         { href: '/library', label: t('library') },
         { href: '/templates', label: t('templates') },
+        { href: '/docs', label: t('docs') },
     ];
 
     // During SSR and initial hydration, always render transparent (matches server)
@@ -54,9 +55,12 @@ export function Navbar({ components = staticComponents }: NavbarProps) {
         <header
             className={cn(
                 'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+                'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+                // Mobile: Always solid background for better visibility
+                // Desktop: Transparent at top, solid when scrolled
                 showScrolledStyles
                     ? 'bg-background/80 backdrop-blur-lg border-b border-border shadow-sm'
-                    : 'bg-transparent'
+                    : 'bg-background/80 backdrop-blur-lg border-b border-border shadow-sm md:bg-transparent md:border-none md:shadow-none'
             )}
         >
             <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -74,8 +78,8 @@ export function Navbar({ components = staticComponents }: NavbarProps) {
                         ))}
                     </div>
 
-                    {/* Center: Logo */}
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                    {/* Center: Logo (Desktop Only) */}
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
                         <Link href="/">
                             <Logo />
                         </Link>
@@ -88,56 +92,53 @@ export function Navbar({ components = staticComponents }: NavbarProps) {
                         <LanguageSwitcher />
                     </div>
 
-                    {/* Mobile: Logo (Left) and Actions (Right) - Simplified for mobile */}
+                    {/* Mobile Layout: Logo (Left) and Actions (Right) */}
                     <div className="flex items-center justify-between w-full md:hidden">
-                        {/* Logo visible on mobile naturally since absolute center might overlap if not handled, 
-                            but let's keep the absolute logo for desktop and standard flow for mobile. 
-                            Actually, absolute centering works for mobile too if width permits, but typically mobile has Logo Left, Hamburger Right.
-                        */}
+                        <Link href="/">
+                            <Logo />
+                        </Link>
 
-                        {/* We need to hide the absolute logo on mobile if we want standard mobile layout, 
-                            OR keep it centered on mobile too. 
-                            Let's try to keep it centered on mobile for consistency, and place hamburger left or right.
-                        */}
-                    </div>
-
-                    {/* Mobile Actions (Right) */}
-                    <div className="flex items-center gap-2 md:hidden absolute right-0">
-                        <SearchTrigger
-                            components={components}
-                            className="bg-transparent border-none p-2 hover:bg-accent text-foreground"
-                        />
-                        <button
-                            className="p-2 text-foreground"
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            aria-label="Toggle menu"
-                        >
-                            {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                        </button>
+                        <div className="flex items-center gap-2">
+                            <SearchTrigger
+                                components={components}
+                                className="bg-transparent border-none p-2 hover:bg-accent text-foreground"
+                            />
+                            <button
+                                className="p-2 text-foreground"
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                aria-label="Toggle menu"
+                            >
+                                {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 {/* Mobile Menu */}
                 {isMobileMenuOpen && (
-                    <div className="md:hidden py-4 border-t border-border">
-                        <div className="flex flex-col gap-4">
+                    <div className="md:hidden absolute top-16 left-0 right-0 h-[calc(100vh-4rem)] bg-background/95 backdrop-blur-xl border-t border-border p-4 animate-in slide-in-from-top-4 duration-200">
+                        <div className="flex flex-col gap-4 h-full overflow-y-auto">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="text-sm font-medium text-muted transition-colors hover:text-foreground"
+                                    className="text-lg font-medium text-foreground py-2 border-b border-border/50"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {link.label}
                                 </Link>
                             ))}
-                            <div className="pt-4 flex flex-col gap-4">
-                                <div className="flex items-center gap-4">
+                            <div className="mt-auto pb-8 flex flex-col gap-4">
+                                <div className="flex items-center justify-between gap-4 p-4 rounded-lg bg-accent/50">
+                                    <span className="text-sm font-medium">Appearance</span>
                                     <ThemeToggle />
+                                </div>
+                                <div className="flex items-center justify-between gap-4 p-4 rounded-lg bg-accent/50">
+                                    <span className="text-sm font-medium">Language</span>
                                     <LanguageSwitcher />
                                 </div>
-                                <Link href="/library">
-                                    <Button className="w-full" variant="premium">{t('getStarted')}</Button>
+                                <Link href="/library" onClick={() => setIsMobileMenuOpen(false)}>
+                                    <Button className="w-full h-12 text-base" variant="premium">{t('getStarted')}</Button>
                                 </Link>
                             </div>
                         </div>
