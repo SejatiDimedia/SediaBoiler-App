@@ -123,7 +123,7 @@ export function LibraryClient({ components, categories, initialCategory = 'all' 
                             placeholder={t('search')}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-9 pr-4 h-11 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 transition"
+                            className="w-full pl-9 pr-4 h-11 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted focus:border-brand-from focus:ring-2 focus:ring-brand-from/20 transition"
                         />
                     </div>
                 </div>
@@ -159,7 +159,7 @@ export function LibraryClient({ components, categories, initialCategory = 'all' 
                                         'flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all border',
                                         validPage === 1
                                             ? 'bg-muted/30 border-border text-muted cursor-not-allowed'
-                                            : 'bg-background border-border text-foreground hover:border-primary hover:text-primary'
+                                            : 'bg-background border-border text-foreground hover:border-brand-from hover:text-brand-from'
                                     )}
                                 >
                                     <ChevronLeft className="h-4 w-4" />
@@ -174,7 +174,7 @@ export function LibraryClient({ components, categories, initialCategory = 'all' 
                                             className={cn(
                                                 'w-10 h-10 flex items-center justify-center rounded-lg text-sm font-medium transition-all',
                                                 page === validPage
-                                                    ? 'bg-primary text-white'
+                                                    ? 'bg-gradient-to-br from-brand-from to-brand-to text-white shadow-md shadow-brand-from/20'
                                                     : 'bg-background border border-border text-muted hover:text-foreground hover:border-foreground/20'
                                             )}
                                         >
@@ -190,7 +190,7 @@ export function LibraryClient({ components, categories, initialCategory = 'all' 
                                         'flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all border',
                                         validPage === totalPages
                                             ? 'bg-muted/30 border-border text-muted cursor-not-allowed'
-                                            : 'bg-background border-border text-foreground hover:border-primary hover:text-primary'
+                                            : 'bg-background border-border text-foreground hover:border-brand-from hover:text-brand-from'
                                     )}
                                 >
                                     {locale === 'id' ? 'Selanjutnya' : 'Next'}
@@ -236,7 +236,7 @@ export function LibraryClient({ components, categories, initialCategory = 'all' 
                             searchQuery && (
                                 <button
                                     onClick={() => setSearchQuery('')}
-                                    className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-sm hover:shadow"
+                                    className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-brand-from text-white font-semibold hover:bg-brand-from/90 transition-all shadow-sm hover:shadow"
                                 >
                                     {locale === 'id' ? 'Hapus Pencarian' : 'Clear Search'}
                                 </button>

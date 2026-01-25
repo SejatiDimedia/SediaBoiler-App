@@ -23,14 +23,14 @@ export function FAQ() {
                     {/* LEFT COLUMN: Header */}
                     <div className="lg:col-span-4 flex flex-col justify-start pt-8">
                         <div className="inline-flex items-center gap-2 mb-6">
-                            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-500/10 text-blue-600">
-                                <HelpCircle className="h-5 w-5" />
+                            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-brand-from to-brand-to text-white shadow-lg shadow-brand-from/20">
+                                <HelpCircle className="h-4 w-4" />
                             </span>
-                            <span className="text-sm font-semibold uppercase tracking-wide text-blue-600">FAQ</span>
+                            <span className="text-sm font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to">FAQ</span>
                         </div>
                         <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6">
                             {t('title')} <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to">
                                 {t('titleHighlight')}
                             </span>
                         </h2>
@@ -42,7 +42,7 @@ export function FAQ() {
                             <div
                                 key={key}
                                 className={`group rounded-2xl border transition-all duration-300 overflow-hidden ${openIndex === index
-                                    ? 'bg-gradient-to-br from-background to-accent/20 border-blue-500/30 shadow-lg shadow-blue-500/5'
+                                    ? 'bg-gradient-to-br from-background to-brand-from/5 border-brand-from/30 shadow-xl shadow-brand-from/5'
                                     : 'bg-background hover:bg-accent/40 border-border/60 hover:border-border'
                                     }`}
                             >
@@ -50,12 +50,14 @@ export function FAQ() {
                                     onClick={() => setOpenIndex(openIndex === index ? null : index)}
                                     className="flex w-full items-center justify-between p-6 text-left"
                                 >
-                                    <span className={`text-lg font-medium transition-colors ${openIndex === index ? 'text-blue-600 font-bold' : 'text-foreground'
+                                    <span className={`text-lg font-bold transition-colors ${openIndex === index
+                                        ? 'text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to'
+                                        : 'text-foreground'
                                         }`}>
                                         {t(`items.${key}.question`)}
                                     </span>
                                     <span className={`ml-6 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-300 ${openIndex === index
-                                        ? 'bg-blue-600 border-blue-600 text-white rotate-180'
+                                        ? 'bg-gradient-to-br from-brand-from to-brand-to border-brand-from text-white rotate-180 shadow-md shadow-brand-from/20'
                                         : 'bg-transparent border-border text-muted-foreground group-hover:border-foreground group-hover:text-foreground'
                                         }`}>
                                         <Plus className={`h-4 w-4 transition-transform duration-300 ${openIndex === index ? 'rotate-45' : ''}`} />

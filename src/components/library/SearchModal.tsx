@@ -198,14 +198,14 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
                             className={cn(
                                 "flex items-center gap-3 p-4 border-b transition-all duration-300 ease-out",
                                 isFocused
-                                    ? "border-primary/50 shadow-[0_0_20px_rgba(var(--primary),0.05)] bg-accent/30"
+                                    ? "border-brand-from/50 shadow-brand-from/5 bg-accent/30"
                                     : "border-border bg-transparent"
                             )}
                         >
                             <Search
                                 className={cn(
                                     "h-5 w-5 transition-colors duration-300",
-                                    isFocused ? "text-primary" : "text-muted"
+                                    isFocused ? "text-brand-from" : "text-muted"
                                 )}
                             />
                             <input
@@ -216,7 +216,7 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
                                 onChange={(e) => setQuery(e.target.value)}
                                 onFocus={() => setIsFocused(true)}
                                 onBlur={() => setIsFocused(false)}
-                                className="flex-1 bg-transparent !border-none !outline-none focus:!outline-none focus:!ring-0 focus:!border-none !shadow-none !appearance-none text-foreground placeholder:text-muted/70 text-lg caret-primary p-0 m-0"
+                                className="flex-1 bg-transparent !border-none !outline-none focus:!outline-none focus:!ring-0 focus:!border-none !shadow-none !appearance-none text-foreground placeholder:text-muted/70 text-lg caret-brand-from p-0 m-0"
                                 autoFocus
                             />
                             {query && (
@@ -247,17 +247,17 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
                                             <button
                                                 key={category.name}
                                                 onClick={() => handleCategoryClick(category.name)}
-                                                className="group flex items-start gap-4 p-4 rounded-xl border border-border bg-accent/30 hover:bg-accent hover:border-primary/30 transition-all text-left"
+                                                className="group flex items-start gap-4 p-4 rounded-xl border border-border bg-accent/30 hover:bg-accent hover:border-brand-from/30 transition-all text-left"
                                             >
-                                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                                                    <Icon className="h-5 w-5 text-primary" />
+                                                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-gradient-to-br from-brand-from to-brand-to flex items-center justify-center shadow-md shadow-brand-from/20">
+                                                    <Icon className="h-5 w-5 text-white" />
                                                 </div>
                                                 <div className="flex-1 min-w-0">
                                                     <div className="flex items-center gap-2 mb-1">
-                                                        <h3 className="font-semibold text-foreground capitalize group-hover:text-primary transition">
+                                                        <h3 className="font-bold text-foreground capitalize group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-from group-hover:to-brand-to transition-all">
                                                             {category.name}
                                                         </h3>
-                                                        <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                                                        <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-brand-from/10 text-brand-from border border-brand-from/10">
                                                             {category.count} {t('components')}
                                                         </span>
                                                     </div>
@@ -265,7 +265,7 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
                                                         {category.description[locale]}
                                                     </p>
                                                 </div>
-                                                <ArrowRight className="h-5 w-5 text-muted group-hover:text-primary group-hover:translate-x-1 transition-all flex-shrink-0 mt-2" />
+                                                <ArrowRight className="h-5 w-5 text-muted group-hover:text-brand-from group-hover:translate-x-1 transition-all flex-shrink-0 mt-2" />
                                             </button>
                                         );
                                     })}

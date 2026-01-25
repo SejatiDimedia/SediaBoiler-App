@@ -35,8 +35,8 @@ export function HomePageClient({ locale }: { locale: string }) {
             icon: Copy,
             title: tFeatures('items.copyPaste.title'),
             description: tFeatures('items.copyPaste.description'),
-            color: "text-blue-500",
-            bg: "bg-blue-500/10",
+            color: "text-brand-from",
+            bg: "bg-brand-from/10",
         },
         {
             icon: Smartphone,
@@ -84,10 +84,10 @@ export function HomePageClient({ locale }: { locale: string }) {
 
                 {/* Ambient Glows */}
                 <div className="absolute top-0 right-0 -translate-y-12 translate-x-1/4 blur-3xl opacity-30 pointer-events-none">
-                    <div className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-blue-500 to-cyan-400" style={{ clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)' }} />
+                    <div className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-brand-from to-brand-to" style={{ clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)' }} />
                 </div>
                 <div className="absolute bottom-0 left-0 translate-y-12 -translate-x-1/4 blur-3xl opacity-30 pointer-events-none">
-                    <div className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-cyan-400 to-blue-600" style={{ clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)' }} />
+                    <div className="aspect-[1155/678] w-[72.1875rem] bg-gradient-to-tr from-brand-to to-brand-from" style={{ clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)' }} />
                 </div>
 
                 <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -96,15 +96,15 @@ export function HomePageClient({ locale }: { locale: string }) {
                         {/* LEFT: Typography & Content */}
                         <div className="flex flex-col items-start text-left z-10">
                             {/* Badge */}
-                            <div className="animate-in fade-in slide-in-from-left-4 duration-500 delay-100 inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/5 px-4 py-1.5 mb-8 backdrop-blur-sm">
-                                <Sparkles className="h-3.5 w-3.5 text-blue-500 animate-pulse" />
-                                <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">{t('badge')}</span>
+                            <div className="animate-in fade-in slide-in-from-left-4 duration-500 delay-100 inline-flex items-center gap-2 rounded-full border border-brand-from/20 bg-brand-from/5 px-4 py-1.5 mb-8 backdrop-blur-sm">
+                                <Sparkles className="h-3.5 w-3.5 text-brand-from animate-pulse" />
+                                <span className="text-xs font-semibold text-brand-from uppercase tracking-wide">{t('badge')}</span>
                             </div>
 
                             {/* Title */}
                             <h1 className="animate-in fade-in slide-in-from-left-6 duration-700 delay-200 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-foreground mb-6 leading-[1.1]">
                                 {t('title')} <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500 animate-gradient">
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to animate-gradient">
                                     {t('titleHighlight')}
                                 </span>
                             </h1>
@@ -117,7 +117,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                             {/* CTAs */}
                             <div className="animate-in fade-in zoom-in duration-700 delay-400 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
                                 <Link href="/library">
-                                    <Button variant="premium" size="lg" className="w-full sm:w-auto gap-2 from-blue-600 to-cyan-600 hover:from-blue-600/90 hover:to-cyan-600/90 shadow-lg shadow-blue-500/20 text-white rounded-full px-8">
+                                    <Button variant="premium" size="lg" className="w-full sm:w-auto gap-2 from-brand-from to-brand-to hover:from-brand-from/90 hover:to-brand-to/90 shadow-lg shadow-brand-from/20 text-white rounded-full px-8">
                                         {t('cta')}
                                         <ArrowRight className="h-4 w-4" />
                                     </Button>
@@ -130,7 +130,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                             <div className="relative w-full max-w-[600px] transform lg:rotate-y-[-12deg] lg:rotate-x-[5deg] transition-transform duration-500 hover:rotate-0 preserve-3d">
 
                                 {/* Glow behind illustration */}
-                                <div className="absolute inset-0 bg-blue-500/20 blur-[100px] -z-10 rounded-full" />
+                                <div className="absolute inset-0 bg-brand-from/20 blur-[100px] -z-10 rounded-full" />
 
                                 {/* Moving Transfer Element (The "Copy-Paste" Action) */}
                                 <div className="absolute z-50 top-[30%] left-[30%] animate-[transfer_4s_ease-in-out_infinite] hidden md:block pointer-events-none">
@@ -143,7 +143,7 @@ export function HomePageClient({ locale }: { locale: string }) {
 
                                 {/* Top Layer: Component Library (Source) */}
                                 <div className="relative group z-20 translate-x-4 translate-y-4 lg:translate-x-0 lg:translate-y-0 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
-                                    <div className="absolute -inset-1 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000" />
+                                    <div className="absolute -inset-1 bg-gradient-to-tr from-brand-to to-brand-from rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000" />
                                     <div className="relative rounded-xl border border-border/50 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden h-[340px] flex flex-col ring-1 ring-white/10">
                                         {/* Header */}
                                         <div className="flex items-center justify-between px-4 py-3 border-b border-border/50 bg-muted/30">
@@ -163,11 +163,11 @@ export function HomePageClient({ locale }: { locale: string }) {
 
                                             {/* The Component Card being "Copied" */}
                                             <div className="relative group/card cursor-pointer">
-                                                <div className="absolute inset-0 bg-blue-500/10 rounded-xl blur-xl group-hover/card:bg-blue-500/20 transition-all" />
-                                                <div className="relative bg-card border border-border rounded-xl p-4 transition-all group-hover/card:border-blue-500/50 group-hover/card:shadow-lg hover:-translate-y-1">
+                                                <div className="absolute inset-0 bg-brand-from/10 rounded-xl blur-xl group-hover/card:bg-brand-from/20 transition-all" />
+                                                <div className="relative bg-card border border-border rounded-xl p-4 transition-all group-hover/card:border-brand-from/50 group-hover/card:shadow-lg hover:-translate-y-1">
                                                     <div className="flex items-center justify-between mb-3">
                                                         <div className="flex items-center gap-3">
-                                                            <div className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600">
+                                                            <div className="w-8 h-8 rounded-lg bg-brand-from/10 flex items-center justify-center text-brand-from">
                                                                 <Layout className="w-4 h-4" />
                                                             </div>
                                                             <div>
@@ -175,7 +175,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                                                                 <div className="text-[10px] text-muted-foreground">Layouts</div>
                                                             </div>
                                                         </div>
-                                                        <div className="h-6 w-16 bg-blue-600 text-white rounded-md text-[10px] font-bold flex items-center justify-center shadow-lg shadow-blue-500/20">
+                                                        <div className="h-6 w-16 bg-brand-from text-white rounded-md text-[10px] font-bold flex items-center justify-center shadow-lg shadow-brand-from/20">
                                                             Copy
                                                         </div>
                                                     </div>
@@ -199,7 +199,7 @@ export function HomePageClient({ locale }: { locale: string }) {
 
                                 {/* Bottom Layer: Code Editor (Destination) */}
                                 <div className="relative z-10 translate-x-12 -translate-y-24 lg:translate-x-20 lg:-translate-y-32 animate-in fade-in slide-in-from-right-12 duration-1000 delay-300">
-                                    <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl blur opacity-30" />
+                                    <div className="absolute -inset-1 bg-gradient-to-r from-brand-from to-brand-to rounded-2xl blur opacity-30" />
                                     <div className="relative rounded-xl border border-white/10 bg-[#0F172A] shadow-2xl overflow-hidden h-[300px] w-[340px] flex flex-col ring-1 ring-white/5 mx-auto">
                                         <div className="flex items-center justify-between px-4 py-3 bg-[#0F172A] border-b border-white/5">
                                             <div className="flex gap-1.5">
@@ -217,7 +217,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                                                 <span className="pl-8 text-slate-300">&lt;<span className="text-pink-400">main</span>&gt;</span>
 
                                                 {/* Typing Effect Area */}
-                                                <div className="pl-12 py-1 my-1 bg-blue-500/10 border-l-2 border-blue-500 animate-[pulse_4s_ease-in-out_infinite]">
+                                                <div className="pl-12 py-1 my-1 bg-brand-from/10 border-l-2 border-brand-from animate-[pulse_4s_ease-in-out_infinite]">
                                                     <span className="text-yellow-300">&lt;HeroSection /&gt;</span>
                                                 </div>
 

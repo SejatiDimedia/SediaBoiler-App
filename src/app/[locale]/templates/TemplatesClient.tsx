@@ -99,7 +99,7 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
                             placeholder={locale === 'id' ? 'Cari template...' : 'Search templates...'}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-9 pr-4 h-11 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted focus:border-primary focus:ring-2 focus:ring-primary/20 transition"
+                            className="w-full pl-9 pr-4 h-11 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted focus:border-brand-from focus:ring-2 focus:ring-brand-from/20 transition"
                         />
                     </div>
                 </div>
@@ -150,7 +150,7 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
                                             className={cn(
                                                 'w-10 h-10 flex items-center justify-center rounded-lg text-sm font-medium transition-all',
                                                 page === validPage
-                                                    ? 'bg-primary text-white'
+                                                    ? 'bg-gradient-to-br from-brand-from to-brand-to text-white shadow-md shadow-brand-from/20'
                                                     : 'bg-background border border-border text-muted hover:text-foreground hover:border-foreground/20'
                                             )}
                                         >

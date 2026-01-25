@@ -27,7 +27,7 @@ export function ComponentCard({
         : `/library/component/${category}/${slug}`;
 
     return (
-        <div className="group relative h-full rounded-xl border border-border bg-background overflow-hidden hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5 transition-all duration-300">
+        <div className="group relative h-full rounded-xl border border-border bg-background overflow-hidden hover:border-brand-from/50 hover:shadow-lg hover:shadow-brand-from/5 transition-all duration-300">
             {/* Stretched link - covers entire card */}
             <Link href={href} className="absolute inset-0 z-10" aria-label={`View ${name}`}>
                 <span className="sr-only">{viewLabel}</span>
@@ -54,25 +54,25 @@ export function ComponentCard({
                 )}
 
                 {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-brand-from/0 group-hover:bg-brand-from/5 transition-colors duration-300" />
             </div>
 
             {/* Content */}
             <div className="p-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-primary/10 text-primary capitalize">
+                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-from/10 text-brand-from border border-brand-from/10 capitalize">
                         {category}
                     </span>
                 </div>
-                <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                <h3 className="font-bold text-foreground mb-1 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-from group-hover:to-brand-to transition-all">
                     {name}
                 </h3>
-                <p className="text-sm text-muted line-clamp-2 mb-3">
+                <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
                     {description}
                 </p>
-                <div className="flex items-center text-sm text-primary font-medium group-hover:gap-2 transition-all">
-                    <span>{viewLabel}</span>
-                    <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                <div className="flex items-center text-sm font-bold text-brand-from group-hover:gap-2 transition-all">
+                    <span className="group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-from group-hover:to-brand-to">{viewLabel}</span>
+                    <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform text-brand-from" />
                 </div>
             </div>
         </div>

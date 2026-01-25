@@ -61,8 +61,8 @@ export function LibrarySidebarContent({ categories, locale, collapsed = false, o
                 collapsed ? "p-3 flex justify-center" : "p-5"
             )}>
                 <div className={cn("flex items-center gap-3", collapsed && "justify-center")}>
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary/20 via-primary/10 to-transparent flex items-center justify-center border border-primary/20 shrink-0">
-                        <Code2 className="w-5 h-5 text-primary" />
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-from to-brand-to flex items-center justify-center shadow-lg shadow-brand-from/20 shrink-0">
+                        <Code2 className="w-5 h-5 text-white" />
                     </div>
                     {!collapsed && (
                         <div className="animate-in fade-in duration-300">
@@ -95,7 +95,7 @@ export function LibrarySidebarContent({ categories, locale, collapsed = false, o
                                 "group flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200",
                                 collapsed && "justify-center px-0",
                                 isAllComponents
-                                    ? "bg-primary text-white shadow-lg shadow-primary/25"
+                                    ? "bg-gradient-to-r from-brand-from to-brand-to text-white shadow-lg shadow-brand-from/25"
                                     : "text-muted-foreground hover:bg-accent hover:text-foreground"
                             )}
                         >
@@ -160,7 +160,7 @@ export function LibrarySidebarContent({ categories, locale, collapsed = false, o
                                         )}>
                                             <IconComponent className={cn(
                                                 "w-4 h-4 transition-colors",
-                                                isActive ? "text-primary" : "text-muted-foreground group-hover:text-primary"
+                                                isActive ? "text-brand-from" : "text-muted-foreground group-hover:text-brand-from"
                                             )} />
                                         </div>
                                         {!collapsed && (
@@ -173,7 +173,7 @@ export function LibrarySidebarContent({ categories, locale, collapsed = false, o
                                                 </span>
                                                 {isActive && (
                                                     <div className="ml-auto flex items-center gap-1 animate-in fade-in duration-300">
-                                                        <div className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                                                        <div className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-brand-from to-brand-to animate-pulse" />
                                                     </div>
                                                 )}
                                             </>
@@ -192,7 +192,7 @@ export function LibrarySidebarContent({ categories, locale, collapsed = false, o
                 collapsed ? "p-3" : "p-4"
             )}>
                 {!collapsed ? (
-                    <div className="px-3 py-3 rounded-xl bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 border border-primary/10 animate-in fade-in duration-300">
+                    <div className="px-3 py-3 rounded-xl bg-gradient-to-r from-brand-from/5 via-brand-to/10 to-brand-from/5 border border-brand-from/10 animate-in fade-in duration-300">
                         <p className="text-xs text-muted-foreground leading-relaxed">
                             {locale === 'id'
                                 ? '💡 Klik kategori untuk melihat komponen yang tersedia.'

@@ -17,15 +17,15 @@ export function DocumentationClient() {
             {/* Header */}
             <div className="mb-16 border-b border-border pb-10 relative">
                 {/* Ambient Glow (Subtle) */}
-                <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-500/10 blur-3xl opacity-50 pointer-events-none" />
+                <div className="absolute -top-24 -right-24 w-64 h-64 bg-brand-from/10 blur-3xl opacity-50 pointer-events-none" />
 
-                <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/20 bg-blue-500/5 px-3 py-1 mb-6 backdrop-blur-sm">
-                    <BookOpen className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
-                    <span className="text-xs font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wide">{t('badge')}</span>
+                <div className="inline-flex items-center gap-2 rounded-full border border-brand-from/20 bg-brand-from/5 px-3 py-1 mb-6 backdrop-blur-sm">
+                    <BookOpen className="w-3.5 h-3.5 text-brand-from" />
+                    <span className="text-xs font-semibold text-brand-from uppercase tracking-wide">{t('badge')}</span>
                 </div>
 
                 <h1 className="text-4xl md:text-5xl font-bold mb-6 tracking-tight text-foreground leading-[1.1]">
-                    {t('title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">{t('titleHighlight')}</span>
+                    {t('title')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to">{t('titleHighlight')}</span>
                 </h1>
                 <p className="text-xl text-muted-foreground max-w-3xl leading-relaxed">
                     {t('subtitle')}
@@ -48,13 +48,13 @@ export function DocumentationClient() {
                                 className={cn(
                                     "w-full flex items-center gap-3 px-3 py-2 text-sm transition-all text-left relative group rounded-md",
                                     activeSection === section
-                                        ? "bg-blue-500/5 text-blue-600 dark:text-blue-400 font-semibold"
+                                        ? "bg-brand-from/5 text-brand-from font-semibold"
                                         : "text-muted-foreground hover:bg-muted/50 hover:text-foreground font-medium",
-                                    section === 'installation' && activeSection !== 'installation' && "text-blue-600/80 hover:text-blue-700 hover:bg-blue-50/50"
+                                    section === 'installation' && activeSection !== 'installation' && "text-brand-from/80 hover:text-brand-from hover:bg-brand-from/5"
                                 )}
                             >
                                 {activeSection === section && (
-                                    <span className="absolute left-0 top-2 bottom-2 w-1 bg-blue-600 rounded-full" />
+                                    <span className="absolute left-0 top-2 bottom-2 w-1 bg-brand-from rounded-full" />
                                 )}
                                 {section === 'installation' ? (
                                     <span className="flex items-center gap-2">
@@ -90,22 +90,22 @@ export function DocumentationClient() {
 
                 {/* Content */}
                 <main className="lg:col-span-9 min-w-0">
-                    <div className="prose prose-slate max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-code:text-blue-600 dark:prose-code:text-blue-400 prose-code:bg-blue-500/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
+                    <div className="prose prose-slate max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-code:text-brand-from prose-code:bg-brand-from/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
 
                         {/* Getting Started */}
                         {activeSection === 'getting-started' && (
                             <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                                 <div>
-                                    <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600 w-fit">{t('sections.getting-started.title')}</h2>
-                                    <p className="text-lg text-muted-foreground leading-relaxed border-l-4 border-blue-500/20 pl-4">
+                                    <h2 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-brand-from to-brand-to w-fit">{t('sections.getting-started.title')}</h2>
+                                    <p className="text-lg text-muted-foreground leading-relaxed border-l-4 border-brand-from/20 pl-4">
                                         {t('sections.getting-started.description')}
                                     </p>
                                 </div>
 
                                 <div className="grid sm:grid-cols-2 gap-6">
-                                    <div className="p-6 rounded-xl border border-border bg-card/50 hover:border-blue-500/30 transition-colors shadow-sm group">
+                                    <div className="p-6 rounded-xl border border-border bg-card/50 hover:border-brand-from/30 transition-colors shadow-sm group">
                                         <h3 className="font-semibold text-lg mb-4 flex items-center gap-2 text-foreground mt-0">
-                                            <div className="p-2 rounded-lg bg-blue-500/10 text-blue-600 group-hover:scale-110 transition-transform">
+                                            <div className="p-2 rounded-lg bg-brand-from/10 text-brand-from group-hover:scale-110 transition-transform">
                                                 <CheckCircle2 className="w-4 h-4" />
                                             </div>
                                             {t('sections.getting-started.features.title')}
@@ -113,15 +113,15 @@ export function DocumentationClient() {
                                         <ul className="space-y-3 list-none pl-0">
                                             {['copyPaste', 'responsive', 'bilingual', 'modern', 'openSource'].map((key) => (
                                                 <li key={key} className="flex items-start gap-3 text-sm text-muted-foreground font-medium">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500/40 mt-2 shrink-0" />
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-brand-from/40 mt-2 shrink-0" />
                                                     {t(`sections.getting-started.features.items.${key}`)}
                                                 </li>
                                             ))}
                                         </ul>
                                     </div>
-                                    <div className="p-6 rounded-xl border border-border bg-card/50 hover:border-cyan-500/30 transition-colors shadow-sm group">
+                                    <div className="p-6 rounded-xl border border-border bg-card/50 hover:border-brand-to/30 transition-colors shadow-sm group">
                                         <h3 className="font-semibold text-lg mb-4 flex items-center gap-2 text-foreground mt-0">
-                                            <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-600 group-hover:scale-110 transition-transform">
+                                            <div className="p-2 rounded-lg bg-brand-to/10 text-brand-to group-hover:scale-110 transition-transform">
                                                 <Layers className="w-4 h-4" />
                                             </div>
                                             {t('sections.getting-started.useCases.title')}
@@ -172,7 +172,7 @@ export function DocumentationClient() {
                                 <div className="space-y-12">
                                     <div className="group">
                                         <h3 className="text-xl font-bold mb-4 text-foreground flex items-center gap-4 mt-0">
-                                            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white text-sm font-bold shadow-lg shadow-blue-500/30">1</span>
+                                            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-brand-from to-brand-to text-white text-sm font-bold shadow-lg shadow-brand-from/30">1</span>
                                             {t('sections.installation.step1.title')}
                                         </h3>
                                         <p className="text-muted-foreground mb-4 pl-[44px]">{t('sections.installation.step1.description')}</p>
@@ -195,7 +195,7 @@ export function DocumentationClient() {
 
                                     <div className="group">
                                         <h3 className="text-xl font-bold mb-4 text-foreground flex items-center gap-4 mt-0">
-                                            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-blue-600 to-cyan-500 text-white text-sm font-bold shadow-lg shadow-blue-500/30">2</span>
+                                            <span className="flex items-center justify-center w-8 h-8 rounded-full bg-gradient-to-br from-brand-from to-brand-to text-white text-sm font-bold shadow-lg shadow-brand-from/30">2</span>
                                             {t('sections.installation.step2.title')}
                                         </h3>
                                         <p className="text-muted-foreground mb-4 pl-[44px]">{t('sections.installation.step2.description')}</p>
@@ -224,7 +224,7 @@ export function DocumentationClient() {
                             <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                                 <div>
                                     <h2 className="text-3xl font-bold mb-4 text-foreground tracking-tight">{t(`sections.${activeSection}.title`)}</h2>
-                                    <p className="text-lg text-muted-foreground border-l-4 border-blue-500/20 pl-4">
+                                    <p className="text-lg text-muted-foreground border-l-4 border-brand-from/20 pl-4">
                                         {t(`sections.${activeSection}.description`)}
                                     </p>
                                 </div>

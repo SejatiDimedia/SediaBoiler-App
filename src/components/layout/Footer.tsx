@@ -7,62 +7,29 @@ export function Footer() {
     const tNav = useTranslations('nav');
     const locale = useLocale();
 
-    // Simplified Footer Links - Only existing routes
-    const footerSections = [
-        {
-            title: "Product",
-            links: [
-                { label: tNav('library'), href: '/library' },
-            ]
-        },
-        {
-            title: "Resources",
-            links: [
-                { label: tNav('docs'), href: '/docs' },
-            ]
-        },
-        {
-            title: "Legal",
-            links: [
-                { label: t('terms'), href: '/terms' },
-                { label: t('privacy'), href: '/privacy' },
-            ]
-        }
-    ];
+
 
     return (
         <footer className="border-t border-border bg-background pt-16 pb-8">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
-                    {/* Brand Column (Span 4) */}
-                    <div className="lg:col-span-4 flex flex-col gap-6">
-                        <Link href="/" className="inline-block">
-                            <Logo />
+                <div className="flex flex-col items-center text-center gap-8 mb-16 px-4">
+                    <Link href="/" className="inline-block">
+                        <Logo />
+                    </Link>
+                    <p className="text-muted-foreground text-base leading-relaxed max-w-2xl mx-auto">
+                        {t('description')}
+                    </p>
+                    <div className="flex items-center gap-8">
+                        {/* Add simple links if needed, but per request we are removing sections */}
+                        <Link href="/library" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                            {tNav('library')}
                         </Link>
-                        <p className="text-muted-foreground text-base leading-relaxed max-w-sm">
-                            {t('description')}
-                        </p>
-                    </div>
-
-                    {/* Links Columns (Span 8) */}
-                    <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-8">
-                        {footerSections.map((section) => (
-                            <div key={section.title}>
-                                <h3 className="font-bold text-foreground mb-6">{section.title}</h3>
-                                <ul className="space-y-4">
-                                    {section.links.map((link) => (
-                                        <li key={link.href}>
-                                            <Link
-                                                href={link.href}
-                                                className="text-muted-foreground hover:text-primary transition-colors text-sm font-medium"
-                                            >
-                                                {link.label}
-                                            </Link>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+                        <Link href="/templates" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                            {tNav('templates')}
+                        </Link>
+                        <Link href="/docs" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+                            {tNav('docs')}
+                        </Link>
                     </div>
                 </div>
 

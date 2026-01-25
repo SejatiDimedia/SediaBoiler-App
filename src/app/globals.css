@@ -6,6 +6,14 @@
   --primary-dark: #1D4ED8;
   --primary-light: #3B82F6;
 
+  /* Theme Branding (Gradients) */
+  --brand-from: #2563EB;
+  /* Default: Blue 600 */
+  --brand-to: #06b6d4;
+  /* Default: Cyan 500 */
+  --brand-from-rgb: 37, 99, 235;
+  --brand-to-rgb: 6, 182, 212;
+
   /* Neutrals */
   --background: #ffffff;
   --foreground: #0f172a;
@@ -25,6 +33,14 @@
   --border: #1e293b;
   --accent: #0f172a;
   --accent-dark: #1e293b;
+
+  /* Theme Branding (Gradients) - Keep same for now or adapt if needed */
+  --brand-from: #3b82f6;
+  /* Blue 500 */
+  --brand-to: #22d3ee;
+  /* Cyan 400 */
+  --brand-from-rgb: 59, 130, 246;
+  --brand-to-rgb: 34, 211, 238;
 }
 
 @theme inline {
@@ -36,7 +52,10 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-accent: var(--accent);
-  --color-accent-dark: var(--accent-dark);
+  /* Custom Brand Utilities */
+  --color-brand-from: var(--brand-from);
+  --color-brand-to: var(--brand-to);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
