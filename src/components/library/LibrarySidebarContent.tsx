@@ -103,11 +103,11 @@ export function LibrarySidebarContent({ categories, locale, collapsed = false, o
                                 "w-8 h-8 rounded-lg flex items-center justify-center transition-colors shrink-0",
                                 isAllComponents
                                     ? "bg-white/20"
-                                    : "bg-accent group-hover:bg-primary/10"
+                                    : "bg-accent group-hover:bg-brand-from/10"
                             )}>
                                 <LayoutTemplate className={cn(
                                     "w-4 h-4",
-                                    isAllComponents ? "text-white" : "text-muted-foreground group-hover:text-primary"
+                                    isAllComponents ? "text-white" : "text-muted-foreground group-hover:text-brand-from"
                                 )} />
                             </div>
                             {!collapsed && (
@@ -155,8 +155,8 @@ export function LibrarySidebarContent({ categories, locale, collapsed = false, o
                                         <div className={cn(
                                             "w-8 h-8 rounded-lg flex items-center justify-center transition-all shrink-0",
                                             isActive
-                                                ? "bg-primary/10 border border-primary/20"
-                                                : "bg-accent/50 group-hover:bg-primary/10"
+                                                ? "bg-brand-from/10 border border-brand-from/20"
+                                                : "bg-accent/50 group-hover:bg-brand-from/10"
                                         )}>
                                             <IconComponent className={cn(
                                                 "w-4 h-4 transition-colors",

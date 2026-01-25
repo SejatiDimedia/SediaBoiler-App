@@ -96,9 +96,9 @@ export function HomePageClient({ locale }: { locale: string }) {
                         {/* LEFT: Typography & Content */}
                         <div className="flex flex-col items-start text-left z-10">
                             {/* Badge */}
-                            <div className="animate-in fade-in slide-in-from-left-4 duration-500 delay-100 inline-flex items-center gap-2 rounded-full border border-brand-from/20 bg-brand-from/5 px-4 py-1.5 mb-8 backdrop-blur-sm">
+                            <div className="animate-in fade-in slide-in-from-left-4 duration-500 delay-100 inline-flex items-center gap-2 rounded-full border border-brand-from/20 bg-gradient-to-r from-brand-from/10 to-brand-to/5 px-4 py-1.5 mb-8 backdrop-blur-sm shadow-sm shadow-brand-from/5">
                                 <Sparkles className="h-3.5 w-3.5 text-brand-from animate-pulse" />
-                                <span className="text-xs font-semibold text-brand-from uppercase tracking-wide">{t('badge')}</span>
+                                <span className="text-xs font-bold bg-clip-text text-transparent bg-gradient-to-r from-brand-from to-brand-to uppercase tracking-wide">{t('badge')}</span>
                             </div>
 
                             {/* Title */}

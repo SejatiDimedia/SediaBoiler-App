@@ -22,7 +22,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     variant === 'secondary' && 'bg-accent text-foreground hover:bg-accent-dark border border-border',
                     variant === 'ghost' && 'hover:bg-accent text-foreground',
                     variant === 'outline' && 'border-2 border-primary text-primary hover:bg-primary hover:text-white',
-                    variant === 'premium' && 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white hover:from-blue-600/90 hover:to-cyan-500/90 shadow-lg shadow-blue-500/25 border border-white/10 relative overflow-hidden',
+                    variant === 'premium' && 'bg-gradient-to-r from-brand-from to-brand-to text-white hover:from-brand-from/90 hover:to-brand-to/90 shadow-lg shadow-brand-from/25 border border-white/10 relative overflow-hidden',
                     // Sizes
                     size === 'sm' && 'px-3 py-1.5 text-sm',
                     size === 'md' && 'px-5 py-2.5 text-sm',

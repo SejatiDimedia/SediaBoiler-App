@@ -27,14 +27,14 @@ export function ComponentCard({
         : `/library/component/${category}/${slug}`;
 
     return (
-        <div className="group relative h-full rounded-xl border border-border bg-background overflow-hidden hover:border-brand-from/50 hover:shadow-lg hover:shadow-brand-from/5 transition-all duration-300">
+        <div className="group relative h-full rounded-xl border border-border bg-background overflow-hidden hover:border-brand-from/40 hover:shadow-xl hover:shadow-brand-from/5 transition-all duration-500 hover:-translate-y-1">
             {/* Stretched link - covers entire card */}
             <Link href={href} className="absolute inset-0 z-10" aria-label={`View ${name}`}>
                 <span className="sr-only">{viewLabel}</span>
             </Link>
 
             {/* Preview area */}
-            <div className="relative aspect-video bg-accent/50 overflow-hidden">
+            <div className="relative aspect-video bg-gradient-to-br from-brand-from/[0.03] to-brand-to/[0.03] border-b border-border/50 overflow-hidden">
                 {preview ? (
                     <div className="absolute inset-0 scale-[0.4] origin-top-left w-[250%] h-[250%] pointer-events-none">
                         {preview}
@@ -60,7 +60,7 @@ export function ComponentCard({
             {/* Content */}
             <div className="p-4">
                 <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-bold px-2.5 py-0.5 rounded-full bg-brand-from/10 text-brand-from border border-brand-from/10 capitalize">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-from/10 text-brand-from border border-brand-from/20 uppercase tracking-wider backdrop-blur-sm">
                         {category}
                     </span>
                 </div>
@@ -70,9 +70,9 @@ export function ComponentCard({
                 <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
                     {description}
                 </p>
-                <div className="flex items-center text-sm font-bold text-brand-from group-hover:gap-2 transition-all">
-                    <span className="group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-from group-hover:to-brand-to">{viewLabel}</span>
-                    <ArrowRight className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform text-brand-from" />
+                <div className="flex items-center text-sm font-bold text-brand-from transition-all group-hover:gap-1.5">
+                    <span className="bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-brand-from group-hover:to-brand-to transition-all">{viewLabel}</span>
+                    <ArrowRight className="h-4 w-4 transition-all group-hover:translate-x-1 text-brand-from group-hover:text-brand-to" />
                 </div>
             </div>
         </div>

@@ -14,8 +14,8 @@ export function FAQ() {
         <section className="py-32 bg-background relative overflow-hidden">
             {/* Background Decor */}
             <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-            <div className="absolute -left-20 top-40 w-80 h-80 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
-            <div className="absolute -right-20 bottom-40 w-80 h-80 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -left-20 top-40 w-80 h-80 bg-brand-from/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -right-20 bottom-40 w-80 h-80 bg-brand-to/10 rounded-full blur-[100px] pointer-events-none" />
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
@@ -67,7 +67,7 @@ export function FAQ() {
                                     className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? 'max-h-48 opacity-100' : 'max-h-0 opacity-0'
                                         }`}
                                 >
-                                    <div className="p-6 pt-0 text-muted-foreground leading-relaxed border-t border-dashed border-blue-500/10 mt-2">
+                                    <div className="p-6 pt-0 text-muted-foreground leading-relaxed border-t border-dashed border-brand-from/10 mt-2">
                                         {t(`items.${key}.answer`)}
                                     </div>
                                 </div>

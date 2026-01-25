@@ -54,7 +54,7 @@ export function MobileLibraryNav({ categories, locale }: MobileLibraryNavProps) 
                 </div>
                 <button
                     onClick={() => setIsOpen(true)}
-                    className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+                    className="flex items-center gap-2 px-3 py-1.5 text-sm font-medium rounded-lg bg-brand-from/10 text-brand-from hover:bg-brand-from/20 transition-colors shadow-sm shadow-brand-from/5"
                 >
                     <Menu className="w-4 h-4" />
                     {locale === 'id' ? 'Menu' : 'Menu'}

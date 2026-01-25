@@ -27,7 +27,7 @@ export function LanguageSwitcher() {
                     className={cn(
                         'flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium transition-all duration-200',
                         locale === loc.code
-                            ? 'bg-gradient-to-r from-blue-600 to-cyan-500 text-white shadow-md shadow-blue-500/20'
+                            ? 'bg-gradient-to-r from-brand-from to-brand-to text-white shadow-md shadow-brand-from/20'
                             : 'text-muted hover:text-foreground'
                     )}
                 >

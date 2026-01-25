@@ -60,6 +60,10 @@ export async function generateMetadata({
             title: metadata.title,
             description: metadata.description,
         },
+        icons: {
+            icon: '/icon',
+            apple: '/icon',
+        }
     };
 }
 

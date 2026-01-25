@@ -135,7 +135,7 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
                                         'flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all border',
                                         validPage === 1
                                             ? 'bg-muted/30 border-border text-muted cursor-not-allowed'
-                                            : 'bg-background border-border text-foreground hover:border-primary hover:text-primary'
+                                            : 'bg-background border-border text-foreground hover:border-brand-from hover:text-brand-from'
                                     )}
                                 >
                                     <ChevronLeft className="h-4 w-4" />
@@ -166,7 +166,7 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
                                         'flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all border',
                                         validPage === totalPages
                                             ? 'bg-muted/30 border-border text-muted cursor-not-allowed'
-                                            : 'bg-background border-border text-foreground hover:border-primary hover:text-primary'
+                                            : 'bg-background border-border text-foreground hover:border-brand-from hover:text-brand-from'
                                     )}
                                 >
                                     {locale === 'id' ? 'Selanjutnya' : 'Next'}
@@ -209,7 +209,7 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
                         {searchQuery && (
                             <button
                                 onClick={() => setSearchQuery('')}
-                                className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all shadow-sm hover:shadow"
+                                className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-brand-from text-white font-semibold hover:bg-brand-from/90 transition-all shadow-sm hover:shadow"
                             >
                                 {locale === 'id' ? 'Hapus Pencarian' : 'Clear Search'}
                             </button>

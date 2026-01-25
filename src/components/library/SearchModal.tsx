@@ -253,11 +253,11 @@ export function SearchModal({ isOpen, onClose, components }: SearchModalProps) {
                                                     <Icon className="h-5 w-5 text-white" />
                                                 </div>
                                                 <div className="flex-1 min-w-0">
-                                                    <div className="flex items-center gap-2 mb-1">
-                                                        <h3 className="font-bold text-foreground capitalize group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-from group-hover:to-brand-to transition-all">
+                                                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                                                        <h3 className="font-bold text-foreground capitalize group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-brand-from group-hover:to-brand-to transition-all whitespace-nowrap">
                                                             {category.name}
                                                         </h3>
-                                                        <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-brand-from/10 text-brand-from border border-brand-from/10">
+                                                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-from/10 text-brand-from border border-brand-from/10 whitespace-nowrap shadow-sm shadow-brand-from/5">
                                                             {category.count} {t('components')}
                                                         </span>
                                                     </div>

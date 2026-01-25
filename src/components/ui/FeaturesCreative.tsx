@@ -14,40 +14,40 @@ export function FeaturesCreative() {
             title: tFeatures('items.copyPaste.title'),
             desc: tFeatures('items.copyPaste.description'),
             className: "md:col-span-2",
-            bg: "from-blue-500/20 to-cyan-500/20",
-            iconColor: "text-blue-500",
+            bg: "from-brand-from/20 to-brand-to/20",
+            iconColor: "text-brand-from",
         },
         {
             icon: Palette,
             title: tFeatures('items.modern.title'),
             desc: tFeatures('items.modern.description'),
             className: "md:row-span-2",
-            bg: "from-purple-500/20 to-pink-500/20",
-            iconColor: "text-purple-500",
+            bg: "from-brand-to/20 to-brand-from/20",
+            iconColor: "text-brand-to",
         },
         {
             icon: Smartphone,
             title: tFeatures('items.responsive.title'),
             desc: tFeatures('items.responsive.description'),
             className: "",
-            bg: "from-green-500/20 to-emerald-500/20",
-            iconColor: "text-emerald-500",
+            bg: "from-brand-from/20 to-brand-to/20",
+            iconColor: "text-brand-from",
         },
         {
             icon: Languages,
             title: tFeatures('items.bilingual.title'),
             desc: tFeatures('items.bilingual.description'),
             className: "",
-            bg: "from-orange-500/20 to-red-500/20",
-            iconColor: "text-orange-500",
+            bg: "from-brand-to/20 to-brand-from/20",
+            iconColor: "text-brand-to",
         },
         {
             icon: Settings,
             title: "Fully Configured",
             desc: "TypeScript, ESLint, Prettier, and more out of the box.",
             className: "md:col-span-2",
-            bg: "from-indigo-500/20 to-violet-500/20",
-            iconColor: "text-indigo-500",
+            bg: "from-brand-from/20 to-brand-to/20",
+            iconColor: "text-brand-from",
         },
     ];
 
@@ -60,7 +60,7 @@ export function FeaturesCreative() {
                 <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
                     <div className="max-w-2xl">
                         <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground mb-6 leading-[0.9]">
-                            {tFeatures('creativeTitlePrefix')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">{tFeatures('creativeTitleHighlight')}</span>
+                            {tFeatures('creativeTitlePrefix')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to">{tFeatures('creativeTitleHighlight')}</span>
                         </h2>
                         <p className="text-xl text-muted-foreground">
                             {tFeatures('creativeSubtitle')}
@@ -78,7 +78,7 @@ export function FeaturesCreative() {
                         <div
                             key={i}
                             className={cn(
-                                "group relative overflow-hidden rounded-3xl bg-accent/30 border border-white/10 p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] hover:bg-accent/50 hover:shadow-2xl hover:shadow-blue-500/10",
+                                "group relative overflow-hidden rounded-3xl bg-accent/30 border border-white/10 p-8 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] hover:bg-accent/50 hover:shadow-2xl hover:shadow-brand-from/10",
                                 item.className
                             )}
                         >
