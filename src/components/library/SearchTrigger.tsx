@@ -40,15 +40,12 @@ export function SearchTrigger({ components, className }: SearchTriggerProps) {
             <button
                 onClick={() => setIsOpen(true)}
                 className={cn(
-                    "flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-accent/50 hover:bg-accent text-muted hover:text-foreground transition-all group",
+                    "text-muted-foreground hover:text-foreground transition-colors p-2",
                     className
                 )}
+                aria-label={t('trigger')}
             >
-                <Search className="h-4 w-4" />
-                <span className="text-sm hidden sm:inline">{t('trigger')}</span>
-                <kbd className="hidden sm:flex items-center gap-0.5 px-1.5 py-0.5 rounded bg-background border border-border text-xs font-mono">
-                    <Command className="h-3 w-3" />K
-                </kbd>
+                <Search className="h-5 w-5" />
             </button>
 
             <SearchModal

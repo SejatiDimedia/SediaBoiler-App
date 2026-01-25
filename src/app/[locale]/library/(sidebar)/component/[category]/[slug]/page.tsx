@@ -43,6 +43,10 @@ export default async function ComponentPage({ params }: ComponentPageProps) {
         notFound();
     }
 
+    if (component.isPublished === 'false') {
+        notFound();
+    }
+
     // Validate category match (optional but strictly requested structure)
     if (component.category !== category && category !== 'all') {
         // Allow 'all' wildcards? user specifically asked for /component/button/button-primary.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import {
 	componentCategories,
@@ -22,9 +22,10 @@ import {
 	PanelLeftClose,
 	PanelRightClose,
 	Sparkles,
-	Wand2, // Icon for code generation
+	Wand2,
+	Camera, // Icon for capture
 } from "lucide-react";
-import { AdminComponentPreview } from "./AdminComponentPreview";
+import { AdminComponentPreview, AdminComponentPreviewRef } from "./AdminComponentPreview";
 import { CodeEditor } from "./CodeEditor";
 import { ImageUploader } from "./ImageUploader";
 import { generateComponentMetadata, generateComponentCode } from "@/lib/actions/ai";
@@ -55,7 +56,10 @@ export function ComponentForm({
 }: ComponentFormProps) {
 	const router = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
+	const [isCapturing, setIsCapturing] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+
+	const previewRef = useRef<AdminComponentPreviewRef>(null);
 
 	// Panel visibility state: 'both' | 'code' | 'preview'
 	const [panelView, setPanelView] = useState<"both" | "code" | "preview">("both");
@@ -210,6 +214,27 @@ export function ComponentForm({
 		} finally {
 			setIsGeneratingCode(false);
 			setPrompt("");
+		}
+	};
+
+	const handleCapture = async () => {
+		if (!previewRef.current) return;
+		setIsCapturing(true);
+		setError(null);
+		try {
+			const dataUrl = await previewRef.current.capture();
+			if (dataUrl) {
+				setFormData(prev => ({ ...prev, previewImage: dataUrl }));
+				// If we are in preview-only mode, switch back to split view so user can SEE the captured image in the details panel
+				if (panelView === 'preview') {
+					setPanelView('both');
+				}
+			}
+		} catch (err) {
+			console.error(err);
+			setError("Failed to capture thumbnail. Please try again.");
+		} finally {
+			setIsCapturing(false);
 		}
 	};
 
@@ -422,13 +447,18 @@ export function ComponentForm({
 
 							{/* Preview Image - Full Width */}
 							<div className="lg:col-span-4">
-								<label className="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-2">
-									<Eye className="w-4 h-4 text-slate-400" />
-									Preview Image
-								</label>
-								<p className="text-xs text-slate-400 mb-3">
-									Shown as card thumbnail when no live preview is available
-								</p>
+								<div className="flex items-center justify-between mb-2">
+									<div>
+										<label className="text-sm font-semibold text-slate-700 flex items-center gap-2">
+											<Eye className="w-4 h-4 text-slate-400" />
+											Preview Image
+										</label>
+										<p className="text-xs text-slate-400 mt-1">
+											Shown as thumbnail when database-driven
+										</p>
+									</div>
+
+								</div>
 								<ImageUploader
 									value={formData.previewImage}
 									onChange={(url) => setFormData({ ...formData, previewImage: url })}
@@ -637,9 +667,22 @@ export function ComponentForm({
 										<Eye className="w-3 h-3" />
 										Live Preview
 									</span>
+									{panelView === 'preview' && (
+										<button
+											type="button"
+											onClick={handleCapture}
+											disabled={isCapturing || !formData.code}
+											className="flex items-center gap-2 px-3 py-1.5 bg-indigo-50 text-indigo-600 rounded-lg text-xs font-semibold hover:bg-indigo-100 transition disabled:opacity-50 shadow-sm border border-indigo-100"
+											title="Capture current preview as thumbnail"
+										>
+											{isCapturing ? <Loader2 className="w-3 h-3 animate-spin" /> : <Camera className="w-3 h-3" />}
+											{isCapturing ? "Capturing..." : "Auto-Capture"}
+										</button>
+									)}
 								</div>
 								<div className={`flex-1 bg-slate-100/50 overflow-y-auto ${panelView === "preview" ? "min-h-[900px]" : "h-full"}`}>
 									<AdminComponentPreview
+										ref={previewRef}
 										code={formData.code}
 										className="w-full"
 									/>

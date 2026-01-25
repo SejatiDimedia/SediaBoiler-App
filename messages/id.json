@@ -12,16 +12,47 @@
     "getStarted": "Mulai Sekarang"
   },
   "hero": {
-    "badge": "🚀 UI Library Indonesia",
+    "badge": "🚀 Hemat Waktu Development Anda",
     "title": "Fondasi Siap Pakai,",
     "titleHighlight": "Coding Jadi Lancar",
-    "description": "Koleksi komponen UI modern dengan kode siap copy-paste. Dibangun dengan Next.js dan Tailwind CSS untuk developer Indonesia.",
+    "description": "Koleksi lengkap template dan komponen UI siap pakai. Dibangun dengan Next.js dan Tailwind CSS untuk mempercepat workflow development Anda.",
     "cta": "Jelajahi Library",
     "ctaSecondary": "Lihat Dokumentasi"
   },
+  "faq": {
+    "title": "Pertanyaan yang Sering",
+    "titleHighlight": "Diajukan",
+    "subtitle": "Tidak menemukan jawaban yang Anda cari? Hubungi tim support kami.",
+    "contact": "Hubungi Support",
+    "items": {
+      "installation": {
+        "question": "Apakah perlu install package?",
+        "answer": "Tidak. SediaBoiler adalah library copy-paste. Anda cukup salin kode mentah langsung ke project Anda. Tanpa dependensi berat, tanpa lock-in."
+      },
+      "tech_stack": {
+        "question": "Teknologi apa saja yang dipakai?",
+        "answer": "Dibangun dengan teknologi terkini: Next.js 14 (App Router), Tailwind CSS v3.4, TypeScript 5, Supabase, dan komponen aksesibel khusus."
+      },
+      "license": {
+        "question": "Bolehkah saya jual hasil projectnya?",
+        "answer": "Tentu saja. Kode sepenuhnya milik Anda. Bangun produk SaaS, website klien, atau tools internal dan jual tanpa batas. Bebas royalti."
+      },
+      "customization": {
+        "question": "Bisakah saya kustomisasi desainnya?",
+        "answer": "Ya! Karena kodenya ada di project Anda, Anda punya kontrol penuh. Bebas ubah class Tailwind atau logic apa pun sesuai branding Anda."
+      },
+      "roadmap": {
+        "question": "Apakah akan ada komponen baru?",
+        "answer": "Ya! Kami merilis blok UI baru (Dashboard, Form, Section) setiap minggu berdasarkan request user. Boilerplate ini terus berkembang."
+      }
+    }
+  },
   "features": {
     "title": "Mengapa SediaBoiler?",
+    "creativeTitlePrefix": "MENGAPA",
+    "creativeTitleHighlight": "SEDIA BOILER?",
     "subtitle": "Semua yang Anda butuhkan untuk membangun website modern dengan cepat",
+    "creativeSubtitle": "Sebuah pengalaman yang dirancang untuk membuat Anda ship lebih cepat, bukan sekadar template.",
     "items": {
       "copyPaste": {
         "title": "Copy-Paste Instan",

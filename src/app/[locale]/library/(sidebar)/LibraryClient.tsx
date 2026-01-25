@@ -21,47 +21,35 @@ interface ComponentItem {
 interface LibraryPageClientProps {
     components: ComponentItem[];
     categories: string[];
+    initialCategory?: string;
 }
 
-export function LibraryClient({ components, categories }: LibraryPageClientProps) {
+export function LibraryClient({ components, categories, initialCategory = 'all' }: LibraryPageClientProps) {
     const t = useTranslations('library');
     const locale = useLocale() as 'id' | 'en';
     const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
-    // Initialize state from URL params
-    const initialCategory = searchParams.get('category');
-    const validatedCategory = initialCategory && categories.includes(initialCategory) ? initialCategory : 'all';
+    // Initialize state
     const initialPage = parseInt(searchParams.get('page') || '1', 10);
 
     const [searchQuery, setSearchQuery] = useState('');
-    const [activeCategory, setActiveCategory] = useState(validatedCategory);
+    const [activeCategory, setActiveCategory] = useState(initialCategory);
     const [currentPage, setCurrentPage] = useState(initialPage);
 
-    // Sync state if URL changes
+    // Sync state if props change (navigation)
     useEffect(() => {
-        const cat = searchParams.get('category');
-        const page = parseInt(searchParams.get('page') || '1', 10);
-
-        if (cat && categories.includes(cat)) {
-            setActiveCategory(cat);
-        } else if (!cat) {
-            setActiveCategory('all');
-        }
-
-        setCurrentPage(page);
-    }, [searchParams, categories]);
+        setActiveCategory(initialCategory);
+        setCurrentPage(1); // Reset page on category change
+    }, [initialCategory]);
 
     const handleCategoryChange = (category: string) => {
-        const params = new URLSearchParams(searchParams.toString());
         if (category === 'all') {
-            params.delete('category');
+            router.push(`/${locale}/library`);
         } else {
-            params.set('category', category);
+            router.push(`/${locale}/library/${category}`);
         }
-        params.delete('page'); // Reset to page 1
-        router.push(`${pathname}?${params.toString()}`);
     };
 
     const handlePageChange = (page: number) => {

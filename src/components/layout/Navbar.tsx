@@ -60,13 +60,8 @@ export function Navbar({ components = staticComponents }: NavbarProps) {
             )}
         >
             <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div className="flex h-16 items-center justify-between">
-                    {/* Logo */}
-                    <Link href="/">
-                        <Logo />
-                    </Link>
-
-                    {/* Desktop Navigation */}
+                <div className="flex h-16 items-center justify-between relative">
+                    {/* Left: Desktop Navigation */}
                     <div className="hidden md:flex md:items-center md:gap-8">
                         {navLinks.map((link) => (
                             <Link
@@ -79,18 +74,35 @@ export function Navbar({ components = staticComponents }: NavbarProps) {
                         ))}
                     </div>
 
-                    {/* Desktop Actions */}
+                    {/* Center: Logo */}
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <Link href="/">
+                            <Logo />
+                        </Link>
+                    </div>
+
+                    {/* Right: Desktop Actions */}
                     <div className="hidden md:flex md:items-center md:gap-3">
                         <SearchTrigger components={components} />
                         <ThemeToggle />
                         <LanguageSwitcher />
-                        <Link href="/library">
-                            <Button size="sm" variant="premium">{t('getStarted')}</Button>
-                        </Link>
                     </div>
 
-                    {/* Mobile Actions */}
-                    <div className="flex items-center gap-2 md:hidden">
+                    {/* Mobile: Logo (Left) and Actions (Right) - Simplified for mobile */}
+                    <div className="flex items-center justify-between w-full md:hidden">
+                        {/* Logo visible on mobile naturally since absolute center might overlap if not handled, 
+                            but let's keep the absolute logo for desktop and standard flow for mobile. 
+                            Actually, absolute centering works for mobile too if width permits, but typically mobile has Logo Left, Hamburger Right.
+                        */}
+
+                        {/* We need to hide the absolute logo on mobile if we want standard mobile layout, 
+                            OR keep it centered on mobile too. 
+                            Let's try to keep it centered on mobile for consistency, and place hamburger left or right.
+                        */}
+                    </div>
+
+                    {/* Mobile Actions (Right) */}
+                    <div className="flex items-center gap-2 md:hidden absolute right-0">
                         <SearchTrigger
                             components={components}
                             className="bg-transparent border-none p-2 hover:bg-accent text-foreground"

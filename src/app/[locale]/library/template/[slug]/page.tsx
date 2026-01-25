@@ -42,6 +42,10 @@ export default async function TemplatePage({ params }: TemplatePageProps) {
         notFound();
     }
 
+    if (component.isPublished === 'false') {
+        notFound();
+    }
+
     const PreviewComponent = componentRegistry[slug];
 
     return (

@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { setRequestLocale } from 'next-intl/server';
-import { LibraryClient } from './LibraryClient';
+import { LibraryClient } from '../LibraryClient';
 import { getPublishedComponents } from '@/lib/actions/components';
 import { components as staticComponents, getAllCategories } from '@/lib/components-data';
 
@@ -22,45 +22,30 @@ function LibraryLoading() {
     );
 }
 
-export default async function LibraryPage({
+export default async function CategoryPage({
     params,
 }: {
-    params: Promise<{ locale: string }>;
+    params: Promise<{ locale: string; category: string }>;
 }) {
-    const { locale } = await params;
+    const { locale, category } = await params;
     setRequestLocale(locale);
 
-    // Try to get components from database, fallback to static data
-    let components;
+    let components = [];
     try {
         const dbComponents = await getPublishedComponents();
-        if (dbComponents.length > 0) {
-            components = dbComponents
-                .filter(c => c.category !== 'landing-page') // Exclude templates
-                .map(c => ({
-                    slug: c.slug,
-                    name: c.name,
-                    description: c.description,
-                    category: c.category,
-                    previewImage: c.previewImage,
-                }));
-        } else {
-            // Use static data if database is empty
-            components = staticComponents
-                .filter(c => c.category !== 'landing-page') // Exclude templates
-                .map(c => ({
-                    slug: c.slug,
-                    name: c.name,
-                    description: c.description,
-                    category: c.category,
-                    previewImage: undefined,
-                }));
-        }
+        components = dbComponents
+            .filter(c => c.category !== 'landing-page')
+            .map(c => ({
+                slug: c.slug,
+                name: c.name,
+                description: c.description,
+                category: c.category,
+                previewImage: c.previewImage,
+            }));
     } catch (error) {
-        // Fallback to static data on error
-        console.error('Failed to fetch from database, using static data:', error);
+        console.error('Failed to fetch from database:', error);
         components = staticComponents
-            .filter(c => c.category !== 'landing-page') // Exclude templates
+            .filter(c => c.category !== 'landing-page')
             .map(c => ({
                 slug: c.slug,
                 name: c.name,
@@ -74,7 +59,11 @@ export default async function LibraryPage({
 
     return (
         <Suspense fallback={<LibraryLoading />}>
-            <LibraryClient components={components} categories={categories} />
+            <LibraryClient
+                components={components}
+                categories={categories}
+                initialCategory={category}
+            />
         </Suspense>
     );
 }

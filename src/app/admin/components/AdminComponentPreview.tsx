@@ -1,10 +1,9 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, forwardRef, useImperativeHandle } from "react";
 import { useTheme } from "next-themes";
+import html2canvas from "html2canvas";
 import {
-	Eye,
-	Code,
 	RotateCcw,
 	AlertCircle,
 	Smartphone,
@@ -20,16 +19,142 @@ interface AdminComponentPreviewProps {
 	className?: string;
 }
 
-export function AdminComponentPreview({
+export interface AdminComponentPreviewRef {
+	capture: () => Promise<string | null>;
+}
+
+export const AdminComponentPreview = forwardRef<AdminComponentPreviewRef, AdminComponentPreviewProps>(({
 	code,
 	className,
-}: AdminComponentPreviewProps) {
+}, ref) => {
 	const { resolvedTheme } = useTheme();
 
 	const [viewMode, setViewMode] = useState<ViewMode>("desktop");
 	const [iframeKey, setIframeKey] = useState(0);
 	const [error, setError] = useState<string | null>(null);
 	const iframeRef = useRef<HTMLIFrameElement>(null);
+
+	// Expose capture method
+	useImperativeHandle(ref, () => ({
+		capture: async () => {
+			if (!iframeRef.current?.contentDocument) return null;
+
+			try {
+				const doc = iframeRef.current.contentDocument;
+				const root = doc.getElementById('root');
+				const target = root?.firstElementChild || root || doc.body;
+
+				// IMAGE LOADING HACK: Convert all images to Base64 to bypass CORS issues in html2canvas
+				// This is robust against external URLs (Unsplash, etc) that might block canvas methods.
+				const images = target.querySelectorAll('img');
+				const originalSrcs = new Map<HTMLImageElement, string>();
+
+				await Promise.all(Array.from(images).map(async (img) => {
+					try {
+						const originalSrc = img.src;
+						// Skip if already base64
+						if (originalSrc.startsWith('data:')) return;
+
+						originalSrcs.set(img, originalSrc);
+
+						// Fetch the image as a blob
+						const response = await fetch(originalSrc);
+						const blob = await response.blob();
+
+						// Convert to base64
+						const base64Src = await new Promise<string>((resolve) => {
+							const reader = new FileReader();
+							reader.onloadend = () => resolve(reader.result as string);
+							reader.readAsDataURL(blob);
+						});
+
+						img.src = base64Src;
+					} catch (e) {
+						console.warn('Failed to proxy image for capture:', e);
+						// Continue even if one image fails
+					}
+				}));
+
+				const bgColor = resolvedTheme === 'dark' ? '#020617' : '#ffffff';
+
+				// FORCE DESKTOP WIDTH (1280px) as requested
+				// This ensures we always capture the desktop version of the navbar/component
+				const captureWidth = 1280;
+
+				// Capture using html2canvas with foreignObjectRendering for better flexbox support
+				const canvas = await html2canvas(target as HTMLElement, {
+					useCORS: true,
+					allowTaint: true,
+					logging: false,
+					scale: 2,
+					backgroundColor: bgColor,
+					windowWidth: captureWidth, // Simulates 1280px screen (Tailwind lg breakpoint)
+					x: 0,
+					y: 0,
+					foreignObjectRendering: true,
+					removeContainer: true,
+					// Try to wait for images to load
+					imageTimeout: 15000,
+				});
+
+				// RESTORE IMAGES
+				originalSrcs.forEach((src, img) => {
+					img.src = src;
+				});
+
+				// Thumbnail dimensions (16:9)
+				const thumbWidth = 640;
+				const thumbHeight = 360;
+
+				const thumbnailCanvas = document.createElement("canvas");
+				thumbnailCanvas.width = thumbWidth;
+				thumbnailCanvas.height = thumbHeight;
+
+				const ctx = thumbnailCanvas.getContext("2d");
+				if (!ctx) return null;
+
+				// Fill background first
+				ctx.fillStyle = bgColor;
+				ctx.fillRect(0, 0, thumbWidth, thumbHeight);
+
+				ctx.imageSmoothingEnabled = true;
+				ctx.imageSmoothingQuality = "high";
+
+				// Source dimensions (from html2canvas, which has scale:2)
+				const sourceWidth = canvas.width;
+				const sourceHeight = canvas.height;
+
+				// Calculate how to draw:
+				// We want to scale source to fit EXACTLY thumbWidth, then see if height fits
+				const scaleRatio = thumbWidth / sourceWidth;
+				const scaledHeight = sourceHeight * scaleRatio;
+
+				if (scaledHeight >= thumbHeight) {
+					// Content is TALLER than thumbnail: Crop from top (for landing pages)
+					// We need to take only the top portion that fits 16:9
+					const sourceHeightToCrop = thumbHeight / scaleRatio;
+					ctx.drawImage(
+						canvas,
+						0, 0, sourceWidth, sourceHeightToCrop, // Source: full width, cropped height
+						0, 0, thumbWidth, thumbHeight         // Dest: fill entire thumbnail
+					);
+				} else {
+					// Content is SHORTER than thumbnail: Draw at top, maintain proportions
+					// This ensures navbar stays aligned and proportional
+					ctx.drawImage(
+						canvas,
+						0, 0, sourceWidth, sourceHeight,       // Source: entire capture
+						0, 0, thumbWidth, scaledHeight         // Dest: full width, natural height at top
+					);
+				}
+
+				return thumbnailCanvas.toDataURL("image/jpeg", 0.92);
+			} catch (err) {
+				console.error("Capture failed:", err);
+				throw err;
+			}
+		}
+	}));
 
 	const createPreviewContent = useCallback(
 		(componentCode: string, theme: string) => {
@@ -63,10 +188,8 @@ export function AdminComponentPreview({
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script>
-        // Define component code as a global variable
         window.__componentCode__ = ${JSON.stringify(componentCode)};
 
-        // Helper to create SVG elements
         const createSvg = (props, children) => React.createElement('svg', {
             viewBox: "0 0 24 24",
             fill: "none",
@@ -77,7 +200,6 @@ export function AdminComponentPreview({
             ...props
         }, ...children);
 
-        // MOCK LUCIDE ICONS LIBRARY
         window.LucideIcons = {
             DefaultIcon: (p) => createSvg(p, [React.createElement('circle', {cx:12, cy:12, r:10})]),
             Menu: (p) => createSvg(p, [React.createElement('line',{x1:4,x2:20,y1:12,y2:12}),React.createElement('line',{x1:4,x2:20,y1:6,y2:6}),React.createElement('line',{x1:4,x2:20,y1:18,y2:18})]),
@@ -102,13 +224,12 @@ export function AdminComponentPreview({
             Palette: (p) => createSvg(p, [React.createElement('circle',{cx:13.5,cy:6.5,r:.5}),React.createElement('circle',{cx:17.5,cy:10.5,r:.5}),React.createElement('circle',{cx:8.5,cy:7.5,r:.5}),React.createElement('circle',{cx:6.5,cy:12.5,r:.5}),React.createElement('path',{d:"M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z"})]),
             Flame: (p) => createSvg(p, [React.createElement('path',{d:"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"})]),
             Target: (p) => createSvg(p, [React.createElement('circle',{cx:12,cy:12,r:10}),React.createElement('circle',{cx:12,cy:12,r:6}),React.createElement('circle',{cx:12,cy:12,r:2})]),
-            Sparkles: (p) => createSvg(p, [React.createElement('path',{d:"m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"}),React.createElement('path',{d:"M5 3v4"}),React.createElement('path',{d:"M19 17v4"}),React.createElement('path',{d:"M3 5h4"}),React.createElement('path',{d:"M17 19h4"})]),
+            Sparkles: (p) => createSvg(p, [React.createElement('path',{d:"m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L12 3Z"}),React.createElement('path',{d:"M5 3v4"}),React.createElement('path',{d:"M19 17v4"}),React.createElement('path',{d:"M3 5h4"}),React.createElement('path',{d:"M17 19h4"})]),
             Wrench: (p) => createSvg(p, [React.createElement('path',{d:"M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"})]),
             ThumbsUp: (p) => createSvg(p, [React.createElement('path',{d:"M7 10v12"}),React.createElement('path',{d:"M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"})]),
             HelpCircle: (p) => createSvg(p, [React.createElement('circle',{cx:12,cy:12,r:10}),React.createElement('path',{d:"M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"}),React.createElement('path',{d:"M12 17h.01"})]),
         };
 
-        // Fallback Proxy
         window.LucideProxy = new Proxy(window.LucideIcons, {
             get: (target, prop) => {
                 if (prop in target) return target[prop];
@@ -117,7 +238,6 @@ export function AdminComponentPreview({
             }
         });
 
-        // Dynamic Resize Logic
         const observer = new ResizeObserver(entries => {
             const height = document.body.scrollHeight;
             window.parent.postMessage({ type: 'preview-resize', height: height }, '*');
@@ -140,14 +260,11 @@ export function AdminComponentPreview({
             try {
                 var code = window.__componentCode__;
 
-                // DETECT IMPORTS BEFORE STRIPPING
                 var importedIcons = [];
-                // Regex matches: import { A, B as C } from 'lucide-react'
                 var lucideMatch = code.match(/import\\s+{([^}]+)}\\s+from\\s+['"]lucide-react['"]/);
                 if (lucideMatch) {
                     importedIcons = lucideMatch[1].split(',').map(function(s) { 
                         var parts = s.trim().split(/\\s+as\\s+/);
-                        // Store simple name or {name, alias}
                         return { 
                             name: parts[0].trim(), 
                             alias: parts[1] ? parts[1].trim() : parts[0].trim() 
@@ -155,27 +272,20 @@ export function AdminComponentPreview({
                     });
                 }
 
-                // STRIP ALL IMPORTS
                 code = code.replace(/import\\s+[\\s\\S]*?from\\s+['"].*['"];?/g, '');
-                // Also strip "use client"
                 code = code.replace(/['"]use client['"];?/g, '');
-
-                // Remove export statements
                 code = code.replace(/export\\s+default\\s+/g, '').replace(/export\\s+/g, '');
 
-                // Find function name
                 var functionMatch = code.match(/function\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*\\(/);
                 var functionName = functionMatch ? functionMatch[1] : null;
 
                 if (!functionName) throw new Error('Could not find function component');
 
-                // Transform JSX and TypeScript using Babel
                 var transformed = Babel.transform(code, {
                     presets: ['react', 'typescript'],
                     filename: 'component.tsx',
                 }).code;
 
-                // Inject Icon declarations
                 var iconInjects = importedIcons.map(function(icon) {
                     return 'var ' + icon.alias + ' = window.LucideProxy.' + icon.name + ';';
                 }).join('\\n');
@@ -195,6 +305,7 @@ export function AdminComponentPreview({
 
             } catch (err) {
                 console.error('[Preview] Error:', err);
+                window.parent.postMessage({ type: 'preview-error', error: err.message }, '*');
                 document.getElementById('root').innerHTML = '<div style="color:red;padding:20px">Error: ' + err.message + '</div>';
             }
         }
@@ -208,7 +319,6 @@ export function AdminComponentPreview({
 		[],
 	);
 
-	// Update iframe when code or theme changes
 	useEffect(() => {
 		if (!iframeRef.current) return;
 
@@ -219,7 +329,6 @@ export function AdminComponentPreview({
 
 			iframeRef.current.src = url;
 
-			// Cleanup
 			return () => {
 				URL.revokeObjectURL(url);
 			};
@@ -228,17 +337,11 @@ export function AdminComponentPreview({
 		}
 	}, [code, resolvedTheme, iframeKey, createPreviewContent]);
 
-	// Listen for errors and resize from iframe
-	// Handles in main useEffect now to separate logic if needed, but combined above unique logic
-	// Keeping this empty as we combined logic above but need to remove old effect
-
 
 	const refreshPreview = () => {
 		setError(null);
 		setIframeKey((prev) => prev + 1);
 	};
-
-
 
 	const viewModes = [
 		{ key: "mobile" as ViewMode, icon: Smartphone, label: "Mobile" },
@@ -257,13 +360,11 @@ export function AdminComponentPreview({
 		}
 	};
 
-	/* Dynamic Height Logic */
 	const [dynamicHeight, setDynamicHeight] = useState("500px");
 
 	useEffect(() => {
 		const handleMessage = (event: MessageEvent) => {
 			if (event.data.type === "preview-resize") {
-				// Add buffer to prevent scrollbars
 				setDynamicHeight(`${event.data.height + 60}px`);
 			} else if (event.data.type === "preview-error") {
 				setError(event.data.error);
@@ -281,15 +382,7 @@ export function AdminComponentPreview({
 				className,
 			)}
 		>
-			{/* Header */}
-			{/* ... header content ... */}
-			{/* Keeping existing header code implicitly via precise targeting if possible, but replace_file_content replaces chunks. 
-               I should target specific blocks or be careful. 
-               Actually, I will target the specific lines for dynamicHeight logic and iframe style.
-            */}
-			{/* Header */}
 			<div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 border-b border-slate-200 bg-slate-50">
-				{/* View Mode Toggles */}
 				<div className="flex items-center gap-1 rounded-lg bg-slate-100 p-1">
 					{viewModes.map((mode) => (
 						<button
@@ -310,8 +403,6 @@ export function AdminComponentPreview({
 					))}
 				</div>
 
-				{/* Actions */}
-				{/* Actions */}
 				<div className="flex items-center gap-3">
 					<button
 						type="button"
@@ -332,7 +423,6 @@ export function AdminComponentPreview({
 				</div>
 			</div>
 
-			{/* Preview Content */}
 			<div className="overflow-y-auto">
 				<div
 					className={cn(
@@ -379,4 +469,6 @@ export function AdminComponentPreview({
 			</div>
 		</div>
 	);
-}
+});
+
+AdminComponentPreview.displayName = 'AdminComponentPreview';

@@ -19,7 +19,7 @@ export function LanguageSwitcher() {
         const segments = pathname.split('/');
         segments[1] = newLocale;
         const newPath = segments.join('/');
-        router.push(newPath);
+        router.push(newPath, { scroll: false });
     };
 
     return (

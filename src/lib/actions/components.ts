@@ -2,7 +2,7 @@
 
 import { db } from '@/db';
 import { components, NewComponent, Component } from '@/db/schema';
-import { eq, ne, desc } from 'drizzle-orm';
+import { eq, ne, desc, inArray } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
 // Get all components
@@ -114,6 +114,30 @@ export async function updateComponent(id: number, data: Partial<NewComponent>): 
 export async function deleteComponent(id: number): Promise<void> {
     if (!db) throw new Error('Database not available');
     await db.delete(components).where(eq(components.id, id));
+    revalidatePath('/admin/components');
+    revalidatePath('/admin/templates');
+    revalidatePath('/[locale]/library', 'layout');
+}
+
+// Bulk update publish status
+export async function bulkUpdatePublishStatus(ids: number[], isPublished: 'true' | 'false'): Promise<void> {
+    if (!db) throw new Error('Database not available');
+    if (ids.length === 0) return;
+
+    await db.update(components)
+        .set({ isPublished })
+        .where(inArray(components.id, ids));
+
+    revalidatePath('/[locale]/library', 'layout');
+}
+
+// Bulk delete components
+export async function bulkDeleteComponents(ids: number[]): Promise<void> {
+    if (!db) throw new Error('Database not available');
+    if (ids.length === 0) return;
+
+    await db.delete(components).where(inArray(components.id, ids));
+
     revalidatePath('/admin/components');
     revalidatePath('/admin/templates');
     revalidatePath('/[locale]/library', 'layout');

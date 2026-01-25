@@ -12,16 +12,47 @@
         "getStarted": "Get Started"
     },
     "hero": {
-        "badge": "🚀 Indonesian UI Library",
+        "badge": "🚀 Save Your Development Time",
         "title": "Ready-Made Foundation,",
         "titleHighlight": "Smooth Coding",
-        "description": "A collection of modern UI components with copy-paste ready code. Built with Next.js and Tailwind CSS for Indonesian developers.",
+        "description": "Comprehensive collection of ready-to-use templates and UI components. Built with Next.js and Tailwind CSS to speed up your development workflows.",
         "cta": "Explore Library",
         "ctaSecondary": "View Documentation"
     },
+    "faq": {
+        "title": "Frequently Asked",
+        "titleHighlight": "Questions",
+        "subtitle": "Can't find the answer you're looking for? Reach out to our customer support team.",
+        "contact": "Contact Support",
+        "items": {
+            "installation": {
+                "question": "Do I need to install a package?",
+                "answer": "No. SediaBoiler is a copy-paste library. You simply copy the raw code directly into your project. No heavy dependencies or vendor lock-in."
+            },
+            "tech_stack": {
+                "question": "What specific technologies are inside?",
+                "answer": "Built on the bleeding edge: Next.js 14 (App Router), Tailwind CSS v3.4, TypeScript 5, Supabase, and specialized accessible components."
+            },
+            "license": {
+                "question": "Can I sell projects I build with this?",
+                "answer": "Absolutely. The code is yours. Build SaaS products, client websites, or internal tools and sell them unlimitedly. No royalties, no strings attached."
+            },
+            "customization": {
+                "question": "Can I customize the components?",
+                "answer": "Yes! Since the code lives in your project, you have full control. You can modify any Tailwind class or logic to fit your specific brand."
+            },
+            "roadmap": {
+                "question": "Are more components coming?",
+                "answer": "Yes! We ship new UI blocks (Dashboards, Forms, Sections) every week based on user requests. Your boilerplate grows with you."
+            }
+        }
+    },
     "features": {
         "title": "Why SediaBoiler?",
+        "creativeTitlePrefix": "WHY",
+        "creativeTitleHighlight": "SEDIA BOILER?",
         "subtitle": "Everything you need to build modern websites quickly",
+        "creativeSubtitle": "An experience designed to make you ship faster, not just a template.",
         "items": {
             "copyPaste": {
                 "title": "Instant Copy-Paste",

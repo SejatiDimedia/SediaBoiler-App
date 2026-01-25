@@ -9,16 +9,22 @@ if (!connectionString) {
     console.error('DATABASE_URL is not set in environment variables');
 }
 
-// Create postgres connection only if we have a connection string
-const client = connectionString
+// Create postgres connection with singleton pattern for development
+const globalQueryClient = global as unknown as { postgres: postgres.Sql };
+
+const client = globalQueryClient.postgres || (connectionString
     ? postgres(connectionString, {
         prepare: false,
-        max: 1,  // Keep low for Supabase Session Pooler. For better concurrency, use Transaction Pooler (port 6543)
+        max: 1, // Strict limit for Supabase Session Pooling
     })
-    : null;
+    : null);
+
+if (process.env.NODE_ENV !== 'production' && client) {
+    globalQueryClient.postgres = client;
+}
 
 export const db = client ? drizzle(client, { schema }) : null;
-export const sql = client; // Export client for manual cleanup
+export const sql = client;
 
 export { schema };
 
