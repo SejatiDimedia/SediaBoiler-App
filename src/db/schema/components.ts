@@ -1,10 +1,5 @@
 import { pgTable, serial, varchar, text, timestamp, jsonb } from 'drizzle-orm/pg-core';
-
-// Bilingual content type
-export type BilingualContent = {
-    id: string;
-    en: string;
-};
+import { BilingualContent } from './types';
 
 // Component categories
 export const componentCategories = [

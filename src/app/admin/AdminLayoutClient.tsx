@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Layers, LayoutDashboard, Package, LogOut, ChevronLeft, ChevronRight, Menu, FolderOpen, ImageIcon, Layout } from 'lucide-react';
+import { Layers, LayoutDashboard, Package, LogOut, ChevronLeft, ChevronRight, Menu, FolderOpen, ImageIcon, Layout, BookOpen } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -29,6 +29,7 @@ export function AdminLayoutClient({ children }: AdminLayoutClientProps) {
 
     const navItems = [
         { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
+        { name: 'Blog', href: '/admin/blog', icon: BookOpen },
         { name: 'Components', href: '/admin/components', icon: Package },
         { name: 'Templates', href: '/admin/templates', icon: Layout },
         { name: 'Categories', href: '/admin/categories', icon: FolderOpen },

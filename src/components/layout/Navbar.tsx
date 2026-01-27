@@ -46,6 +46,7 @@ export function Navbar({ components = [] }: NavbarProps) {
         { href: '/library', label: t('library') },
         { href: '/templates', label: t('templates') },
         { href: '/docs', label: t('docs') },
+        { href: '/blog', label: 'Blog' },
     ];
 
     // During SSR and initial hydration, always render transparent (matches server)
@@ -122,7 +123,7 @@ export function Navbar({ components = [] }: NavbarProps) {
                                 <Link
                                     key={link.href}
                                     href={link.href}
-                                    className="text-lg font-medium text-foreground py-2 border-b border-border/50"
+                                    className="text-sm font-medium text-foreground py-3 border-b border-border/50 transition-colors hover:text-primary"
                                     onClick={() => setIsMobileMenuOpen(false)}
                                 >
                                     {link.label}
@@ -145,6 +146,6 @@ export function Navbar({ components = [] }: NavbarProps) {
                     </div>
                 )}
             </nav>
-        </header>
+        </header >
     );
 }

@@ -111,7 +111,7 @@ html {
 
 /* Code block styling */
 pre {
-  background: var(--accent-dark) !important;
+  background: var(--accent-dark);
   border-radius: 0.5rem;
   overflow-x: auto;
 }

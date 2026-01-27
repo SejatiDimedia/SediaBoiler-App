@@ -19,6 +19,21 @@
         "cta": "Explore Library",
         "ctaSecondary": "View Documentation"
     },
+    "blog": {
+        "badge": "The Blog",
+        "title": "Engineering Insights",
+        "description": "Architecting the next generation of web applications. Deep dives into code, design, and performance.",
+        "featured": "Featured Article",
+        "readArticle": "Read Article",
+        "readMore": "Read more",
+        "noPosts": "No posts found yet. Stay tuned!",
+        "footer": {
+            "badge": "What's Next?",
+            "title": "Continue your journey.",
+            "description": "Dive deeper into our library of tutorials, components, and industry insights.",
+            "button": "Explore Library"
+        }
+    },
     "faq": {
         "title": "Frequently Asked",
         "titleHighlight": "Questions",

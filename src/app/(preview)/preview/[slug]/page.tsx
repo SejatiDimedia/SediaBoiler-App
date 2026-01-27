@@ -24,74 +24,74 @@ function DynamicPreview({ code, theme }: { code: string; theme: string }) {
             ${isDark ? "background: #0a0a0a; color: #fafafa;" : "background: #ffffff; color: #0a0a0a;"}
         }
         #root { width: 100%; min-height: 100vh; }
-        h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.25; }
-        p { line-height: 1.75; }
-        button, input, select, textarea { font-family: inherit; }
-        a { color: ${isDark ? "#60a5fa" : "#3b82f6"}; text-decoration: none; }
-        a:hover { color: ${isDark ? "#93c5fd" : "#2563eb"}; }
-        button { cursor: pointer; border: none; outline: none; }
-        nav, header { width: 100%; }
     </style>
+    <!-- Import Map for handling bare imports -->
+    <script type="importmap">
+    {
+        "imports": {
+            "react": "https://esm.sh/react@19?dev",
+            "react-dom/client": "https://esm.sh/react-dom@19/client?dev",
+            "lucide-react": "https://esm.sh/lucide-react@0.469.0?dev"
+        }
+    }
+    </script>
+    <!-- Babel for transforming TSX to JS -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
     <div id="root"></div>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script>
-        window.__componentCode__ = ${JSON.stringify(componentCode)};
-    </script>
-    <script>
-        function initPreview() {
-            if (typeof React === 'undefined' || typeof ReactDOM === 'undefined' || typeof Babel === 'undefined') {
-                setTimeout(initPreview, 100);
-                return;
-            }
-            
+
+    <!-- Hidden implementation script -->
+    <script type="text/babel" data-type="module" data-presets="react,typescript">
+        import React from 'react';
+        import { createRoot } from 'react-dom/client';
+        
+        // User Code Injection
+        const userCode = ${JSON.stringify(componentCode)};
+
+        async function run() {
             try {
-                var code = window.__componentCode__;
-                code = code.replace(/export\\s+default\\s+/g, '').replace(/export\\s+/g, '');
-                
-                var functionMatch = code.match(/function\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*\\(/);
-                var functionName = functionMatch ? functionMatch[1] : null;
-                
-                if (!functionName) {
-                    throw new Error('Could not find a function component.');
-                }
-                
-                var transformed = Babel.transform(code, {
-                    presets: ['react'],
+                // Transform User Code
+                // We use Babel.transform to compile TSX -> JS (ESM)
+                const { code } = Babel.transform(userCode, {
                     filename: 'component.tsx',
-                }).code;
+                    presets: [
+                        ['react', { runtime: 'automatic', importSource: 'react' }],
+                        ['typescript', { isTSX: true, allExtensions: true }]
+                    ],
+                    // Critical: Preserve import statements
+                    targets: { esmodules: true },
+                });
+
+                // Create a blob URL for the module
+                const blob = new Blob([code], { type: 'text/javascript' });
+                const url = URL.createObjectURL(blob);
+
+                // Dynamic Import the user module
+                const module = await import(url);
                 
-                var wrapperCode = 
-                    'var useState = React.useState;' +
-                    'var useEffect = React.useEffect;' +
-                    'var useCallback = React.useCallback;' +
-                    'var useMemo = React.useMemo;' +
-                    'var useRef = React.useRef;' +
-                    'var useContext = React.useContext;' +
-                    'var useReducer = React.useReducer;' +
-                    transformed +
-                    ';return ' + functionName + ';';
-                
-                var Component = new Function('React', wrapperCode)(React);
-                
-                if (typeof Component !== 'function') {
-                    throw new Error('Component is not a valid React function component');
+                // Find the default export
+                const Component = module.default;
+
+                if (!Component) {
+                    throw new Error('No default export found. Please export a component as default.');
                 }
-                
-                var rootEl = document.getElementById('root');
-                ReactDOM.createRoot(rootEl).render(React.createElement(Component));
+
+                // Mount
+                const root = createRoot(document.getElementById('root'));
+                root.render(React.createElement(Component));
+
             } catch (err) {
+                console.error(err);
                 document.getElementById('root').innerHTML = 
-                    '<div style="color: #dc2626; padding: 2rem; text-align: center;">' +
-                        '<h2>Preview Error</h2>' +
-                        '<p style="font-family: monospace; background: #fef2f2; padding: 0.5rem; border-radius: 0.25rem;">' + err.message + '</p>' +
+                    '<div style="color: #ef4444; padding: 20px; font-family: monospace;">' +
+                    '<strong>Preview Error:</strong><br/>' + 
+                    err.message +
                     '</div>';
             }
         }
-        initPreview();
+
+        run();
     </script>
 </body>
 </html>`;

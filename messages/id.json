@@ -19,6 +19,21 @@
     "cta": "Jelajahi Library",
     "ctaSecondary": "Lihat Dokumentasi"
   },
+  "blog": {
+    "badge": "Blog",
+    "title": "Wawasan Teknis",
+    "description": "Merancang generasi aplikasi web berikutnya. Bahasan mendalam tentang kode, desain, dan performa.",
+    "featured": "Artikel Unggulan",
+    "readArticle": "Baca Artikel",
+    "readMore": "Baca selengkapnya",
+    "noPosts": "Belum ada postingan. Pantau terus!",
+    "footer": {
+      "badge": "Apa Selanjutnya?",
+      "title": "Lanjutkan perjalanan Anda.",
+      "description": "Pelajari lebih dalam perpustakaan tutorial, komponen, dan wawasan industri kami.",
+      "button": "Jelajahi Perpustakaan"
+    }
+  },
   "faq": {
     "title": "Pertanyaan yang Sering",
     "titleHighlight": "Diajukan",

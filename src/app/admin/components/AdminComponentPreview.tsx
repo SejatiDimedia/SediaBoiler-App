@@ -174,7 +174,9 @@ export const AdminComponentPreview = forwardRef<AdminComponentPreviewRef, AdminC
             ${isDark ? "background: #0a0a0a; color: #fafafa;" : "background: #ffffff; color: #0a0a0a;"}
         }
         #root { width: 100%; }
+        /* Prevent infinite resize loops by disabling viewport-based heights in preview */
         .min-h-screen { min-height: auto !important; }
+        .h-screen { height: auto !important; }
         h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.25; }
         p { line-height: 1.75; }
         a { color: ${isDark ? "#60a5fa" : "#3b82f6"}; text-decoration: none; }
@@ -239,15 +241,29 @@ export const AdminComponentPreview = forwardRef<AdminComponentPreviewRef, AdminC
         });
 
         const observer = new ResizeObserver(entries => {
-            const height = document.body.scrollHeight;
-            window.parent.postMessage({ type: 'preview-resize', height: height }, '*');
+            // We want the height of the content, usually #root
+            const root = document.getElementById('root');
+            if (!root) return;
+            
+            // Use ResizeObserverEntry borderBoxSize if available for better perf, 
+            // but root.scrollHeight is most reliable for overflow content.
+            const height = root.scrollHeight;
+            
+            // Only post if sensible
+            if (height > 0) {
+                 window.parent.postMessage({ type: 'preview-resize', height: height }, '*');
+            }
         });
         
         window.addEventListener('DOMContentLoaded', () => {
-            observer.observe(document.body);
-            setTimeout(() => {
-                 window.parent.postMessage({ type: 'preview-resize', height: document.body.scrollHeight }, '*');
-            }, 100);
+            const root = document.getElementById('root');
+            if (root) {
+                observer.observe(root);
+                // Initial check
+                setTimeout(() => {
+                     window.parent.postMessage({ type: 'preview-resize', height: root.scrollHeight }, '*');
+                }, 100);
+            }
         });
     </script>
     <script>

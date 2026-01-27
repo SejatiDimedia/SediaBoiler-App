@@ -91,10 +91,10 @@ export function HomePageClient({ locale }: { locale: string }) {
                 </div>
 
                 <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 lg:items-start items-center">
 
                         {/* LEFT: Typography & Content */}
-                        <div className="flex flex-col items-start text-left z-10">
+                        <div className="flex flex-col items-center text-center lg:items-start lg:text-left z-10 text-pretty lg:pt-0 lg:mt-5">
                             {/* Badge */}
                             <div className="animate-in fade-in slide-in-from-left-4 duration-500 delay-100 inline-flex items-center gap-2 rounded-full border border-brand-from/20 bg-gradient-to-r from-brand-from/10 to-brand-to/5 px-4 py-1.5 mb-8 backdrop-blur-sm shadow-sm shadow-brand-from/5">
                                 <Sparkles className="h-3.5 w-3.5 text-brand-from animate-pulse" />
@@ -110,14 +110,14 @@ export function HomePageClient({ locale }: { locale: string }) {
                             </h1>
 
                             {/* Description */}
-                            <p className="animate-in fade-in slide-in-from-left-6 duration-700 delay-300 text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-lg">
+                            <p className="animate-in fade-in slide-in-from-left-6 duration-700 delay-300 text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0">
                                 {t('description')}
                             </p>
 
                             {/* CTAs */}
-                            <div className="animate-in fade-in zoom-in duration-700 delay-400 flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+                            <div className="animate-in fade-in zoom-in duration-700 delay-400 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center justify-center lg:justify-start">
                                 <Link href="/library">
-                                    <Button variant="premium" size="lg" className="w-full sm:w-auto gap-2 from-brand-from to-brand-to hover:from-brand-from/90 hover:to-brand-to/90 shadow-lg shadow-brand-from/20 text-white rounded-full px-8">
+                                    <Button variant="premium" size="lg" className="w-full sm:w-auto gap-2 from-brand-from to-brand-to hover:from-brand-from/90 hover:to-brand-to/90 shadow-lg shadow-brand-from/20 text-white rounded-full px-8 border-none">
                                         {t('cta')}
                                         <ArrowRight className="h-4 w-4" />
                                     </Button>
@@ -126,8 +126,8 @@ export function HomePageClient({ locale }: { locale: string }) {
                         </div>
 
                         {/* RIGHT: Visual / Illustration */}
-                        <div className="relative w-full perspective-1000 lg:h-[600px] flex items-center justify-center lg:justify-end">
-                            <div className="relative w-full max-w-[600px] transform lg:rotate-y-[-12deg] lg:rotate-x-[5deg] transition-transform duration-500 hover:rotate-0 preserve-3d">
+                        <div className="relative w-full perspective-1000 lg:h-[600px] flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
+                            <div className="relative w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[600px] transform lg:rotate-y-[-12deg] lg:rotate-x-[5deg] transition-transform duration-500 hover:rotate-0 preserve-3d scale-[0.95] sm:scale-100">
 
                                 {/* Glow behind illustration */}
                                 <div className="absolute inset-0 bg-brand-from/20 blur-[100px] -z-10 rounded-full" />
@@ -142,9 +142,9 @@ export function HomePageClient({ locale }: { locale: string }) {
                                 </div>
 
                                 {/* Top Layer: Component Library (Source) */}
-                                <div className="relative group z-20 translate-x-4 translate-y-4 lg:translate-x-0 lg:translate-y-0 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
+                                <div className="relative group z-20 translate-x-0 translate-y-0 lg:translate-x-0 lg:translate-y-0 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
                                     <div className="absolute -inset-1 bg-gradient-to-tr from-brand-to to-brand-from rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000" />
-                                    <div className="relative rounded-xl border border-border/50 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden h-[340px] flex flex-col ring-1 ring-white/10">
+                                    <div className="relative rounded-xl border border-border/50 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden h-[300px] sm:h-[340px] w-full flex flex-col ring-1 ring-white/10">
                                         {/* Header */}
                                         <div className="flex items-center justify-between px-4 py-3 border-b border-border/50 bg-muted/30">
                                             <div className="flex gap-2">
@@ -155,7 +155,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                                         </div>
 
                                         {/* Library Content */}
-                                        <div className="p-6 flex flex-col gap-6">
+                                        <div className="p-4 sm:p-6 flex flex-col gap-4 sm:gap-6">
                                             <div className="space-y-2">
                                                 <div className="h-4 w-1/3 bg-muted rounded animate-pulse" />
                                                 <div className="h-2 w-1/2 bg-muted/50 rounded" />
@@ -164,7 +164,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                                             {/* The Component Card being "Copied" */}
                                             <div className="relative group/card cursor-pointer">
                                                 <div className="absolute inset-0 bg-brand-from/10 rounded-xl blur-xl group-hover/card:bg-brand-from/20 transition-all" />
-                                                <div className="relative bg-card border border-border rounded-xl p-4 transition-all group-hover/card:border-brand-from/50 group-hover/card:shadow-lg hover:-translate-y-1">
+                                                <div className="relative bg-card border border-border rounded-xl p-3 sm:p-4 transition-all group-hover/card:border-brand-from/50 group-hover/card:shadow-lg hover:-translate-y-1">
                                                     <div className="flex items-center justify-between mb-3">
                                                         <div className="flex items-center gap-3">
                                                             <div className="w-8 h-8 rounded-lg bg-brand-from/10 flex items-center justify-center text-brand-from">
@@ -179,7 +179,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                                                             Copy
                                                         </div>
                                                     </div>
-                                                    <div className="h-20 bg-muted/10 rounded-lg border border-border/50 border-dashed flex items-center justify-center">
+                                                    <div className="h-16 sm:h-20 bg-muted/10 rounded-lg border border-border/50 border-dashed flex items-center justify-center">
                                                         <div className="w-1/2 h-2 bg-muted/20 rounded-full" />
                                                     </div>
                                                 </div>
@@ -192,15 +192,15 @@ export function HomePageClient({ locale }: { locale: string }) {
                                                 </div>
                                             </div>
 
-                                            <div className="h-24 bg-muted/5 rounded-xl border border-border/30 border-dashed" />
+                                            <div className="h-20 sm:h-24 bg-muted/5 rounded-xl border border-border/30 border-dashed" />
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Bottom Layer: Code Editor (Destination) */}
-                                <div className="relative z-10 translate-x-12 -translate-y-24 lg:translate-x-20 lg:-translate-y-32 animate-in fade-in slide-in-from-right-12 duration-1000 delay-300">
+                                <div className="relative z-10 translate-x-4 -translate-y-10 sm:translate-x-12 sm:-translate-y-24 lg:translate-x-20 lg:-translate-y-32 animate-in fade-in slide-in-from-right-12 duration-1000 delay-300">
                                     <div className="absolute -inset-1 bg-gradient-to-r from-brand-from to-brand-to rounded-2xl blur opacity-30" />
-                                    <div className="relative rounded-xl border border-white/10 bg-[#0F172A] shadow-2xl overflow-hidden h-[300px] w-[340px] flex flex-col ring-1 ring-white/5 mx-auto">
+                                    <div className="relative rounded-xl border border-white/10 bg-[#0F172A] shadow-2xl overflow-hidden h-[260px] sm:h-[300px] w-full max-w-[340px] flex flex-col ring-1 ring-white/5 mx-auto">
                                         <div className="flex items-center justify-between px-4 py-3 bg-[#0F172A] border-b border-white/5">
                                             <div className="flex gap-1.5">
                                                 <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />

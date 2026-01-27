@@ -1,6 +1,7 @@
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Logo } from '@/components/ui/Logo';
+import { Heart } from 'lucide-react';
 
 export function Footer() {
     const t = useTranslations('footer');
@@ -40,7 +41,9 @@ export function Footer() {
                     </p>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <span>Made with</span>
-                        <div className="text-red-500 animate-pulse">❤️</div>
+                        <div className="animate-pulse">
+                            <Heart className="w-4 h-4 text-brand-from fill-brand-from" />
+                        </div>
                         <span>in Indonesia</span>
                     </div>
                 </div>
