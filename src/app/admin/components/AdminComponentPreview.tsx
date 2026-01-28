@@ -165,7 +165,22 @@ export const AdminComponentPreview = forwardRef<AdminComponentPreviewRef, AdminC
 <html>
 <head>
     <meta charset="UTF-8">
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            from: '${isDark ? "#3b82f6" : "#2563EB"}',
+                            to: '${isDark ? "#22d3ee" : "#06b6d4"}',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { min-height: 100%; width: 100%; }
@@ -177,6 +192,8 @@ export const AdminComponentPreview = forwardRef<AdminComponentPreviewRef, AdminC
         /* Prevent infinite resize loops by disabling viewport-based heights in preview */
         .min-h-screen { min-height: auto !important; }
         .h-screen { height: auto !important; }
+        /* Typography overrides if needed */
+        .prose { max-width: none; }
         h1, h2, h3, h4, h5, h6 { font-weight: 700; line-height: 1.25; }
         p { line-height: 1.75; }
         a { color: ${isDark ? "#60a5fa" : "#3b82f6"}; text-decoration: none; }
@@ -185,7 +202,7 @@ export const AdminComponentPreview = forwardRef<AdminComponentPreviewRef, AdminC
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div id="root" class="${isDark ? 'dark' : ''}"></div>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>

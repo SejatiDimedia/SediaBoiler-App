@@ -5,9 +5,9 @@ import { routing } from '@/i18n/routing';
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { ThemeProvider } from '@/components/theme-provider';
-import { getComponentSearchIndex } from '@/lib/actions/components';
 import '../globals.css';
 import { Geist, Geist_Mono, Outfit, Space_Grotesk } from 'next/font/google';
+import { NextAuthProvider } from '@/components/providers/NextAuthProvider';
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -86,25 +86,25 @@ export default async function LocaleLayout({
 
     // Providing all messages to the client side
     const messages = await getMessages();
-    // Search data is now fetched client-side to prevent blocking the initial render
-    // const components = await getComponentSearchIndex();
 
     return (
         <html lang={locale} suppressHydrationWarning>
             <body className={`${geistSans.variable} ${geistMono.variable} ${outfit.variable} ${spaceGrotesk.variable} antialiased`}>
-                <ThemeProvider
-                    attribute="class"
-                    defaultTheme="system"
-                    enableSystem
-                >
-                    <NextIntlClientProvider messages={messages}>
-                        <div className="flex min-h-screen flex-col">
-                            <Navbar />
-                            <main className="flex-1 pt-16">{children}</main>
-                            <Footer />
-                        </div>
-                    </NextIntlClientProvider>
-                </ThemeProvider>
+                <NextAuthProvider>
+                    <ThemeProvider
+                        attribute="class"
+                        defaultTheme="system"
+                        enableSystem
+                    >
+                        <NextIntlClientProvider messages={messages}>
+                            <div className="flex min-h-screen flex-col">
+                                <Navbar />
+                                <main className="flex-1 pt-16">{children}</main>
+                                <Footer />
+                            </div>
+                        </NextIntlClientProvider>
+                    </ThemeProvider>
+                </NextAuthProvider>
             </body>
         </html>
     );

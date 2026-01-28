@@ -7,6 +7,8 @@ import { ArrowLeft, Calendar, Clock, Sparkles, ArrowRight, BookOpen } from 'luci
 import { Metadata } from 'next';
 import { Button } from '@/components/ui/Button';
 import { CodeBlock } from '@/components/library/CodeBlock';
+import { BlogInteractions } from '@/components/blog/BlogInteractions';
+import { getPostInteractions } from '@/lib/actions/interactions';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
     const { locale, slug } = await params;
@@ -37,6 +39,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function BlogPostPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
     const { locale, slug } = await params;
     const { success, data: post } = await getPostBySlug(slug);
+    const interactions = await getPostInteractions(slug);
 
     if (!success || !post) {
         notFound();
@@ -111,68 +114,138 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
                 )}
 
                 {/* Main Content - Editorial Typography */}
-                <div className="prose prose-lg dark:prose-invert max-w-none 
-                    /* Headings */
-                    prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground prose-headings:scroll-m-20
-                    prose-h1:text-4xl prose-h1:font-extrabold prose-h1:mb-8
-                    prose-h2:text-2xl prose-h2:font-bold prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-border/30 prose-h2:pb-2
-                    prose-h3:text-xl prose-h3:font-semibold prose-h3:mt-8 prose-h3:mb-4
-                    
-                    /* Body Text */
-                    prose-p:text-foreground/85 prose-p:leading-8 prose-p:my-6
-                    prose-strong:text-foreground prose-strong:font-bold
-                    
-                    /* Links */
-                    prose-a:text-foreground prose-a:font-semibold prose-a:underline prose-a:decoration-brand-from/50 prose-a:underline-offset-4 prose-a:decoration-2 hover:prose-a:decoration-brand-from hover:prose-a:text-brand-from prose-a:transition-all
-                    
-                    /* Lists */
-                    prose-ul:my-6 prose-ul:list-disc prose-ul:pl-6
-                    prose-ol:my-6 prose-ol:list-decimal prose-ol:pl-6
-                    prose-li:text-foreground/85 prose-li:my-2 prose-li:leading-7
-                    prose-li:marker:text-brand-from prose-li:marker:font-bold
-                    
-                    /* Blockquotes */
-                    prose-blockquote:border-l-4 prose-blockquote:border-brand-from prose-blockquote:bg-muted/30 prose-blockquote:py-6 prose-blockquote:px-8 prose-blockquote:rounded-r-xl prose-blockquote:italic prose-blockquote:text-foreground prose-blockquote:my-10 prose-blockquote:font-serif prose-blockquote:text-xl prose-blockquote:leading-loose prose-blockquote:shadow-sm
-                    
-                    /* Images */
-                    prose-img:rounded-xl prose-img:border prose-img:border-border/50 prose-img:shadow-lg prose-img:my-12 prose-img:w-full prose-img:bg-muted
-                    
-                    /* Separators */
-                    prose-hr:my-16 prose-hr:border-border/50
-                    
-                    /* Code (Inline - Block is handled by component) */
-                    prose-pre:p-0 prose-pre:bg-transparent prose-pre:border-none
-                ">
+                {/* Main Content - Custom Rendered for Complete Control, bypassing Prose plugin */}
+                <div className="max-w-none">
                     <ReactMarkdown
                         components={{
-                            // Unwrap pre to avoid background color leaks in margins
-                            pre: ({ children }: any) => <>{children}</>,
+                            // Headings
+                            h1: ({ children }) => (
+                                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mt-16 mb-8 bg-clip-text text-transparent bg-gradient-to-r from-brand-from to-brand-to w-fit">
+                                    {children}
+                                </h1>
+                            ),
+                            h2: ({ children }) => (
+                                <h2 className="text-2xl md:text-3xl font-bold tracking-tight mt-12 mb-6 flex items-center gap-3 group">
+                                    <span className="w-1.5 h-8 rounded-full bg-gradient-to-b from-brand-from to-brand-to shrink-0" />
+                                    <span className="bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70 group-hover:from-brand-from group-hover:to-brand-to transition-all duration-500">
+                                        {children}
+                                    </span>
+                                </h2>
+                            ),
+                            h3: ({ children }) => (
+                                <h3 className="text-xl md:text-2xl font-bold mt-8 mb-4 flex items-center gap-2">
+                                    <span className="text-brand-from/50">#</span>
+                                    {children}
+                                </h3>
+                            ),
+                            // Text
+                            p: ({ children }) => (
+                                <p className="text-lg text-foreground/85 leading-loose mb-6 font-normal tracking-wide">
+                                    {children}
+                                </p>
+                            ),
+                            strong: ({ children }) => (
+                                <strong className="font-bold text-foreground bg-brand-from/10 px-1 rounded-sm">
+                                    {children}
+                                </strong>
+                            ),
+                            // Lists
+                            ul: ({ children }) => (
+                                <ul className="flex flex-col gap-3 my-8 ml-2">
+                                    {children}
+                                </ul>
+                            ),
+                            ol: ({ children }) => (
+                                <ol className="list-decimal list-outside ml-6 flex flex-col gap-3 my-8 text-foreground/80 font-medium">
+                                    {children}
+                                </ol>
+                            ),
+                            li: ({ children }) => {
+                                // Check if it's an ordered list item by context if possible, but simpler to just robustly style both.
+                                // For UL, we can assume no bullets provided by parent UL style usually, but lets try to detect or just default generic.
+                                // ReactMarkdown 'li' doesn't easily know parent. 
+                                // Actually, 'ul' above removes list-style. So we need to add custom marker here
+                                // But generic 'li' handles both content. 
+                                // Let's try a safe bet: standard LI for OL, custom for UL is tricky without context.
+                                // We'll stick to CSS markers for OL, but for UL we cleared it? 
+                                // Revert specific UL clear, use standard class but styled.
+                                return (
+                                    <li className="text-lg leading-relaxed pl-2 relative">
+                                        {children}
+                                    </li>
+                                )
+                            },
+                            // Links
+                            a: ({ children, href }) => (
+                                <Link
+                                    href={href || '#'}
+                                    className="inline-block font-semibold text-brand-from border-b-2 border-brand-from/30 hover:border-brand-from transition-all duration-300 hover:-translate-y-0.5"
+                                >
+                                    {children}
+                                </Link>
+                            ),
+                            // Blockquote - Visual Feature
+                            blockquote: ({ children }) => (
+                                <blockquote className="relative my-10 p-8 rounded-2xl bg-gradient-to-br from-brand-from/5 to-transparent border border-brand-from/10 shadow-[0_0_40px_-15px_rgba(var(--brand-from-rgb),0.2)] icon-quote">
+                                    <Sparkles className="absolute top-4 right-4 w-6 h-6 text-brand-from/20" />
+                                    <div className="relative z-10 text-xl font-medium italic text-foreground/90 leading-relaxed font-serif">
+                                        {children}
+                                    </div>
+                                </blockquote>
+                            ),
+                            // Code Blocks
+                            pre: ({ children }) => <>{children}</>,
                             code({ className, children, ...props }) {
                                 const match = /language-(\w+)/.exec(className || '');
                                 const isInline = !match;
 
                                 if (!isInline && match) {
                                     return (
-                                        <div className="not-prose my-12">
-                                            <CodeBlock
-                                                code={String(children).replace(/\n$/, '')}
-                                                language={match[1]}
-                                            />
-                                        </div>
+                                        <CodeBlock
+                                            code={String(children).replace(/\n$/, '')}
+                                            language={match[1]}
+                                        />
                                     );
                                 }
 
                                 return (
-                                    <code className={`${className} bg-gradient-to-r from-brand-from to-brand-to px-1.5 py-0.5 rounded-md text-[0.9em] font-mono font-bold text-white shadow-sm shadow-brand-from/20`} {...props}>
+                                    <code className={`${className} bg-brand-from/10 text-brand-from px-1.5 py-0.5 rounded-md text-[0.9em] font-mono font-bold border border-brand-from/20`} {...props}>
                                         {children}
                                     </code>
                                 );
-                            }
+                            },
+                            // Images
+                            img: (props) => (
+                                <div className="my-12 relative group rounded-3xl overflow-hidden shadow-2xl bg-muted">
+                                    <div className="absolute inset-0 ring-1 ring-inset ring-black/10 z-10 rounded-3xl" />
+                                    <img
+                                        {...props}
+                                        className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-105"
+                                    />
+                                    {props.alt && (
+                                        <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6 pt-12 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20">
+                                            <p className="text-white font-medium text-sm text-center">{props.alt}</p>
+                                        </div>
+                                    )}
+                                </div>
+                            ),
+                            // Separator
+                            hr: () => (
+                                <hr className="my-16 border-t-2 border-dashed border-border/60 w-1/3 mx-auto" />
+                            )
                         }}
                     >
                         {content}
                     </ReactMarkdown>
                 </div>
+
+                {/* Interactions Section */}
+                <BlogInteractions
+                    slug={slug}
+                    initialLikeCount={interactions.likeCount}
+                    initialUserHasLiked={interactions.userHasLiked}
+                    initialComments={interactions.comments}
+                />
 
                 {/* Footer Section - Brands Gradient Card */}
                 <div className="mt-24 pt-16 border-t border-border/40">
