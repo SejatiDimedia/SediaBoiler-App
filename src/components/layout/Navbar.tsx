@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -7,9 +8,10 @@ import { LanguageSwitcher } from '@/components/ui/LanguageSwitcher';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { SearchTrigger } from '@/components/library/SearchTrigger';
 import { Button } from '@/components/ui/Button';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, LogOut, User } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Logo } from '@/components/ui/Logo';
+import { useSession, signOut } from 'next-auth/react';
 
 interface ComponentItem {
     slug: string;
@@ -25,6 +27,7 @@ interface NavbarProps {
 
 
 export function Navbar({ components = [] }: NavbarProps) {
+    const { data: session } = useSession();
     const t = useTranslations('nav');
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,7 +58,6 @@ export function Navbar({ components = [] }: NavbarProps) {
     return (
         <header
             className={cn(
-                'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
                 'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
                 // Mobile: Always solid background for better visibility
                 // Desktop: Transparent at top, solid when scrolled
@@ -91,6 +93,41 @@ export function Navbar({ components = [] }: NavbarProps) {
                         <SearchTrigger components={components} />
                         <ThemeToggle />
                         <LanguageSwitcher />
+
+                        {session ? (
+                            <div className="relative group ml-2 pl-3 border-l border-border/50 h-10 flex items-center">
+                                <div className="w-8 h-8 rounded-full overflow-hidden border border-border bg-accent cursor-pointer transition-all duration-300 group-hover:ring-2 group-hover:ring-brand-from/30 group-hover:scale-105">
+                                    {session.user?.image ? (
+                                        <img src={session.user.image} alt="User" className="w-full h-full object-cover" />
+                                    ) : (
+                                        <User className="w-full h-full p-2 text-muted-foreground" />
+                                    )}
+                                </div>
+
+                                {/* Dropdown Menu on Hover */}
+                                <div className="absolute top-full right-0 mt-3 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 translate-y-2 group-hover:translate-y-0 z-[100]">
+                                    <div className="relative bg-background/95 backdrop-blur-2xl border border-border rounded-2xl shadow-2xl p-2 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+                                        {/* Ambient Glow in Dropdown */}
+                                        <div className="absolute -top-12 -right-12 w-24 h-24 bg-brand-from/10 blur-2xl rounded-full pointer-events-none" />
+
+                                        <div className="relative px-3 py-3 border-b border-border/50 mb-1">
+                                            <p className="text-sm font-bold text-foreground truncate">{session.user?.name}</p>
+                                            <p className="text-[11px] text-muted-foreground truncate leading-none mt-1">{session.user?.email}</p>
+                                        </div>
+
+                                        <button
+                                            onClick={() => signOut()}
+                                            className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-all group/logout"
+                                        >
+                                            <div className="w-8 h-8 rounded-full bg-muted/50 flex items-center justify-center group-hover/logout:bg-destructive/20 transition-colors">
+                                                <LogOut className="w-4 h-4 group-hover/logout:-translate-x-0.5 transition-transform" />
+                                            </div>
+                                            Logout
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        ) : null}
                     </div>
 
                     {/* Mobile Layout: Logo (Left) and Actions (Right) */}
@@ -130,6 +167,24 @@ export function Navbar({ components = [] }: NavbarProps) {
                                 </Link>
                             ))}
                             <div className="mt-auto pb-8 flex flex-col gap-4">
+                                {session && (
+                                    <div className="flex items-center justify-between p-4 rounded-lg bg-accent/50 mb-2">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-10 h-10 rounded-full overflow-hidden border border-border">
+                                                {session.user?.image ? (
+                                                    <img src={session.user.image} alt="User" className="w-full h-full object-cover" />
+                                                ) : (
+                                                    <User className="w-full h-full p-2" />
+                                                )}
+                                            </div>
+                                            <span className="text-sm font-medium">{session.user?.name}</span>
+                                        </div>
+                                        <Button variant="ghost" size="sm" onClick={() => signOut()} className="text-red-500">
+                                            <LogOut className="w-4 h-4 mr-2" />
+                                            Logout
+                                        </Button>
+                                    </div>
+                                )}
                                 <div className="flex items-center justify-between gap-4 p-4 rounded-lg bg-accent/50">
                                     <span className="text-sm font-medium">Appearance</span>
                                     <ThemeToggle />

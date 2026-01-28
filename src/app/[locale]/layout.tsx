@@ -61,8 +61,8 @@ export async function generateMetadata({
             description: metadata.description,
         },
         icons: {
-            icon: '/icon',
-            apple: '/icon',
+            icon: '/favicon.ico?v=3',
+            apple: '/icon.png?v=3',
         }
     };
 }

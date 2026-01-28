@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     const excerpt = post.excerpt ? (post.excerpt[locale] || post.excerpt['en']) : '';
 
     return {
-        title: `${title} | SediaBoiler Blog`,
+        title: title,
         description: excerpt,
         openGraph: {
             title: title,

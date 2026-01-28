@@ -6,10 +6,10 @@ import { cn } from '@/lib/utils';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
-    const t = await getTranslations({ locale, namespace: 'Blog' });
+    const t = await getTranslations({ locale, namespace: 'blog' });
     return {
-        title: t('meta_title') || 'Blog | SediaBoiler',
-        description: t('meta_description') || 'Insights, tutorials, and latest news regarding our ecosystem.',
+        title: t('meta_title'),
+        description: t('meta_description'),
     };
 }
 

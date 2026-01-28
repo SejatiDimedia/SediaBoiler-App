@@ -20,6 +20,8 @@
         "ctaSecondary": "View Documentation"
     },
     "blog": {
+        "meta_title": "Blog",
+        "meta_description": "Insights, tutorials, and latest news regarding our ecosystem.",
         "badge": "The Blog",
         "title": "Engineering Insights",
         "description": "Architecting the next generation of web applications. Deep dives into code, design, and performance.",
@@ -32,6 +34,20 @@
             "title": "Continue your journey.",
             "description": "Dive deeper into our library of tutorials, components, and industry insights.",
             "button": "Explore Library"
+        },
+        "interactions": {
+            "discussion": "Discussion",
+            "likes": "Likes",
+            "thanks": "Thanks for appreciating!",
+            "enjoyed": "Did you enjoy this article?",
+            "join": "Join the Conversation",
+            "signInDesc": "Sign in to share your thoughts and interact with the community.",
+            "signInGoogle": "Continue with Google",
+            "placeholder": "Add to the discussion...",
+            "markdown": "Markdown supported",
+            "post": "Post",
+            "signOut": "Sign Out",
+            "noComments": "No comments yet. Be the first to share your thoughts!"
         }
     },
     "faq": {

@@ -2,6 +2,15 @@ import { requireAdminAuth } from '@/lib/admin-auth';
 import { Geist, Geist_Mono } from 'next/font/google';
 import '../globals.css';
 import { AdminLayoutClient } from './AdminLayoutClient';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+    title: 'Admin | SediaBoiler',
+    icons: {
+        icon: '/favicon.ico?v=3',
+        apple: '/icon.png?v=3',
+    }
+};
 
 const geistSans = Geist({
     variable: '--font-geist-sans',

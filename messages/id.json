@@ -20,6 +20,8 @@
     "ctaSecondary": "Lihat Dokumentasi"
   },
   "blog": {
+    "meta_title": "Blog",
+    "meta_description": "Wawasan teknis, tutorial, dan berita terbaru sekeliling ekosistem kami.",
     "badge": "Blog",
     "title": "Wawasan Teknis",
     "description": "Merancang generasi aplikasi web berikutnya. Bahasan mendalam tentang kode, desain, dan performa.",
@@ -32,6 +34,20 @@
       "title": "Lanjutkan perjalanan Anda.",
       "description": "Pelajari lebih dalam perpustakaan tutorial, komponen, dan wawasan industri kami.",
       "button": "Jelajahi Perpustakaan"
+    },
+    "interactions": {
+      "discussion": "Diskusi",
+      "likes": "Suka",
+      "thanks": "Terima kasih atas apresiasinya!",
+      "enjoyed": "Suka dengan artikel ini?",
+      "join": "Gabung dalam Diskusi",
+      "signInDesc": "Masuk untuk berbagi pendapat dan berinteraksi dengan komunitas.",
+      "signInGoogle": "Lanjutkan dengan Google",
+      "placeholder": "Tulis pendapat Anda...",
+      "markdown": "Mendukung Markdown",
+      "post": "Kirim",
+      "signOut": "Keluar",
+      "noComments": "Belum ada komentar. Jadilah yang pertama berkomentar!"
     }
   },
   "faq": {
