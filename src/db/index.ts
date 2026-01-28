@@ -23,7 +23,8 @@ if (process.env.NODE_ENV !== 'production' && client) {
     globalQueryClient.postgres = client;
 }
 
-export const db = client ? drizzle(client, { schema }) : null;
+const dbInstance = client ? drizzle(client, { schema }) : null;
+export const db = dbInstance!;
 export const sql = client;
 
 export { schema };

@@ -5,6 +5,11 @@ import { sql } from 'drizzle-orm';
 async function main() {
     console.log('Starting manual migration...');
 
+    if (!db) {
+        console.error('Database connection could not be established. Check your DATABASE_URL.');
+        process.exit(1);
+    }
+
     try {
         // Users
         await db.execute(sql`
