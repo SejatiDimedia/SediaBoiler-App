@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { CodeBlock } from '@/components/library/CodeBlock';
 import { BlogInteractions } from '@/components/blog/BlogInteractions';
 import { getPostInteractions } from '@/lib/actions/interactions';
+import { ShareButtons } from '@/components/blog/ShareButtons';
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
     const { locale, slug } = await params;
@@ -78,6 +79,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ local
                         <ArrowLeft className="w-4 h-4 mr-2 transition-transform group-hover:-translate-x-1" />
                         Back to Blog
                     </Link>
+                    <ShareButtons title={title} />
                 </div>
 
                 {/* Minimal Header */}

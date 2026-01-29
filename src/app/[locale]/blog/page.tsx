@@ -4,6 +4,8 @@ import { getTranslations } from 'next-intl/server';
 import { ArrowRight, Calendar, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
     const { locale } = await params;
     const t = await getTranslations({ locale, namespace: 'blog' });
@@ -13,9 +15,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     };
 }
 
-export default async function BlogIndexPage({ params }: { params: Promise<{ locale: string }> }) {
+import { Pagination } from '@/components/ui/Pagination';
+
+export default async function BlogIndexPage({
+    params,
+    searchParams
+}: {
+    params: Promise<{ locale: string }>;
+    searchParams: Promise<{ page?: string }>;
+}) {
     const { locale } = await params;
-    const { success, data: allPosts } = await getPosts(locale);
+    const { page } = await searchParams;
+    const currentPage = Number(page) || 1;
+    const limit = 10;
+
+    const { success, data: allPosts, meta } = await getPosts(locale, currentPage, limit);
     const t = await getTranslations('blog');
 
     // Helper to get localized string
@@ -25,9 +39,13 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
         return content[locale] || content['en'] || '';
     };
 
-    // Separate featured post (first one) from the rest
-    const featuredPost = allPosts && allPosts.length > 0 ? allPosts[0] : null;
-    const regularPosts = allPosts && allPosts.length > 1 ? allPosts.slice(1) : [];
+    const isFirstPage = currentPage === 1;
+
+    // Logic: 
+    // Page 1: 1 Featured + (N-1) Grid
+    // Page 2+: N Grid
+    const featuredPost = (isFirstPage && allPosts && allPosts.length > 0) ? allPosts[0] : null;
+    const regularPosts = (isFirstPage && allPosts) ? allPosts.slice(1) : (allPosts || []);
 
     return (
         <div className="min-h-screen bg-background relative overflow-hidden">
@@ -38,7 +56,8 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
             </div>
 
             <div className="container mx-auto px-4 py-12 lg:py-20 relative z-10 max-w-7xl">
-                {/* Header */}
+                {/* Header - Only show on first page to reduce noise on pagination? Or keep it? */}
+                {/* Let's keep it but maybe smaller on inner pages? No, consistency is better. */}
                 <div className="text-center max-w-3xl mx-auto mb-20 space-y-6">
                     <div className="inline-flex items-center rounded-full border border-brand-from/20 bg-gradient-to-r from-brand-from/5 to-brand-to/5 px-3 py-1 text-sm font-medium mb-4 backdrop-blur-sm">
                         <Sparkles className="mr-2 h-3.5 w-3.5 text-brand-from" />
@@ -54,20 +73,13 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
                     </p>
                 </div>
 
-                {/* Featured Post */}
+                {/* Featured Post - Only on Page 1 */}
                 {featuredPost && (
                     <div className="mb-20">
                         <Link
                             href={`/blog/${featuredPost.slug}`}
-                            // Removed hover:border-brand-from/30 and hover:shadow-brand-from/10
                             className="group relative block w-full rounded-3xl overflow-hidden bg-card border border-border/50 transition-all duration-300 shadow-lg hover:shadow-2xl"
                         >
-                            {/* Gradient Border Line on Top - KEPT as subtle accent, but removed heavy opacity transition if needed. 
-                                User asked to remove "hover color effect". I'll make it static or remove hover reliance. 
-                                I'll keep the top border as a static accent or remove it if "color effect" means all colors.
-                                I'll remove the hover opacity change so it doesn't "flash" color.
-                            */}
-
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:h-[450px]">
                                 {/* Image Info */}
                                 <div className="relative h-64 lg:h-full overflow-hidden">
@@ -89,24 +101,16 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
 
                                 {/* Content Info */}
                                 <div className="p-8 lg:p-12 flex flex-col justify-center bg-card/50 backdrop-blur-sm lg:bg-transparent relative">
-                                    {/* Removed Ambient Glow on hover */}
-
                                     <div className="flex items-center gap-2 text-sm font-medium mb-4">
                                         <span className="relative flex h-2 w-2">
                                             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-from opacity-75"></span>
                                             <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-from"></span>
                                         </span>
-                                        {/* Gradient Badge Text - kept as requested previously */}
                                         <span className="bg-clip-text text-transparent bg-gradient-to-r from-brand-from to-brand-to font-bold">
                                             {t('featured')}
                                         </span>
                                     </div>
 
-                                    {/* Removed group-hover:bg-clip-text etc. Back to simple color, or kept gradient but static?
-                                        User said "hover color effect... di hilangkan saja".
-                                        I will revert the HOVER change, but keep the text clean or gradient static if preferred.
-                                        I will keep the text foreground (standard) to be safe/clean as requested.
-                                    */}
                                     <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-foreground leading-tight transition-colors">
                                         {getLocalized(featuredPost.title)}
                                     </h2>
@@ -166,8 +170,6 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
                                 </div>
 
                                 <div className="flex-1 p-6 flex flex-col relative text-left">
-                                    {/* Removed the hover gradient bg overlay */}
-
                                     <h3 className="text-xl font-bold mb-3 line-clamp-2 text-foreground transition-all relative z-10">
                                         {getLocalized(post.title)}
                                     </h3>
@@ -194,7 +196,13 @@ export default async function BlogIndexPage({ params }: { params: Promise<{ loca
                     )
                 )}
 
-                {/* Newsletter / CTA Section could go here */}
+                {/* Pagination */}
+                {meta && (
+                    <Pagination
+                        currentPage={meta.current}
+                        totalPages={meta.totalPages}
+                    />
+                )}
             </div>
         </div>
     );
