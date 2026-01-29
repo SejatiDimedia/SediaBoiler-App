@@ -48,6 +48,12 @@
       "post": "Kirim",
       "signOut": "Keluar",
       "noComments": "Belum ada komentar. Jadilah yang pertama berkomentar!"
+    },
+    "mostPopular": {
+      "title": "Bacaan Paling Populer",
+      "trending": "Sedang Tren",
+      "description": "Berdasarkan jumlah suka komunitas",
+      "readArticle": "Baca Artikel"
     }
   },
   "faq": {

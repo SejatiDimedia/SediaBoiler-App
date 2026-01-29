@@ -48,6 +48,12 @@
             "post": "Post",
             "signOut": "Sign Out",
             "noComments": "No comments yet. Be the first to share your thoughts!"
+        },
+        "mostPopular": {
+            "title": "Most Popular Reads",
+            "trending": "Trending Now",
+            "description": "Calculated by community likes",
+            "readArticle": "Read Article"
         }
     },
     "faq": {

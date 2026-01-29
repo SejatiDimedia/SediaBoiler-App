@@ -125,3 +125,27 @@ export async function getPostInteractions(slug: string) {
         comments: postComments,
     };
 }
+
+export async function getMostLikedPosts(limit: number = 4) {
+    const topPosts = await db
+        .select({
+            post: posts,
+            likeCount: sql<number>`count(${likes.postId})`.mapWith(Number)
+        })
+        .from(likes)
+        .leftJoin(posts, eq(likes.postId, posts.id))
+        .where(eq(posts.isPublished, true))
+        .groupBy(posts.id)
+        .orderBy(desc(sql`count(${likes.postId})`))
+        .limit(limit);
+
+    // If we don't have enough liked posts, fill with recent posts?
+    // User requested "Section blog yang paling banyak disukai", so strictly liked posts is better initially.
+    // However, if no likes exist, the section might be empty.
+    // Let's return what we have. API consumer can decide fallback.
+
+    return topPosts.map(item => ({
+        ...item.post,
+        likeCount: item.likeCount
+    }));
+}

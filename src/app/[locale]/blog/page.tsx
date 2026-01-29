@@ -16,6 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 import { Pagination } from '@/components/ui/Pagination';
+import { MostLikedSection } from '@/components/blog/MostLikedSection';
 
 export default async function BlogIndexPage({
     params,
@@ -72,6 +73,11 @@ export default async function BlogIndexPage({
                         {t('description')}
                     </p>
                 </div>
+
+                {/* Most Liked Section - Added here */}
+                {isFirstPage && (
+                    <MostLikedSection locale={locale} />
+                )}
 
                 {/* Featured Post - Only on Page 1 */}
                 {featuredPost && (
