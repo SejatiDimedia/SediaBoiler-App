@@ -19,6 +19,20 @@
     "cta": "Jelajahi Library",
     "ctaSecondary": "Lihat Dokumentasi"
   },
+  "cta": {
+    "title": "Jangan Mulai dari Nol. Mulai dengan SapaUI.",
+    "description": "Hemat ratusan jam coding. Fokus pada ide produkmu, biarkan kami yang urus UI-nya.",
+    "primary": "Jelajahi Komponen",
+    "templates": "Jelajahi Template",
+    "secondary": "Baca Dokumentasi"
+  },
+  "newsletter": {
+    "title": "Siap Kirim Lebih Cepat?",
+    "description": "Dapatkan komponen dan template terbaru langsung di inbox. Hemat waktu, salin, tempel, dan luncurkan.",
+    "placeholder": "Masukkan email Anda",
+    "button": "Berlangganan",
+    "disclaimer": "Bebas spam. Berhenti berlangganan kapan saja."
+  },
   "blog": {
     "meta_title": "Blog",
     "meta_description": "Wawasan teknis, tutorial, dan berita terbaru sekeliling ekosistem kami.",

@@ -28,7 +28,7 @@ export function FAQ() {
                             </span>
                             <span className="text-sm font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to">FAQ</span>
                         </div>
-                        <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6">
+                        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground mb-6">
                             {t('title')} <br />
                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to">
                                 {t('titleHighlight')}
@@ -50,7 +50,7 @@ export function FAQ() {
                                     onClick={() => setOpenIndex(openIndex === index ? null : index)}
                                     className="flex w-full items-center justify-between p-6 text-left"
                                 >
-                                    <span className={`text-lg font-bold transition-colors ${openIndex === index
+                                    <span className={`text-base md:text-lg font-bold transition-colors ${openIndex === index
                                         ? 'text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to'
                                         : 'text-foreground'
                                         }`}>

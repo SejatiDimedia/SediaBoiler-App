@@ -25,6 +25,7 @@ import { useState, useEffect } from 'react';
 import { TechStack } from '@/components/ui/TechStack';
 import { FeaturesCreative } from '@/components/ui/FeaturesCreative';
 import { FAQ } from '@/components/ui/FAQ';
+import { CTASection } from '@/components/ui/CTASection';
 
 export function HomePageClient({ locale }: { locale: string }) {
     const t = useTranslations('hero');
@@ -271,6 +272,9 @@ export function HomePageClient({ locale }: { locale: string }) {
 
             {/* Features Section - Creative Grid */}
             <FeaturesCreative />
+
+            {/* CTA Section */}
+            <CTASection />
 
             {/* FAQ Section */}
             <FAQ />

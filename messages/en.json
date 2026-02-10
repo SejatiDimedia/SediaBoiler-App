@@ -19,6 +19,20 @@
         "cta": "Explore Library",
         "ctaSecondary": "View Documentation"
     },
+    "cta": {
+        "title": "Don't Start from Scratch. Start with SapaUI.",
+        "description": "Save hundreds of coding hours. Focus on your product idea, let us handle the UI.",
+        "primary": "Browse Components",
+        "templates": "Explore Templates",
+        "secondary": "Read Documentation"
+    },
+    "newsletter": {
+        "title": "Ready to Ship Faster?",
+        "description": "Get the latest components and templates delivered to your inbox. Save time, copy, paste, and ship.",
+        "placeholder": "Enter your email",
+        "button": "Subscribe",
+        "disclaimer": "No spam. Unsubscribe at any time."
+    },
     "blog": {
         "meta_title": "Blog",
         "meta_description": "Insights, tutorials, and latest news regarding our ecosystem.",

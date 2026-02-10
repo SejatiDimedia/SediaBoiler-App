@@ -59,10 +59,10 @@ export function FeaturesCreative() {
             <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
                     <div className="max-w-2xl">
-                        <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-foreground mb-6 leading-[0.9]">
+                        <h2 className="text-2xl md:text-5xl lg:text-6xl font-black tracking-tighter text-foreground mb-6 leading-[0.9]">
                             {tFeatures('creativeTitlePrefix')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to">{tFeatures('creativeTitleHighlight')}</span>
                         </h2>
-                        <p className="text-xl text-muted-foreground">
+                        <p className="text-sm md:text-xl text-muted-foreground">
                             {tFeatures('creativeSubtitle')}
                         </p>
                     </div>
@@ -88,7 +88,7 @@ export function FeaturesCreative() {
                                 <div className={cn("w-12 h-12 rounded-xl bg-background/80 backdrop-blur border border-white/10 flex items-center justify-center mb-6 shadow-sm group-hover:rotate-6 transition-transform", item.iconColor)}>
                                     <item.icon className="w-6 h-6" />
                                 </div>
-                                <h3 className="text-2xl font-bold mb-2 tracking-tight">{item.title}</h3>
+                                <h3 className="text-lg md:text-2xl font-bold mb-2 tracking-tight">{item.title}</h3>
                                 <p className="text-muted-foreground font-medium leading-relaxed">{item.desc}</p>
                             </div>
                         </div>
