@@ -102,7 +102,7 @@ export function FeaturesSpotlight() {
             <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
                     <span className="inline-block px-4 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/5 text-blue-600 font-semibold text-sm tracking-wide uppercase mb-6 shadow-sm">
-                        Why SediaBoiler
+                        Why SapaUI
                     </span>
                     <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6">
                         {tFeatures('title')}

@@ -1,6 +1,6 @@
 {
     "metadata": {
-        "title": "SediaBoiler - Ready-Made Foundation, Smooth Coding",
+        "title": "SapaUI - Copy & Paste UI, Ship Faster",
         "description": "Ready-to-use UI component library with copy-paste code for Next.js and Tailwind CSS"
     },
     "nav": {
@@ -12,9 +12,9 @@
         "getStarted": "Get Started"
     },
     "hero": {
-        "badge": "🚀 Save Your Development Time",
-        "title": "Ready-Made Foundation,",
-        "titleHighlight": "Smooth Coding",
+        "badge": "🚀 Copy, Paste, Ship",
+        "title": "Copy & Paste UI,",
+        "titleHighlight": "Ship Faster",
         "description": "Comprehensive collection of ready-to-use templates and UI components. Built with Next.js and Tailwind CSS to speed up your development workflows.",
         "cta": "Explore Library",
         "ctaSecondary": "View Documentation"
@@ -64,7 +64,7 @@
         "items": {
             "installation": {
                 "question": "Do I need to install a package?",
-                "answer": "No. SediaBoiler is a copy-paste library. You simply copy the raw code directly into your project. No heavy dependencies or vendor lock-in."
+                "answer": "No. SapaUI is a copy-paste library. You simply copy the raw code directly into your project. No heavy dependencies or vendor lock-in."
             },
             "tech_stack": {
                 "question": "What specific technologies are inside?",
@@ -85,9 +85,9 @@
         }
     },
     "features": {
-        "title": "Why SediaBoiler?",
+        "title": "Why SapaUI?",
         "creativeTitlePrefix": "WHY",
-        "creativeTitleHighlight": "SEDIA BOILER?",
+        "creativeTitleHighlight": "SAPA UI?",
         "subtitle": "Everything you need to build modern websites quickly",
         "creativeSubtitle": "An experience designed to make you ship faster, not just a template.",
         "items": {
@@ -163,13 +163,13 @@
     },
     "docs": {
         "badge": "Documentation",
-        "title": "SediaBoiler",
+        "title": "SapaUI",
         "titleHighlight": "Documentation",
-        "subtitle": "Everything you need to get started with SediaBoiler",
+        "subtitle": "Everything you need to get started with SapaUI",
         "sections": {
             "getting-started": {
                 "title": "Getting Started",
-                "description": "Welcome to SediaBoiler! Here is everything you need to know to start building stunning UI components.",
+                "description": "Welcome to SapaUI! Here is everything you need to know to start building stunning UI components.",
                 "features": {
                     "title": "Key Features",
                     "items": {
@@ -204,7 +204,7 @@
             },
             "installation": {
                 "title": "Installation",
-                "description": "No installation required! SediaBoiler is a copy-paste component library.",
+                "description": "No installation required! SapaUI is a copy-paste component library.",
                 "prerequisites": {
                     "title": "Prerequisites",
                     "items": {
@@ -221,14 +221,14 @@
                 "step2": {
                     "title": "Step 2: Paste into Your Project",
                     "description": "Create a new component file in your Next.js project and paste the code.",
-                    "code": "// 1. Create a new file: src/components/Navbar.tsx\n// 2. Copy component code from SediaBoiler\n// 3. Paste into your file\n// 4. Import and use in your pages"
+                    "code": "// 1. Create a new file: src/components/Navbar.tsx\n// 2. Copy component code from SapaUI\n// 3. Paste into your file\n// 4. Import and use in your pages"
                 },
                 "tip": "Pro Tip",
                 "tipText": "You can customize any component by modifying Tailwind CSS classes to match your brand colors and styling."
             },
             "components": {
                 "title": "Using Components",
-                "description": "Learn how to copy, customize, and use SediaBoiler components in your projects.",
+                "description": "Learn how to copy, customize, and use SapaUI components in your projects.",
                 "howToUse": {
                     "title": "How to Use",
                     "steps": {
@@ -283,7 +283,7 @@
             },
             "customization": {
                 "title": "Customization Guide",
-                "description": "Learn how to customize SediaBoiler components to match your brand.",
+                "description": "Learn how to customize SapaUI components to match your brand.",
                 "colors": {
                     "title": "Changing Colors",
                     "code": "bg-blue-500 → bg-red-500\ntext-gray-900 → text-white\nborder-gray-200 → border-blue-500"
@@ -299,15 +299,15 @@
             },
             "faq": {
                 "title": "FAQ",
-                "description": "Frequently asked questions about SediaBoiler.",
+                "description": "Frequently asked questions about SapaUI.",
                 "items": {
                     "license": {
-                        "question": "Can I use SediaBoiler for commercial projects?",
-                        "answer": "Yes! SediaBoiler is open source and free to use for both personal and commercial projects. No attribution required."
+                        "question": "Can I use SapaUI for commercial projects?",
+                        "answer": "Yes! SapaUI is open source and free to use for both personal and commercial projects. No attribution required."
                     },
                     "support": {
                         "question": "How do I get support?",
-                        "answer": "You can reach out via email or join our Discord community for help with using SediaBoiler components."
+                        "answer": "You can reach out via email or join our Discord community for help with using SapaUI components."
                     },
                     "updates": {
                         "question": "How often do you add new components?",
@@ -323,15 +323,15 @@
                     "links": {
                         "github": {
                             "label": "GitHub Repository",
-                            "url": "https://github.com/sejatidimedia/sedia-boiler"
+                            "url": "https://github.com/sejatidimedia/sapa-ui"
                         },
                         "discord": {
                             "label": "Discord Community",
-                            "url": "https://discord.gg/sediaboiler"
+                            "url": "https://discord.gg/sapaui"
                         },
                         "email": {
                             "label": "Email Support",
-                            "url": "mailto:support@sediaboiler.com"
+                            "url": "mailto:support@sapaui.com"
                         }
                     }
                 }

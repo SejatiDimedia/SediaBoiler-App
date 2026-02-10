@@ -18,13 +18,12 @@ export function Logo({ className, iconClassName, textClassName }: { className?: 
             </div>
 
             {/* Text */}
-            <div className={cn("flex flex-col -space-y-0.5", textClassName)}>
-                <span className="text-xl font-extrabold tracking-[0.1em] text-foreground font-sans leading-none flex items-center gap-1 ml-0.5">
-                    Sedia
-                    <span className="w-1.5 h-1.5 rounded-full bg-brand-to animate-pulse" />
+            <div className={cn("flex items-center gap-0.5", textClassName)}>
+                <span className="text-4xl font-extrabold tracking-tight text-foreground font-sans leading-none">
+                    Sapa
                 </span>
-                <span className="text-lg font-bold tracking-[0.26em] bg-gradient-to-r from-brand-from to-brand-to bg-clip-text text-transparent leading-none">
-                    Boiler
+                <span className="text-4xl font-extrabold tracking-tight bg-gradient-to-r from-brand-from to-brand-to bg-clip-text text-transparent leading-none">
+                    UI
                 </span>
             </div>
         </div>

@@ -38,7 +38,7 @@ export default async function AdminLoginPage({
                         <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-blue-600 text-white mb-4">
                             <Layers className="w-8 h-8" />
                         </div>
-                        <h1 className="text-2xl font-bold text-gray-900">SediaBoiler Admin</h1>
+                        <h1 className="text-2xl font-bold text-gray-900">SapaUI Admin</h1>
                         <p className="text-gray-500 mt-1">Masuk untuk mengelola komponen</p>
                     </div>
 

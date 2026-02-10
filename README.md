@@ -1,7 +1,6 @@
-# SediaBoiler
-> **"Fondasi Siap Pakai, Coding Jadi Lancar"**
+# SapaUI - Salin & Pasang UI 🚀
 
-SediaBoiler is a Bilingual UI Library & Boilerplate Generator designed to provide specific, copy-pasteable UI components and a solid foundation for full-stack Next.js applications. It serves as a visual catalog where developers can preview components, toggle between responsive views, and easily copy the code they need.
+**SapaUI** adalah koleksi komponen UI modern dan boilerplate siap pakai yang dirancang untuk mempercepat alur kerja developer. Dibangun dengan ekosistem **Next.js** dan **Tailwind CSS**, SAPA hadir untuk memastikan Anda bisa merilis produk lebih cepat tanpa repot.
 
 ## 🚀 Vision
 To build a comprehensive UI component library platform that offers ready-to-use code (copy-paste) and eventually functions as an automated full-stack boilerplate generator.
@@ -49,7 +48,7 @@ To build a comprehensive UI component library platform that offers ready-to-use 
 1.  **Clone the repository**:
     ```bash
     git clone <repository-url>
-    cd sedia-boiler
+    cd sapa-ui
     ```
 
 2.  **Install dependencies**:

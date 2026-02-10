@@ -37,7 +37,7 @@ export function Footer() {
                 {/* Bottom Bar */}
                 <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
                     <p className="text-sm text-muted-foreground text-center md:text-left">
-                        &copy; {new Date().getFullYear()} SediaBoiler. | Part of SejatiDimedia. | All rights reserved.
+                        &copy; {new Date().getFullYear()} SapaUI. | Part of SejatiDimedia. | All rights reserved.
                     </p>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <span>Made with</span>

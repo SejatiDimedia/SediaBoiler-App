@@ -49,7 +49,7 @@ export function AdminLayoutClient({ children }: AdminLayoutClientProps) {
                     <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center text-white">
                         <Layers className="w-5 h-5" />
                     </div>
-                    <span className="font-bold text-lg tracking-tight text-white">SediaAdmin</span>
+                    <span className="font-bold text-lg tracking-tight text-white">SapaAdmin</span>
                 </div>
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -89,7 +89,7 @@ export function AdminLayoutClient({ children }: AdminLayoutClientProps) {
                         "font-bold text-lg tracking-tight text-white transition-opacity duration-300",
                         isCollapsed ? "opacity-0 w-0 hidden" : "opacity-100"
                     )}>
-                        SediaAdmin
+                        SapaAdmin
                     </span>
 
                     {/* Floating Toggle Button */}

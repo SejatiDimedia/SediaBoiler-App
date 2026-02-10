@@ -151,7 +151,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                                                 <div className="w-3 h-3 rounded-full bg-red-400/20" />
                                                 <div className="w-3 h-3 rounded-full bg-yellow-400/20" />
                                             </div>
-                                            <div className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Sedia Lib</div>
+                                            <div className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Sapa Lib</div>
                                         </div>
 
                                         {/* Library Content */}
