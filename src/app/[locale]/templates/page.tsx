@@ -4,6 +4,9 @@ import { TemplatesClient } from './TemplatesClient';
 import { getTemplates } from '@/lib/actions/components';
 import { components as staticComponents } from '@/lib/components-data';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 function TemplatesLoading() {
     return (
         <div className="py-16 md:py-24">
@@ -38,7 +41,7 @@ export default async function TemplatesPage({
     if (dbTemplates && dbTemplates.length > 0) {
         // Use database templates (published landing-page category)
         templates = dbTemplates
-            .filter(t => t.isPublished === 'true')
+            .filter(t => String(t.isPublished) === 'true')
             .map(t => ({
                 slug: t.slug,
                 name: t.name,

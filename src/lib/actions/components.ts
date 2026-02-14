@@ -140,6 +140,7 @@ export async function createComponent(data: NewComponent, shouldBroadcast: boole
     revalidatePath('/admin/components');
     revalidatePath('/admin/templates');
     revalidatePath('/[locale]/library', 'layout');
+    revalidatePath('/[locale]/templates', 'page');
     return result[0];
 }
 
@@ -154,6 +155,7 @@ export async function updateComponent(id: number, data: Partial<NewComponent>): 
     revalidatePath('/admin/components');
     revalidatePath('/admin/templates');
     revalidatePath('/[locale]/library', 'layout');
+    revalidatePath('/[locale]/templates', 'page');
     return result[0];
 }
 
@@ -164,6 +166,7 @@ export async function deleteComponent(id: number): Promise<void> {
     revalidatePath('/admin/components');
     revalidatePath('/admin/templates');
     revalidatePath('/[locale]/library', 'layout');
+    revalidatePath('/[locale]/templates', 'page');
 }
 
 // Bulk update publish status
@@ -188,6 +191,7 @@ export async function bulkDeleteComponents(ids: number[]): Promise<void> {
     revalidatePath('/admin/components');
     revalidatePath('/admin/templates');
     revalidatePath('/[locale]/library', 'layout');
+    revalidatePath('/[locale]/templates', 'page');
 }
 
 // Seed initial components from static data
