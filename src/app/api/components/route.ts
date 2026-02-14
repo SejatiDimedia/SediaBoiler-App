@@ -18,7 +18,10 @@ export async function GET() {
 export async function POST(request: NextRequest) {
     try {
         const data = await request.json();
-        const component = await createComponent(data);
+        const shouldBroadcast = data.broadcast === true;
+        delete data.broadcast; // distinct from component data
+
+        const component = await createComponent(data, shouldBroadcast);
         return NextResponse.json(component, { status: 201 });
     } catch (error) {
         console.error('Create component error:', error);

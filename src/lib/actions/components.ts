@@ -4,6 +4,7 @@ import { db } from '@/db';
 import { components, NewComponent, Component } from '@/db/schema';
 import { eq, ne, desc, inArray } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
+import { broadcastUpdate } from './newsletter';
 
 // Get all components
 export async function getAllComponents(): Promise<Component[]> {
@@ -106,9 +107,36 @@ export async function getComponentBySlug(slug: string): Promise<Component | unde
 }
 
 // Create component
-export async function createComponent(data: NewComponent): Promise<Component> {
+export async function createComponent(data: NewComponent, shouldBroadcast: boolean = false): Promise<Component> {
     if (!db) throw new Error('Database not available');
     const result = await db.insert(components).values(data).returning();
+
+    if (shouldBroadcast) {
+        await broadcastUpdate(
+            `New Component: ${data.name} 🚀`,
+            `<div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb;">
+                <div style="background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); padding: 32px 24px; text-align: center;">
+                    <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">New Component Arrived! 🚀</h1>
+                </div>
+                <div style="padding: 32px 24px;">
+                    <h2 style="color: #111827; margin-top: 0; font-size: 20px;">We just released <strong>${data.name}</strong></h2>
+                    <p style="color: #4b5563; line-height: 1.6; font-size: 16px; margin-bottom: 24px;">${data.description}</p>
+                    
+                    <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; font-family: monospace; color: #374151; font-size: 14px; margin-bottom: 24px;">
+                        Category: ${data.category}
+                    </div>
+
+                    <div style="text-align: center;">
+                        <a href="${process.env.NEXT_PUBLIC_APP_URL}/id/library/component/${data.category}/${data.slug}" style="display: inline-block; background-color: #000000; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">View Component</a>
+                    </div>
+                </div>
+                <div style="background-color: #f9fafb; padding: 16px; text-align: center; color: #9ca3af; font-size: 12px; border-top: 1px solid #e5e7eb;">
+                    <p style="margin: 0;">Sent automatically from SapaUI System</p>
+                </div>
+            </div>`
+        );
+    }
+
     revalidatePath('/admin/components');
     revalidatePath('/admin/templates');
     revalidatePath('/[locale]/library', 'layout');
