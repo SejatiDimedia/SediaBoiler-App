@@ -67,6 +67,8 @@ export async function generateMetadata({
     };
 }
 
+import { AiAssistant } from '@/components/ai/AiAssistant';
+
 export default async function LocaleLayout({
     children,
     params,
@@ -101,6 +103,7 @@ export default async function LocaleLayout({
                                 <Navbar />
                                 <main className="flex-1 pt-16">{children}</main>
                                 <Footer />
+                                <AiAssistant />
                             </div>
                         </NextIntlClientProvider>
                     </ThemeProvider>
