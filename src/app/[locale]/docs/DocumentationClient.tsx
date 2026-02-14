@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { BookOpen, CheckCircle2, ChevronRight, Code2, Layers, Zap } from 'lucide-react';
+import { BookOpen, CheckCircle2, ChevronRight, Code2, Layers, Search, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useState } from 'react';
 
@@ -41,7 +41,7 @@ export function DocumentationClient() {
                                 {t('title')}
                             </h2>
                         </div>
-                        {['getting-started', 'installation', 'components', 'templates', 'customization', 'faq'].map((section) => (
+                        {['getting-started', 'installation', 'usage'].map((section) => (
                             <button
                                 key={section}
                                 onClick={() => setActiveSection(section)}
@@ -49,8 +49,8 @@ export function DocumentationClient() {
                                     "w-full flex items-center gap-3 px-3 py-2 text-sm transition-all text-left relative group rounded-md",
                                     activeSection === section
                                         ? "bg-brand-from/5 text-brand-from font-semibold"
-                                        : "text-muted-foreground hover:bg-muted/50 hover:text-foreground font-medium",
-                                    section === 'installation' && activeSection !== 'installation' && "text-brand-from/80 hover:text-brand-from hover:bg-brand-from/5"
+                                        : "text-muted-foreground hover:bg-brand-from/5 hover:text-brand-from font-medium",
+                                    section === 'installation' && activeSection !== 'installation' && "text-brand-from/80 hover:text-brand-from hover:bg-brand-from/10"
                                 )}
                             >
                                 {activeSection === section && (
@@ -78,7 +78,7 @@ export function DocumentationClient() {
                             onChange={(e) => setActiveSection(e.target.value)}
                             className="w-full bg-transparent p-2 text-foreground font-medium focus:outline-none appearance-none cursor-pointer"
                         >
-                            {['getting-started', 'installation', 'components', 'templates', 'customization', 'faq'].map((section) => (
+                            {['getting-started', 'installation', 'usage'].map((section) => (
                                 <option key={section} value={section} className="bg-background text-foreground">
                                     {t(`sections.${section}.title`)}
                                 </option>
@@ -219,23 +219,132 @@ export function DocumentationClient() {
                             </div>
                         )}
 
-                        {/* Other sections rendered generically for now to save space, but using correct keys */}
-                        {['components', 'templates', 'customization', 'faq'].includes(activeSection) && (
-                            <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        {/* Usage Guide (Components + Templates) */}
+                        {activeSection === 'usage' && (
+                            <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
                                 <div>
-                                    <h2 className="text-3xl font-bold mb-4 text-foreground tracking-tight">{t(`sections.${activeSection}.title`)}</h2>
-                                    <p className="text-lg text-muted-foreground border-l-4 border-brand-from/20 pl-4">
-                                        {t(`sections.${activeSection}.description`)}
+                                    <h2 className="text-3xl font-bold mb-4 text-foreground tracking-tight">{t('sections.usage.title')}</h2>
+                                    <p className="text-lg text-muted-foreground border-l-4 border-brand-from/20 pl-4 mb-8">
+                                        {t('sections.usage.description')}
                                     </p>
-                                </div>
-                                {/* Placeholder for content - the translations exist in en.json */}
-                                <div className="py-12 text-center border border-dashed border-border rounded-xl bg-muted/30">
-                                    <div className="inline-flex p-4 rounded-full bg-background mb-4 shadow-sm border border-border">
-                                        <Code2 className="w-8 h-8 text-muted-foreground" />
+
+                                    {/* Component Section */}
+                                    <div className="mb-20">
+                                        <div className="flex items-center gap-4 mb-8">
+                                            <div className="p-3 rounded-2xl bg-brand-from/10 text-brand-from">
+                                                <Code2 className="w-8 h-8" />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-2xl font-bold text-foreground">
+                                                    {t('sections.usage.components.title')}
+                                                </h3>
+                                                <p className="text-muted-foreground mt-1">
+                                                    {t('sections.usage.components.intro.description')}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="grid md:grid-cols-2 gap-6 not-prose mb-12">
+                                            {['find', 'copy', 'paste', 'customize'].map((step, i) => (
+                                                <div key={step} className="group relative">
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-brand-from/20 to-brand-to/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                                                    <div className="relative h-full p-6 rounded-2xl border border-border bg-card/50 hover:bg-card/80 hover:border-brand-from/30 transition-all duration-300">
+                                                        <div className="flex items-start gap-4">
+                                                            <div className="flex-shrink-0 w-8 h-8 rounded-lg bg-gradient-to-br from-brand-from to-brand-to text-white flex items-center justify-center font-bold shadow-lg shadow-brand-from/20">
+                                                                {i + 1}
+                                                            </div>
+                                                            <div>
+                                                                <h4 className="text-lg font-bold mb-2 group-hover:text-brand-from transition-colors">
+                                                                    {t(`sections.usage.components.steps.${step}.title`)}
+                                                                </h4>
+                                                                <p className="text-sm text-muted-foreground leading-relaxed">
+                                                                    {t.rich(`sections.usage.components.steps.${step}.description`, {
+                                                                        bold: (chunks) => <span className="font-semibold text-foreground">{chunks}</span>,
+                                                                        code_1: (chunks) => <code className="bg-brand-from/10 px-1.5 py-0.5 rounded text-brand-from font-mono text-xs border border-brand-from/20">{chunks}</code>
+                                                                    })}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        <div className="bg-brand-from/5 border border-brand-from/10 rounded-2xl p-6">
+                                            <h4 className="text-sm font-semibold uppercase tracking-wider text-brand-from mb-4">
+                                                {t('sections.usage.components.dependencies.title')}
+                                            </h4>
+                                            <div className="grid sm:grid-cols-3 gap-4">
+                                                {['lucide', 'framer', 'utils'].map((item) => (
+                                                    <div key={item} className="flex items-center gap-3 p-3 rounded-lg bg-background/50 border border-brand-from/20 hover:bg-brand-from/5 transition-colors">
+                                                        <CheckCircle2 className="w-5 h-5 text-brand-from" />
+                                                        <span className="text-sm text-foreground font-medium">
+                                                            {item === 'lucide' && 'Lucide React'}
+                                                            {item === 'framer' && 'Framer Motion'}
+                                                            {item === 'utils' && 'Utils (clsx)'}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <p className="text-xs text-brand-from/70 mt-4">
+                                                * {t('sections.usage.components.dependencies.description')}
+                                            </p>
+                                        </div>
                                     </div>
-                                    <p className="text-muted-foreground">
-                                        Content for <span className="font-bold text-foreground">{t(`sections.${activeSection}.title`)}</span> is ready in en.json
-                                    </p>
+
+                                    {/* Template Section */}
+                                    <div>
+                                        <div className="flex items-center gap-4 mb-8">
+                                            <div className="p-3 rounded-2xl bg-brand-to/10 text-brand-to">
+                                                <LayoutTemplateIcon className="w-8 h-8" />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-2xl font-bold text-foreground">
+                                                    {t('sections.usage.templates.title')}
+                                                </h3>
+                                                <p className="text-muted-foreground mt-1">
+                                                    {t('sections.usage.templates.description')}
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-gradient-to-br from-brand-to/5 to-brand-from/5 border border-brand-to/20 rounded-2xl p-8 mb-12 relative overflow-hidden">
+                                            <div className="absolute top-0 right-0 p-3 opacity-10">
+                                                <Zap className="w-24 h-24 text-brand-to" />
+                                            </div>
+                                            <h4 className="flex items-center gap-2 text-brand-to font-bold mt-0 mb-4 text-lg">
+                                                <Zap className="w-5 h-5" />
+                                                {t('sections.usage.templates.proTip.title')}
+                                            </h4>
+                                            <p className="text-foreground/80 mb-0 leading-relaxed max-w-2xl relative z-10">
+                                                {t.rich('sections.usage.templates.proTip.description', {
+                                                    bold: (chunks) => <span className="font-bold text-brand-to">{chunks}</span>
+                                                })}
+                                            </p>
+                                        </div>
+
+                                        <div className="space-y-8">
+                                            <h4 className="text-lg font-bold mb-6 flex items-center gap-2">
+                                                <span className="w-1 h-6 bg-brand-to rounded-full"></span>
+                                                {t('sections.usage.templates.howToUse.title')}
+                                            </h4>
+
+                                            <div className="relative border-l-2 border-border ml-3 space-y-10 pb-4">
+                                                {['1', '2', '3', '4'].map((step, index) => (
+                                                    <div key={step} className="relative pl-8">
+                                                        <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full border-2 border-brand-to bg-background transform transition-transform hover:scale-125" />
+                                                        <h5 className="font-bold text-foreground text-lg mb-2">Step {index + 1}</h5>
+                                                        <p className="text-muted-foreground">
+                                                            {t.rich(`sections.usage.templates.howToUse.steps.${step}`, {
+                                                                bold: (chunks) => <span className="font-semibold text-foreground">{chunks}</span>,
+                                                                code_1: (chunks) => <code className="bg-brand-to/10 px-1.5 py-0.5 rounded text-brand-to font-mono text-xs border border-brand-to/20">{chunks}</code>
+                                                            })}
+                                                        </p>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         )}
@@ -268,45 +377,4 @@ function LayoutTemplateIcon(props: React.SVGProps<SVGSVGElement>) {
     )
 }
 
-function PaintbrushIcon(props: React.SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4"
-        >
-            <path d="M18.375 2.625a3.875 3.875 0 0 0-5.48 0l-9.023 9.024a2.91 2.91 0 0 0 1.25 4.605c2.56.818 4.238 2.015 5.592 5.093.076.173.22.303.4.364l2.427.81a.501.501 0 0 0 .61-.252l.968-2.179A17.96 17.96 0 0 0 19.349 7.72c.45-.486.883-.984 1.295-1.493a3.875 3.875 0 0 0-2.269-3.602Z" />
-            <circle cx="15.5" cy="5.5" r=".5" fill="currentColor" />
-        </svg>
-    )
-}
 
-function HelpCircleIcon(props: React.SVGProps<SVGSVGElement>) {
-    return (
-        <svg
-            {...props}
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="w-4 h-4"
-        >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-            <path d="M12 17h.01" />
-        </svg>
-    )
-}

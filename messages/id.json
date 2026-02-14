@@ -240,112 +240,56 @@
         "tip": "Tip Pro",
         "tipText": "Anda dapat menyesuaikan komponen apa pun dengan memodifikasi kelas Tailwind CSS agar sesuai dengan warna dan gaya merek Anda."
       },
-      "components": {
-        "title": "Menggunakan Komponen",
-        "description": "Pelajari cara menyalin, menyesuaikan, dan menggunakan komponen SapaUI di proyek Anda.",
-        "howToUse": {
-          "title": "Cara Menggunakan",
+      "usage": {
+        "title": "Menggunakan SapaUI",
+        "description": "Panduan lengkap untuk menggunakan komponen dan template SapaUI dalam proyek Anda.",
+        "components": {
+          "title": "Menggunakan Komponen",
+          "intro": {
+            "title": "Pendekatan Kami",
+            "description": "SapaUI tidak menggunakan npm package. Kami memberikan kode sumber (source code) untuk Anda miliki sepenuhnya."
+          },
           "steps": {
-            "browse": "Telusuri perpustakaan komponen berdasarkan kategori",
-            "preview": "Pratinjau komponen dalam berbagai ukuran layar (seluler, tablet, desktop)",
-            "copy": "Klik tombol 'Salin Kode' untuk menyalin kode komponen",
-            "paste": "Tempel kode ke proyek Anda dan sesuaikan jika diperlukan"
-          }
-        },
-        "example": {
-          "title": "Contoh: Menggunakan Komponen Navbar",
-          "code": "import { NavbarModern } from '@/components/ui/Navbar';\n\nexport default function Header() {\n  return (\n    <header className=\"w-full\">\n      <NavbarModern />\n    </header>\n  );\n}"
-        },
-        "customization": {
-          "title": "Menyesuaikan Komponen",
-          "description": "Semua komponen menggunakan Tailwind CSS, membuatnya mudah disesuaikan:",
-          "code": "import { NavbarModern } from '@/components/ui/Navbar';\n\nexport default function Header() {\n  return (\n    <header className=\"w-full\">\n      <NavbarModern className=\"bg-blue-500 text-white\" />\n    </header>\n  );\n}"
-        }
-      },
-      "templates": {
-        "title": "Menggunakan Template",
-        "description": "Template adalah tata letak halaman lengkap siap pakai yang dibangun dari beberapa komponen.",
-        "available": {
-          "title": "Template Tersedia",
-          "items": {
-            "saasStartup": {
-              "title": "Halaman Arahan Startup SaaS",
-              "description": "Halaman arahan modern dengan bagian hero, fitur, harga, dan CTA",
-              "category": "SaaS"
+            "find": {
+              "title": "1. Cari & Temukan",
+              "description": "Buka bagian <bold>Library</bold>. Gunakan kategori sidebar atau pencarian untuk menemukan komponen yang Anda butuhkan."
             },
-            "portfolioAgency": {
-              "title": "Agensi Portofolio",
-              "description": "Tata letak portofolio kreatif untuk agensi dan pekerja lepas",
-              "category": "Portofolio"
+            "copy": {
+              "title": "2. Salin Kode",
+              "description": "Klik tab <bold>Lihat Kode</bold> pada kartu komponen apa pun. Kemudian klik tombol salin untuk mengambil kelas JSX dan Tailwind."
             },
-            "neubrutalism": {
-              "title": "Gaya Neubrutalisme",
-              "description": "Desain berani, penuh warna dengan gaya visual unik",
-              "category": "Kreatif"
+            "paste": {
+              "title": "3. Tempel & Impor",
+              "description": "Tempel kode ke dalam proyek Anda (misalnya, <code_1>src/components/ui/MyComponent.tsx</code_1>). Perbarui impor jika perlu."
+            },
+            "customize": {
+              "title": "4. Kustomisasi",
+              "description": "Kode itu sekarang milik Anda! Ubah warna, ukuran, atau perilaku langsung di file tersebut. Tidak perlu menimpa gaya library yang rumit."
+            }
+          },
+          "dependencies": {
+            "title": "Dependensi",
+            "description": "Komponen-komponen ini membutuhkan library berikut:",
+            "items": {
+              "lucide": "<code_1>lucide-react</code_1> untuk ikon",
+              "framer": "<code_1>framer-motion</code_1> untuk animasi (opsional)",
+              "utils": "<code_1>clsx</code_1> dan <code_1>tailwind-merge</code_1> untuk manajemen kelas"
             }
           }
         },
-        "howToUse": {
-          "title": "Cara Menggunakan Template",
-          "steps": {
-            "choose": "Pilih template yang sesuai dengan proyek Anda",
-            "view": "Lihat template dalam pratinjau langsung",
-            "copy": "Salin seluruh kode template",
-            "customize": "Sesuaikan konten, warna, dan bagian jika diperlukan"
-          }
-        }
-      },
-      "customization": {
-        "title": "Panduan Kustomisasi",
-        "description": "Pelajari cara menyesuaikan komponen SapaUI agar sesuai dengan merek Anda.",
-        "colors": {
-          "title": "Mengubah Warna",
-          "code": "bg-blue-500 → bg-red-500\ntext-gray-900 → text-white\nborder-gray-200 → border-blue-500"
-        },
-        "spacing": {
-          "title": "Menyesuaikan Spasi",
-          "code": "p-4 → p-8 (tambah padding)\ngap-4 → gap-8 (tambah jarak)\nmy-4 → my-8 (tambah margin vertikal)"
-        },
-        "responsive": {
-          "title": "Desain Responsif",
-          "code": "md:p-6 (desktop: padding 6)\nlg:grid-cols-3 (layar besar: 3 kolom)\nsm:hidden (layar kecil: sembunyikan elemen)"
-        }
-      },
-      "faq": {
-        "title": "FAQ",
-        "description": "Pertanyaan umum tentang SapaUI.",
-        "items": {
-          "license": {
-            "question": "Bolehkah saya menggunakan SapaUI untuk proyek komersial?",
-            "answer": "Ya! SapaUI adalah open source dan gratis digunakan untuk proyek pribadi maupun komersial. Tidak perlu atribusi."
+        "templates": {
+          "title": "Menggunakan Template",
+          "proTip": {
+            "title": "Tip Pro: Monolitik vs Molekular",
+            "description": "Template kami sering disediakan sebagai <bold>File Monolitik</bold>. Ini berarti seluruh halaman arahan dimuat dalam satu file untuk kemudahan copy-paste."
           },
-          "support": {
-            "question": "Bagaimana cara mendapatkan bantuan?",
-            "answer": "Anda dapat menghubungi melalui email atau bergabung dengan komunitas Discord kami untuk bantuan menggunakan komponen SapaUI."
-          },
-          "updates": {
-            "question": "Seberapa sering Anda menambahkan komponen baru?",
-            "answer": "Kami memiliki komponen baru secara berkala berdasarkan umpan balik dan permintaan pengguna. Berlangganan buletin kami untuk pembaruan."
-          },
-          "commercial": {
-            "question": "Apakah Anda menawarkan pengembangan komponen kustom?",
-            "answer": "Ya! Kami menawarkan layanan pengembangan komponen kustom. Hubungi kami untuk harga dan ketersediaan."
-          }
-        },
-        "resources": {
-          "title": "Sumber Daya Tambahan",
-          "links": {
-            "github": {
-              "label": "Repositori GitHub",
-              "url": "https://github.com/sejatidimedia/sapa-ui"
-            },
-            "discord": {
-              "label": "Komunitas Discord",
-              "url": "https://discord.gg/sapaui"
-            },
-            "email": {
-              "label": "Dukungan Email",
-              "url": "mailto:support@sapaui.com"
+          "howToUse": {
+            "title": "Cara Menggunakan",
+            "steps": {
+              "1": "Buka tab <bold>Template</bold> dan pilih desain.",
+              "2": "Klik <bold>Salin Kode</bold> untuk mendapatkan struktur halaman.",
+              "3": "Buat file baru (misal: <code_1>src/app/marketing/page.tsx</code_1>) dan tempel kodenya.",
+              "4": "Sesuaikan teks dan gambar sesuai kebutuhan."
             }
           }
         }

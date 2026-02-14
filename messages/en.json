@@ -240,112 +240,56 @@
                 "tip": "Pro Tip",
                 "tipText": "You can customize any component by modifying Tailwind CSS classes to match your brand colors and styling."
             },
-            "components": {
-                "title": "Using Components",
-                "description": "Learn how to copy, customize, and use SapaUI components in your projects.",
-                "howToUse": {
-                    "title": "How to Use",
+            "usage": {
+                "title": "Using SapaUI",
+                "description": "Complete guide to using SapaUI components and templates in your projects.",
+                "components": {
+                    "title": "Using Components",
+                    "intro": {
+                        "title": "Our Approach",
+                        "description": "SapaUI does not use npm packages. We provide source code for you to own completely."
+                    },
                     "steps": {
-                        "browse": "Browse the component library by category",
-                        "preview": "Preview components in different screen sizes (mobile, tablet, desktop)",
-                        "copy": "Click the 'Copy Code' button to copy the component code",
-                        "paste": "Paste the code into your project and customize as needed"
-                    }
-                },
-                "example": {
-                    "title": "Example: Using a Navbar Component",
-                    "code": "import { NavbarModern } from '@/components/ui/Navbar';\n\nexport default function Header() {\n  return (\n    <header className=\"w-full\">\n      <NavbarModern />\n    </header>\n  );\n}"
-                },
-                "customization": {
-                    "title": "Customizing Components",
-                    "description": "All components use Tailwind CSS, making them easy to customize:",
-                    "code": "import { NavbarModern } from '@/components/ui/Navbar';\n\nexport default function Header() {\n  return (\n    <header className=\"w-full\">\n      <NavbarModern className=\"bg-blue-500 text-white\" />\n    </header>\n  );\n}"
-                }
-            },
-            "templates": {
-                "title": "Using Templates",
-                "description": "Templates are complete, ready-to-use page layouts built from multiple components.",
-                "available": {
-                    "title": "Available Templates",
-                    "items": {
-                        "saasStartup": {
-                            "title": "SaaS Startup Landing Page",
-                            "description": "Modern landing page with hero, features, pricing, and CTA sections",
-                            "category": "SaaS"
+                        "find": {
+                            "title": "1. Search & Find",
+                            "description": "Go to the <bold>Library</bold> section. Use sidebar categories or search to find the component you need."
                         },
-                        "portfolioAgency": {
-                            "title": "Portfolio Agency",
-                            "description": "Creative portfolio layout for agencies and freelancers",
-                            "category": "Portfolio"
+                        "copy": {
+                            "title": "2. Copy Code",
+                            "description": "Click the <bold>View Code</bold> tab on any component card. Then click the copy button to grab JSX and Tailwind classes."
                         },
-                        "neubrutalism": {
-                            "title": "Neubrutalism Style",
-                            "description": "Bold, colorful design with unique visual style",
-                            "category": "Creative"
+                        "paste": {
+                            "title": "3. Paste & Import",
+                            "description": "Paste the code into your project (e.g., <code_1>src/components/ui/MyComponent.tsx</code_1>). Update imports if necessary."
+                        },
+                        "customize": {
+                            "title": "4. Customize",
+                            "description": "The code is yours now! Change colors, sizes, or behavior directly in the file. No need to override complex library styles."
+                        }
+                    },
+                    "dependencies": {
+                        "title": "Dependencies",
+                        "description": "These components require the following libraries:",
+                        "items": {
+                            "lucide": "<code_1>lucide-react</code_1> for icons",
+                            "framer": "<code_1>framer-motion</code_1> for animations (optional)",
+                            "utils": "<code_1>clsx</code_1> and <code_1>tailwind-merge</code_1> for class management"
                         }
                     }
                 },
-                "howToUse": {
-                    "title": "How to Use Templates",
-                    "steps": {
-                        "choose": "Choose a template that fits your project",
-                        "view": "View the template in live preview",
-                        "copy": "Copy the entire template code",
-                        "customize": "Customize content, colors, and sections as needed"
-                    }
-                }
-            },
-            "customization": {
-                "title": "Customization Guide",
-                "description": "Learn how to customize SapaUI components to match your brand.",
-                "colors": {
-                    "title": "Changing Colors",
-                    "code": "bg-blue-500 → bg-red-500\ntext-gray-900 → text-white\nborder-gray-200 → border-blue-500"
-                },
-                "spacing": {
-                    "title": "Adjusting Spacing",
-                    "code": "p-4 → p-8 (increase padding)\ngap-4 → gap-8 (increase gap)\nmy-4 → my-8 (increase vertical margin)"
-                },
-                "responsive": {
-                    "title": "Responsive Design",
-                    "code": "md:p-6 (desktop: padding 6)\nlg:grid-cols-3 (large screens: 3 columns)\nsm:hidden (small screens: hide element)"
-                }
-            },
-            "faq": {
-                "title": "FAQ",
-                "description": "Frequently asked questions about SapaUI.",
-                "items": {
-                    "license": {
-                        "question": "Can I use SapaUI for commercial projects?",
-                        "answer": "Yes! SapaUI is open source and free to use for both personal and commercial projects. No attribution required."
+                "templates": {
+                    "title": "Using Templates",
+                    "proTip": {
+                        "title": "Pro Tip: Monolithic vs Molecular",
+                        "description": "Our templates are often provided as <bold>Monolithic Files</bold>. This means the entire landing page is loaded in one file for easy copy-paste."
                     },
-                    "support": {
-                        "question": "How do I get support?",
-                        "answer": "You can reach out via email or join our Discord community for help with using SapaUI components."
-                    },
-                    "updates": {
-                        "question": "How often do you add new components?",
-                        "answer": "We have new components regularly based on user feedback and requests. Subscribe to our newsletter for updates."
-                    },
-                    "commercial": {
-                        "question": "Do you offer custom component development?",
-                        "answer": "Yes! We offer custom component development services. Contact us for pricing and availability."
-                    }
-                },
-                "resources": {
-                    "title": "Additional Resources",
-                    "links": {
-                        "github": {
-                            "label": "GitHub Repository",
-                            "url": "https://github.com/sejatidimedia/sapa-ui"
-                        },
-                        "discord": {
-                            "label": "Discord Community",
-                            "url": "https://discord.gg/sapaui"
-                        },
-                        "email": {
-                            "label": "Email Support",
-                            "url": "mailto:support@sapaui.com"
+                    "howToUse": {
+                        "title": "How to Use",
+                        "steps": {
+                            "1": "Go to the <bold>Templates</bold> tab and select a design.",
+                            "2": "Click <bold>Copy Code</bold> to get the page structure.",
+                            "3": "Create a new file (e.g., <code_1>src/app/marketing/page.tsx</code_1>) and paste the code.",
+                            "4": "Customize text and images as needed."
                         }
                     }
                 }

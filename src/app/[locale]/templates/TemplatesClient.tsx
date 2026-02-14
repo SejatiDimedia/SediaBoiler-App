@@ -127,51 +127,56 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
 
                         {/* Pagination */}
                         {totalPages > 1 && (
-                            <div className="flex items-center justify-center gap-2 mt-12">
-                                <button
-                                    onClick={() => handlePageChange(validPage - 1)}
-                                    disabled={validPage === 1}
-                                    className={cn(
-                                        'flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all border',
-                                        validPage === 1
-                                            ? 'bg-muted/30 border-border text-muted cursor-not-allowed'
-                                            : 'bg-background border-border text-foreground hover:border-brand-from hover:text-brand-from'
-                                    )}
-                                >
-                                    <ChevronLeft className="h-4 w-4" />
-                                    {locale === 'id' ? 'Sebelumnya' : 'Previous'}
-                                </button>
+                            <div className="flex justify-center mt-12">
+                                <div className="inline-flex items-center p-1.5 bg-background/80 backdrop-blur-md border border-border/60 rounded-full shadow-lg shadow-brand-from/5 gap-1">
+                                    <button
+                                        onClick={() => handlePageChange(validPage - 1)}
+                                        disabled={validPage === 1}
+                                        className={cn(
+                                            'flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300',
+                                            validPage === 1
+                                                ? 'text-muted-foreground/30 cursor-not-allowed'
+                                                : 'text-muted-foreground hover:bg-accent hover:text-foreground hover:rotate-[-10deg]'
+                                        )}
+                                        title={locale === 'id' ? 'Sebelumnya' : 'Previous'}
+                                    >
+                                        <ChevronLeft className="h-5 w-5" />
+                                    </button>
 
-                                <div className="flex items-center gap-1">
-                                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                                        <button
-                                            key={page}
-                                            onClick={() => handlePageChange(page)}
-                                            className={cn(
-                                                'w-10 h-10 flex items-center justify-center rounded-lg text-sm font-medium transition-all',
-                                                page === validPage
-                                                    ? 'bg-gradient-to-br from-brand-from to-brand-to text-white shadow-md shadow-brand-from/20'
-                                                    : 'bg-background border border-border text-muted hover:text-foreground hover:border-foreground/20'
-                                            )}
-                                        >
-                                            {page}
-                                        </button>
-                                    ))}
+                                    <div className="flex items-center gap-1 px-2 border-x border-border/30 mx-1">
+                                        {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                                            <button
+                                                key={page}
+                                                onClick={() => handlePageChange(page)}
+                                                className={cn(
+                                                    'w-9 h-9 flex items-center justify-center rounded-full text-sm font-medium transition-all duration-300 relative overflow-hidden',
+                                                    page === validPage
+                                                        ? 'text-white font-bold shadow-md shadow-brand-from/30 scale-110 z-10'
+                                                        : 'text-muted-foreground hover:text-foreground hover:bg-accent hover:scale-105'
+                                                )}
+                                            >
+                                                {page === validPage && (
+                                                    <div className="absolute inset-0 bg-gradient-to-br from-brand-from to-brand-to animate-in fade-in zoom-in duration-300" />
+                                                )}
+                                                <span className="relative z-10">{page}</span>
+                                            </button>
+                                        ))}
+                                    </div>
+
+                                    <button
+                                        onClick={() => handlePageChange(validPage + 1)}
+                                        disabled={validPage === totalPages}
+                                        className={cn(
+                                            'flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300',
+                                            validPage === totalPages
+                                                ? 'text-muted-foreground/30 cursor-not-allowed'
+                                                : 'text-muted-foreground hover:bg-accent hover:text-foreground hover:rotate-[10deg]'
+                                        )}
+                                        title={locale === 'id' ? 'Selanjutnya' : 'Next'}
+                                    >
+                                        <ChevronRight className="h-5 w-5" />
+                                    </button>
                                 </div>
-
-                                <button
-                                    onClick={() => handlePageChange(validPage + 1)}
-                                    disabled={validPage === totalPages}
-                                    className={cn(
-                                        'flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all border',
-                                        validPage === totalPages
-                                            ? 'bg-muted/30 border-border text-muted cursor-not-allowed'
-                                            : 'bg-background border-border text-foreground hover:border-brand-from hover:text-brand-from'
-                                    )}
-                                >
-                                    {locale === 'id' ? 'Selanjutnya' : 'Next'}
-                                    <ChevronRight className="h-4 w-4" />
-                                </button>
                             </div>
                         )}
 
@@ -184,33 +189,40 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
                         </div>
                     </>
                 ) : (
-                    <div className="flex flex-col items-center justify-center py-20 px-4 text-center border-2 border-dashed border-border rounded-2xl bg-muted/5">
-                        <div className="flex items-center justify-center w-32 h-32 rounded-full bg-muted/20 mb-6">
-                            {searchQuery ? (
-                                <SearchX className="w-16 h-16 text-muted-foreground/40" strokeWidth={1.5} />
-                            ) : (
-                                <LayoutTemplate className="w-16 h-16 text-muted-foreground/40" strokeWidth={1.5} />
-                            )}
+                    <div className="flex flex-col items-center justify-center py-24 px-4 text-center border border-dashed border-border/60 rounded-3xl bg-background/50 backdrop-blur-sm">
+                        <div className="relative mb-6 group">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-brand-from/20 to-brand-to/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-70" />
+                            <div className="relative w-24 h-24 rounded-2xl bg-gradient-to-br from-background to-accent/50 border border-border/50 flex items-center justify-center shadow-lg group-hover:shadow-brand-from/10 transition-all duration-500 group-hover:scale-105">
+                                {searchQuery ? (
+                                    <SearchX className="w-10 h-10 text-muted-foreground group-hover:text-brand-from transition-colors duration-300" strokeWidth={1.5} />
+                                ) : (
+                                    <LayoutTemplate className="w-10 h-10 text-muted-foreground group-hover:text-brand-from transition-colors duration-300" strokeWidth={1.5} />
+                                )}
+                            </div>
                         </div>
-                        <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
+
+                        <h3 className="text-xl font-bold text-foreground mb-3">
                             {searchQuery
-                                ? (locale === 'id' ? 'Tidak ada hasil' : 'No results found')
+                                ? (locale === 'id' ? 'Tidak ada hasil ditemukan' : 'No results found')
                                 : (locale === 'id' ? 'Belum ada template' : 'No templates yet')}
                         </h3>
-                        <p className="text-muted-foreground max-w-md mx-auto mb-8 text-base leading-relaxed">
+
+                        <p className="text-muted-foreground max-w-sm mx-auto mb-8 text-sm leading-relaxed">
                             {searchQuery
                                 ? (locale === 'id'
-                                    ? `Oops! Kami tidak menemukan template untuk "${searchQuery}".`
-                                    : `Oops! We couldn't find any templates matching "${searchQuery}".`)
+                                    ? `Kami tidak dapat menemukan template yang cocok dengan "${searchQuery}". Coba kata kunci lain.`
+                                    : `We couldn't find any templates matching "${searchQuery}". Try different keywords.`)
                                 : (locale === 'id'
-                                    ? 'Template landing page akan segera hadir. Stay tuned!'
-                                    : 'Landing page templates are coming soon. Stay tuned!')}
+                                    ? 'Koleksi template landing page kami sedang dalam proses pembuatan. Segera hadir!'
+                                    : 'Our landing page template collection is in the works. Coming soon!')}
                         </p>
+
                         {searchQuery && (
                             <button
                                 onClick={() => setSearchQuery('')}
-                                className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-brand-from text-white font-semibold hover:bg-brand-from/90 transition-all shadow-sm hover:shadow"
+                                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent hover:bg-accent/80 text-foreground font-medium text-sm transition-all border border-border/50 hover:border-brand-from/30 hover:shadow-lg hover:shadow-brand-from/5 group"
                             >
+                                <SearchX className="w-4 h-4 group-hover:text-brand-from transition-colors" />
                                 {locale === 'id' ? 'Hapus Pencarian' : 'Clear Search'}
                             </button>
                         )}

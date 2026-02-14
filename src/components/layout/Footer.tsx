@@ -41,7 +41,7 @@ export function Footer() {
                             <Logo />
                         </Link>
                         <p className="text-muted-foreground text-sm leading-relaxed">
-                            &copy; {new Date().getFullYear()} SapaUI. All rights reserved.
+                            &copy; {new Date().getFullYear()} SapaUI - SejatiDimedia. All rights reserved.
                         </p>
                     </div>
 

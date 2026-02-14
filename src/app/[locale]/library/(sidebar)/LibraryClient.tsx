@@ -208,51 +208,58 @@ export function LibraryClient({ components, categories, initialCategory = 'all' 
                         </div>
                     </>
                 ) : (
-                    <div className="flex flex-col items-center justify-center py-20 px-4 text-center border-2 border-dashed border-border rounded-2xl bg-muted/5">
-                        <div className="flex items-center justify-center w-32 h-32 rounded-full bg-muted/20 mb-6">
-                            {searchQuery ? (
-                                <SearchX className="w-16 h-16 text-muted-foreground/40" strokeWidth={1.5} />
-                            ) : (
-                                <LayoutTemplate className="w-16 h-16 text-muted-foreground/40" strokeWidth={1.5} />
-                            )}
+                    <div className="flex flex-col items-center justify-center py-24 px-4 text-center border border-dashed border-border/60 rounded-3xl bg-background/50 backdrop-blur-sm">
+                        <div className="relative mb-6 group">
+                            <div className="absolute inset-0 bg-gradient-to-tr from-brand-from/20 to-brand-to/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500 opacity-70" />
+                            <div className="relative w-24 h-24 rounded-2xl bg-gradient-to-br from-background to-accent/50 border border-border/50 flex items-center justify-center shadow-lg group-hover:shadow-brand-from/10 transition-all duration-500 group-hover:scale-105">
+                                {searchQuery ? (
+                                    <SearchX className="w-10 h-10 text-muted-foreground group-hover:text-brand-from transition-colors duration-300" strokeWidth={1.5} />
+                                ) : (
+                                    <Box className="w-10 h-10 text-muted-foreground group-hover:text-brand-from transition-colors duration-300" strokeWidth={1.5} />
+                                )}
+                            </div>
                         </div>
-                        <h3 className="text-xl md:text-2xl font-bold text-foreground mb-3">
+
+                        <h3 className="text-xl font-bold text-foreground mb-3">
                             {searchQuery
-                                ? (locale === 'id' ? 'Tidak ada hasil' : 'No results found')
+                                ? (locale === 'id' ? 'Tidak ada hasil ditemukan' : 'No results found')
                                 : (locale === 'id' ? 'Kategori kosong' : 'Empty Category')
                             }
                         </h3>
-                        <p className="text-muted-foreground max-w-md mx-auto mb-8 text-base leading-relaxed">
+
+                        <p className="text-muted-foreground max-w-sm mx-auto mb-8 text-sm leading-relaxed">
                             {searchQuery
                                 ? (locale === 'id'
-                                    ? `Oops! Kami tidak menemukan komponen untuk "${searchQuery}".`
-                                    : `Oops! We couldn't find any components matching "${searchQuery}".`)
+                                    ? `Kami tidak dapat menemukan komponen untuk "${searchQuery}".`
+                                    : `We couldn't find any components matching "${searchQuery}".`)
                                 : (locale === 'id'
                                     ? 'Belum ada komponen di kategori ini. Kami akan segera menambahkannya!'
                                     : 'There are no components in this category yet. We will add them soon!')
                             }
                         </p>
-                        {
-                            searchQuery && (
+
+                        <div className="flex flex-wrap items-center justify-center gap-3">
+                            {searchQuery && (
                                 <button
                                     onClick={() => setSearchQuery('')}
-                                    className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-brand-from text-white font-semibold hover:bg-brand-from/90 transition-all shadow-sm hover:shadow"
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-accent hover:bg-accent/80 text-foreground font-medium text-sm transition-all border border-border/50 hover:border-brand-from/30 hover:shadow-lg hover:shadow-brand-from/5 group"
                                 >
+                                    <SearchX className="w-4 h-4 group-hover:text-brand-from transition-colors" />
                                     {locale === 'id' ? 'Hapus Pencarian' : 'Clear Search'}
                                 </button>
-                            )
-                        }
-                        {
-                            !searchQuery && activeCategory !== 'all' && (
+                            )}
+
+                            {!searchQuery && activeCategory !== 'all' && (
                                 <button
                                     onClick={() => handleCategoryChange('all')}
-                                    className="inline-flex items-center justify-center px-6 py-2.5 rounded-lg bg-background border border-border text-foreground font-medium hover:bg-accent hover:border-accent-foreground/20 transition-all text-sm shadow-sm"
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-background hover:bg-accent text-foreground font-medium text-sm transition-all border border-border/50 hover:border-brand-from/30 hover:shadow-lg hover:shadow-brand-from/5 group"
                                 >
+                                    <Box className="w-4 h-4 group-hover:text-brand-from transition-colors" />
                                     {locale === 'id' ? 'Lihat Kategori Lain' : 'Browse Other Categories'}
                                 </button>
-                            )
-                        }
-                    </div >
+                            )}
+                        </div>
+                    </div>
                 )
                 }
             </div >
