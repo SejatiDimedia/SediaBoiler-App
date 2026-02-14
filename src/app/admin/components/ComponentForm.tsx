@@ -58,6 +58,7 @@ export function ComponentForm({
 	const [isLoading, setIsLoading] = useState(false);
 	const [isCapturing, setIsCapturing] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const [broadcast, setBroadcast] = useState(false);
 
 	const previewRef = useRef<AdminComponentPreviewRef>(null);
 
@@ -141,7 +142,7 @@ export function ComponentForm({
 			const response = await fetch(url, {
 				method: mode === "create" ? "POST" : "PUT",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify(payload),
+				body: JSON.stringify({ ...payload, broadcast }),
 			});
 
 			if (!response.ok) {
@@ -275,6 +276,24 @@ export function ComponentForm({
 					>
 						Cancel
 					</button>
+					<div className="flex items-center gap-3 p-4 bg-blue-50 border border-blue-100 rounded-lg mb-4">
+						<input
+							type="checkbox"
+							id="broadcast"
+							checked={broadcast}
+							onChange={(e) => setBroadcast(e.target.checked)}
+							className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+						/>
+						<div className="flex flex-col">
+							<label htmlFor="broadcast" className="font-medium text-slate-900 cursor-pointer">
+								Broadcast to Subscribers?
+							</label>
+							<span className="text-xs text-slate-500">
+								If checked, an email notification will be sent to all subscribers upon creation.
+							</span>
+						</div>
+					</div>
+
 					<button
 						type="submit"
 						disabled={isLoading}

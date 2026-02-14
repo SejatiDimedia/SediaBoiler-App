@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Layers, LayoutDashboard, Package, LogOut, ChevronLeft, ChevronRight, Menu, FolderOpen, ImageIcon, Layout, BookOpen } from 'lucide-react';
+import { Layers, LayoutDashboard, Package, LogOut, ChevronLeft, ChevronRight, Menu, FolderOpen, ImageIcon, Layout, BookOpen, Users } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -34,6 +34,7 @@ export function AdminLayoutClient({ children }: AdminLayoutClientProps) {
         { name: 'Templates', href: '/admin/templates', icon: Layout },
         { name: 'Categories', href: '/admin/categories', icon: FolderOpen },
         { name: 'Images', href: '/admin/images', icon: ImageIcon },
+        { name: 'Subscribers', href: '/admin/subscribers', icon: Users },
     ];
 
     const isActive = (href: string) => {
