@@ -36,31 +36,39 @@ export default async function TemplatesPage({
     // Try to get templates from database first
     const dbTemplates = await getTemplates();
 
-    let templates;
+    // 1. Process Database Templates
+    const processedDbTemplates = (dbTemplates || [])
+        .filter(t => String(t.isPublished) === 'true')
+        .map(t => ({
+            slug: t.slug,
+            name: t.name,
+            description: t.description,
+            category: t.category,
+            previewImage: t.previewImage || undefined,
+        }));
 
-    if (dbTemplates && dbTemplates.length > 0) {
-        // Use database templates (published landing-page category)
-        templates = dbTemplates
-            .filter(t => String(t.isPublished) === 'true')
-            .map(t => ({
-                slug: t.slug,
-                name: t.name,
-                description: t.description,
-                category: t.category,
-                previewImage: t.previewImage || undefined,
-            }));
-    } else {
-        // Fallback to static components
-        templates = staticComponents
-            .filter(c => c.category === 'landing-page')
-            .map(c => ({
-                slug: c.slug,
-                name: c.name,
-                description: c.description,
-                category: c.category,
-                previewImage: undefined,
-            }));
-    }
+    // 2. Process Static Templates
+    const processedStaticTemplates = staticComponents
+        .filter(c => c.category === 'landing-page')
+        .map(c => ({
+            slug: c.slug,
+            name: c.name,
+            description: c.description,
+            category: c.category,
+            previewImage: undefined,
+        }));
+
+    // 3. Merge: Database templates overwrite static ones if slug matches
+    const templateMap = new Map<string, any>();
+
+    // Add static first
+    processedStaticTemplates.forEach(t => templateMap.set(t.slug, t));
+
+    // overwrite/append with DB
+    processedDbTemplates.forEach(t => templateMap.set(t.slug, t));
+
+    // Convert back to array
+    const templates = Array.from(templateMap.values());
 
     return (
         <Suspense fallback={<TemplatesLoading />}>
