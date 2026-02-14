@@ -112,22 +112,28 @@ export async function createComponent(data: NewComponent, shouldBroadcast: boole
     const result = await db.insert(components).values(data).returning();
 
     if (shouldBroadcast) {
+        const isTemplate = data.category === 'landing-page';
+        const typeLabel = isTemplate ? 'Template' : 'Component';
+        const itemUrl = isTemplate
+            ? `${process.env.NEXT_PUBLIC_APP_URL}/id/library/template/${data.slug}`
+            : `${process.env.NEXT_PUBLIC_APP_URL}/id/library/component/${data.category}/${data.slug}`;
+
         await broadcastUpdate(
-            `New Component: ${data.name} 🚀`,
+            `New ${typeLabel}: ${data.name.en} 🚀`,
             `<div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 12px; overflow: hidden; border: 1px solid #e5e7eb;">
                 <div style="background: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%); padding: 32px 24px; text-align: center;">
-                    <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">New Component Arrived! 🚀</h1>
+                    <h1 style="color: #ffffff; margin: 0; font-size: 24px; font-weight: 700; text-shadow: 0 1px 2px rgba(0,0,0,0.1);">New ${typeLabel} Arrived! 🚀</h1>
                 </div>
                 <div style="padding: 32px 24px;">
-                    <h2 style="color: #111827; margin-top: 0; font-size: 20px;">We just released <strong>${data.name}</strong></h2>
-                    <p style="color: #4b5563; line-height: 1.6; font-size: 16px; margin-bottom: 24px;">${data.description}</p>
+                    <h2 style="color: #111827; margin-top: 0; font-size: 20px;">We just released <strong>${data.name.en}</strong></h2>
+                    <p style="color: #4b5563; line-height: 1.6; font-size: 16px; margin-bottom: 24px;">${data.description.en}</p>
                     
                     <div style="background-color: #f3f4f6; padding: 16px; border-radius: 8px; font-family: monospace; color: #374151; font-size: 14px; margin-bottom: 24px;">
                         Category: ${data.category}
                     </div>
 
                     <div style="text-align: center;">
-                        <a href="${process.env.NEXT_PUBLIC_APP_URL}/id/library/component/${data.category}/${data.slug}" style="display: inline-block; background-color: #000000; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">View Component</a>
+                        <a href="${itemUrl}" style="display: inline-block; background-color: #000000; color: #ffffff; padding: 14px 28px; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 16px;">View ${typeLabel}</a>
                     </div>
                 </div>
                 <div style="background-color: #f9fafb; padding: 16px; text-align: center; color: #9ca3af; font-size: 12px; border-top: 1px solid #e5e7eb;">
@@ -198,31 +204,8 @@ export async function bulkDeleteComponents(ids: number[]): Promise<void> {
 export async function seedComponents(): Promise<{ created: number; skipped: number }> {
     if (!db) throw new Error('Database not available');
 
-    const { components: staticComponents } = await import('@/lib/components-data');
+    // Static data file deleted, seeding function disabled.
+    console.log('Static components data file deleted. Seeding disabled.');
 
-    let created = 0;
-    let skipped = 0;
-
-    for (const comp of staticComponents) {
-        const existing = await getComponentBySlug(comp.slug);
-        if (existing) {
-            skipped++;
-            continue;
-        }
-
-        await createComponent({
-            slug: comp.slug,
-            name: comp.name,
-            description: comp.description,
-            category: comp.category,
-            code: comp.code,
-            isPublished: 'true',
-        });
-        created++;
-
-        // Add delay to prevent max client connection errors on Supabase free tier (Transaction Mode)
-        await new Promise(resolve => setTimeout(resolve, 500));
-    }
-
-    return { created, skipped };
+    return { created: 0, skipped: 0 };
 }

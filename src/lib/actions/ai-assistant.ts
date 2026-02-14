@@ -2,7 +2,7 @@
 
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getComponentSearchIndex } from "./components";
-import { components as staticComponents } from "@/lib/components-data";
+
 
 // Message interface for chat history
 export interface Message {
@@ -41,15 +41,7 @@ export async function chatWithDocs(
     // Try DB first, fallback to static if empty (dev mode)
     let componentIndex = await getComponentSearchIndex();
 
-    if (componentIndex.length === 0) {
-        console.log("[AI Assistant] DB empty, using static data");
-        componentIndex = staticComponents.map(c => ({
-            slug: c.slug,
-            name: c.name,
-            description: c.description,
-            category: c.category
-        }));
-    }
+
 
     // Create a simplified context string for the AI
     // We only send essential info to save tokens

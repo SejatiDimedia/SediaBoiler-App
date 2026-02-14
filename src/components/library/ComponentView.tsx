@@ -4,11 +4,17 @@ import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { ComponentViewer } from '@/components/library/ComponentViewer';
 import { Button } from '@/components/ui/Button';
-import { ComponentData } from '@/lib/components-data';
 import { ArrowLeft, Layers, Copy, FileCode, Palette, Sparkles } from 'lucide-react';
+import { BilingualContent } from '@/db/schema/types';
 
 interface ComponentViewProps {
-    component: ComponentData;
+    component: {
+        slug: string;
+        name: BilingualContent;
+        description: BilingualContent;
+        category: string;
+        code: string;
+    };
     preview?: React.ReactNode;
     locale: 'id' | 'en';
 }

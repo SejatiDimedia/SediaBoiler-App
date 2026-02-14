@@ -72,15 +72,23 @@ export function ComponentViewer({ slug, code, className }: ComponentViewerProps)
         window.__componentCode__ = ${JSON.stringify(componentCode)};
 
         // Helper to create SVG elements
-        const createSvg = (props, children) => React.createElement('svg', {
-            viewBox: "0 0 24 24",
-            fill: "none",
-            stroke: "currentColor",
-            strokeWidth: 2,
-            strokeLinecap: "round",
-            strokeLinejoin: "round",
-            ...props
-        }, ...children);
+        const createSvg = (props, children) => {
+            var size = props.size || 24;
+            var newProps = Object.assign({}, props);
+            delete newProps.size;
+            
+            return React.createElement('svg', {
+                viewBox: "0 0 24 24",
+                width: size,
+                height: size,
+                fill: "none",
+                stroke: "currentColor",
+                strokeWidth: 2,
+                strokeLinecap: "round",
+                strokeLinejoin: "round",
+                ...newProps
+            }, ...children);
+        };
 
         // MOCK LUCIDE ICONS LIBRARY
         window.LucideIcons = {

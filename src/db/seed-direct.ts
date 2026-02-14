@@ -2,7 +2,7 @@ import { config } from 'dotenv';
 config({ path: '.env.local' });
 
 import postgres from 'postgres';
-import { components } from '@/lib/components-data';
+
 
 async function main() {
     console.log('🌱 Starting direct database seed...');
@@ -29,12 +29,14 @@ async function main() {
     let created = 0;
     let skipped = 0;
 
+    const components: any[] = [];
+
     try {
         for (const comp of components) {
             // Check if exists
             const existing = await sql`
-        SELECT id FROM components WHERE slug = ${comp.slug} LIMIT 1
-      `;
+                SELECT id FROM components WHERE slug = ${comp.slug} LIMIT 1
+            `;
 
             if (existing.length > 0) {
                 console.log(`- Skipped existing: ${comp.slug}`);
@@ -46,17 +48,17 @@ async function main() {
 
             // Insert
             await sql`
-        INSERT INTO components (
-          slug, name, description, category, code, is_published
-        ) VALUES (
-          ${comp.slug}, 
-          ${JSON.stringify(comp.name)}, 
-          ${JSON.stringify(comp.description)}, 
-          ${comp.category}, 
-          ${comp.code}, 
-          'true'
-        )
-      `;
+                INSERT INTO components (
+                    slug, name, description, category, code, is_published
+                ) VALUES (
+                    ${comp.slug}, 
+                    ${JSON.stringify(comp.name)}, 
+                    ${JSON.stringify(comp.description)}, 
+                    ${comp.category}, 
+                    ${comp.code}, 
+                    'true'
+                )
+            `;
 
             created++;
 

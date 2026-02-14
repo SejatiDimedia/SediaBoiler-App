@@ -2,7 +2,7 @@ import { Suspense } from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import { LibraryClient } from '../LibraryClient';
 import { getPublishedComponents } from '@/lib/actions/components';
-import { components as staticComponents, getAllCategories } from '@/lib/components-data';
+import { componentCategories } from '@/db/schema/components';
 
 function LibraryLoading() {
     return (
@@ -30,32 +30,26 @@ export default async function CategoryPage({
     const { locale, category } = await params;
     setRequestLocale(locale);
 
-    let components = [];
+    let components: any[] = [];
     try {
         const dbComponents = await getPublishedComponents();
-        components = dbComponents
-            .filter(c => c.category !== 'landing-page')
-            .map(c => ({
-                slug: c.slug,
-                name: c.name,
-                description: c.description,
-                category: c.category,
-                previewImage: c.previewImage,
-            }));
+        if (dbComponents) {
+            components = dbComponents
+                .filter(c => c.category !== 'landing-page')
+                .map(c => ({
+                    slug: c.slug,
+                    name: c.name,
+                    description: c.description,
+                    category: c.category,
+                    previewImage: c.previewImage,
+                }));
+        }
     } catch (error) {
         console.error('Failed to fetch from database:', error);
-        components = staticComponents
-            .filter(c => c.category !== 'landing-page')
-            .map(c => ({
-                slug: c.slug,
-                name: c.name,
-                description: c.description,
-                category: c.category,
-                previewImage: undefined,
-            }));
+        components = [];
     }
 
-    const categories = getAllCategories();
+    const categories = ['all', ...componentCategories];
 
     return (
         <Suspense fallback={<LibraryLoading />}>
