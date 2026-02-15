@@ -105,11 +105,17 @@ export function LibraryClient({ components, categories, initialCategory = 'all' 
         <div className="py-16 md:py-24">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                        {t('title')}
+                <div className="text-center mb-16 relative">
+                    {/* Ambient Glow */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[150px] bg-brand-from/20 blur-[120px] rounded-full pointer-events-none" />
+
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 relative z-10">
+                        <span className="text-foreground">{t('title')}</span>{" "}
+                        <span className="bg-gradient-to-r from-brand-from to-brand-to bg-clip-text text-transparent">
+                            {t('titleHighlight')}
+                        </span>
                     </h1>
-                    <p className="text-lg text-muted max-w-2xl mx-auto">
+                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed relative z-10">
                         {t('subtitle')}
                     </p>
                 </div>

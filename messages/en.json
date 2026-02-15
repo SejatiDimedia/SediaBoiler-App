@@ -20,7 +20,8 @@
         "ctaSecondary": "View Documentation"
     },
     "cta": {
-        "title": "Don't Start from Scratch. Start with SapaUI.",
+        "title": "Don't Start from Scratch. Start with",
+        "titleHighlight": "SapaUI.",
         "description": "Save hundreds of coding hours. Focus on your product idea, let us handle the UI.",
         "primary": "Browse Components",
         "templates": "Explore Templates",
@@ -31,7 +32,31 @@
         "description": "Get the latest components and templates delivered to your inbox. Save time, copy, paste, and ship.",
         "placeholder": "Enter your email",
         "button": "Subscribe",
-        "disclaimer": "No spam. Unsubscribe at any time."
+        "disclaimer": "No spam. Unsubscribe at any time.",
+        "commandCenter": {
+            "systemOnline": "SYSTEM ONLINE",
+            "titleLine1": "Secure Your",
+            "titleHighlight": "Weekly Drops.",
+            "description": "Get the latest SapaUI components, templates, and engineering insights delivered straight to your inbox. Stay updated, ship faster.",
+            "features": {
+                "weeklyDrops": "Weekly Drops",
+                "zeroSpam": "Zero Spam"
+            },
+            "terminal": {
+                "header": "root@sapa-ui:~/newsletter",
+                "init1": "Initializing SapaUI update sequence...",
+                "init2": "Loading components...",
+                "init3": "Target: Stay ahead of the curve.",
+                "init4": "Status: Ready for input.",
+                "lastLogin": "Last login:",
+                "inputPlaceholder": "enter_email_address...",
+                "executeBtn": "EXECUTE",
+                "processing": "Processing request...",
+                "successTitle": "Operation Successful",
+                "successMsg1": "Packet received at",
+                "successMsg2": "Uplink secure. Welcome to the grid."
+            }
+        }
     },
     "blog": {
         "meta_title": "Blog",
@@ -132,8 +157,9 @@
         }
     },
     "library": {
-        "title": "Component Library",
-        "subtitle": "Explore our collection of ready-to-use UI components",
+        "title": "Explore Our",
+        "titleHighlight": "Component Library",
+        "subtitle": "High-quality, copy-paste components built with Next.js and Tailwind CSS.",
         "search": "Search components...",
         "categories": {
             "all": "All",
@@ -318,5 +344,10 @@
                 "description": "Complete shopping flow with cart and checkout."
             }
         }
+    },
+    "templates": {
+        "title": "Premium",
+        "titleHighlight": "Landing Page Templates",
+        "subtitle": "Ready-to-use landing page templates in a single file. Copy-paste and go!"
     }
 }

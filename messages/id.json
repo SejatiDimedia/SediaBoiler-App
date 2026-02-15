@@ -20,7 +20,8 @@
     "ctaSecondary": "Lihat Dokumentasi"
   },
   "cta": {
-    "title": "Jangan Mulai dari Nol. Mulai dengan SapaUI.",
+    "title": "Jangan Mulai dari Nol. Mulai dengan",
+    "titleHighlight": "SapaUI.",
     "description": "Hemat ratusan jam coding. Fokus pada ide produkmu, biarkan kami yang urus UI-nya.",
     "primary": "Jelajahi Komponen",
     "templates": "Jelajahi Template",
@@ -31,7 +32,31 @@
     "description": "Dapatkan komponen dan template terbaru langsung di inbox. Hemat waktu, salin, tempel, dan luncurkan.",
     "placeholder": "Masukkan email Anda",
     "button": "Berlangganan",
-    "disclaimer": "Bebas spam. Berhenti berlangganan kapan saja."
+    "disclaimer": "Bebas spam. Berhenti berlangganan kapan saja.",
+    "commandCenter": {
+      "systemOnline": "SISTEM ONLINE",
+      "titleLine1": "Amankan",
+      "titleHighlight": "Drop Mingguan Anda.",
+      "description": "Dapatkan komponen, template, dan wawasan engineering SapaUI terbaru langsung di inbox Anda. Tetap update, ship lebih cepat.",
+      "features": {
+        "weeklyDrops": "Drop Mingguan",
+        "zeroSpam": "Tanpa Spam"
+      },
+      "terminal": {
+        "header": "root@sapa-ui:~/newsletter",
+        "init1": "Initializing SapaUI update sequence...",
+        "init2": "Loading components...",
+        "init3": "Target: Stay ahead of the curve.",
+        "init4": "Status: Ready for input.",
+        "lastLogin": "Last login:",
+        "inputPlaceholder": "enter_email_address...",
+        "executeBtn": "EXECUTE",
+        "processing": "Processing request...",
+        "successTitle": "Operation Successful",
+        "successMsg1": "Packet received at",
+        "successMsg2": "Uplink secure. Welcome to the grid."
+      }
+    }
   },
   "blog": {
     "meta_title": "Blog",
@@ -132,8 +157,9 @@
     }
   },
   "library": {
-    "title": "Library Komponen",
-    "subtitle": "Jelajahi koleksi komponen UI siap pakai",
+    "title": "Jelajahi",
+    "titleHighlight": "Library Komponen",
+    "subtitle": "Komponen UI berkualitas tinggi, siap salin-tempel dengan Next.js dan Tailwind CSS.",
     "search": "Cari komponen...",
     "categories": {
       "all": "Semua",
@@ -318,5 +344,10 @@
         "description": "Alur belanja lengkap dengan keranjang dan checkout."
       }
     }
+  },
+  "templates": {
+    "title": "Template",
+    "titleHighlight": "Landing Page Premium",
+    "subtitle": "Template halaman landing page siap pakai dalam satu file. Copy-paste, langsung jalan!"
   }
 }

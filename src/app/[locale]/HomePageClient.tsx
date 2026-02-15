@@ -81,7 +81,7 @@ export function HomePageClient({ locale }: { locale: string }) {
     return (
         <div className="flex flex-col min-h-screen bg-background text-foreground">
             {/* Hero Section - Split Layout */}
-            <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32 lg:pt-32 lg:pb-40">
+            <section className="relative overflow-hidden pt-16 pb-16 md:pt-24 md:pb-32 lg:pt-32 lg:pb-40">
                 {/* Dynamic Background */}
                 <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]" />
 
@@ -113,7 +113,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                             </h1>
 
                             {/* Description */}
-                            <p className="animate-in fade-in slide-in-from-left-6 duration-700 delay-300 text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                            <p className="animate-in fade-in slide-in-from-left-6 duration-700 delay-300 text-base md:text-xl text-muted-foreground mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
                                 {t('description')}
                             </p>
 
@@ -125,7 +125,7 @@ export function HomePageClient({ locale }: { locale: string }) {
                             {/* CTAs */}
                             <div className="animate-in fade-in zoom-in duration-700 delay-400 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center justify-center lg:justify-start">
                                 <Link href="/library">
-                                    <Button variant="premium" size="lg" className="w-full sm:w-auto gap-2 from-brand-from to-brand-to hover:from-brand-from/90 hover:to-brand-to/90 shadow-lg shadow-brand-from/20 text-white rounded-full px-8 border-none">
+                                    <Button variant="premium" size="lg" className="w-full sm:w-auto gap-2 from-brand-from to-brand-to hover:from-brand-from/90 hover:to-brand-to/90 shadow-lg shadow-brand-from/20 text-white rounded-full px-6 py-2.5 md:px-8 md:py-3.5 border-none h-11 md:h-14">
                                         {t('cta')}
                                         <ArrowRight className="h-4 w-4" />
                                     </Button>

@@ -119,7 +119,7 @@ export function FeaturedTemplates() {
                                                     {template.description}
                                                 </p>
                                                 <Link href={linkHref}>
-                                                    <Button className="rounded-full bg-gradient-to-r from-brand-from to-brand-to text-white hover:opacity-90 hover:scale-[1.02] transition-all duration-300 font-medium px-8 h-12 gap-2 group/btn border-none shadow-lg shadow-brand-from/20">
+                                                    <Button className="rounded-full bg-gradient-to-r from-brand-from to-brand-to text-white hover:opacity-90 hover:scale-[1.02] transition-all duration-300 font-medium px-6 h-11 md:px-8 md:h-12 gap-2 group/btn border-none shadow-lg shadow-brand-from/20">
                                                         {t('cta')}
                                                         <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                                                     </Button>
@@ -131,11 +131,22 @@ export function FeaturedTemplates() {
                                                     initial={{ opacity: 0 }}
                                                     animate={{ opacity: 1 }}
                                                     transition={{ duration: 0.5 }}
-                                                    className="rotate-180"
-                                                    style={{ writingMode: 'vertical-rl' }}
+                                                    className="md:rotate-180 w-full h-full flex items-center justify-center"
                                                 >
-                                                    <div className="flex items-center gap-4 py-8">
-                                                        <h3 className="text-xl md:text-2xl font-bold text-white tracking-widest uppercase whitespace-nowrap">
+                                                    <div
+                                                        className="flex items-center gap-4 py-8"
+                                                        style={{ writingMode: 'horizontal-tb' }}
+                                                    >
+                                                        {/* Mobile: Horizontal Text */}
+                                                        <h3 className="md:hidden text-xl font-bold text-white tracking-widest uppercase whitespace-nowrap">
+                                                            {template.title}
+                                                        </h3>
+
+                                                        {/* Desktop: Vertical Text */}
+                                                        <h3
+                                                            className="hidden md:block text-2xl font-bold text-white tracking-widest uppercase whitespace-nowrap"
+                                                            style={{ writingMode: 'vertical-rl' }}
+                                                        >
                                                             {template.title}
                                                         </h3>
                                                         <ChevronRight className="w-5 h-5 text-white/50 animate-pulse hidden md:block rotate-90" />

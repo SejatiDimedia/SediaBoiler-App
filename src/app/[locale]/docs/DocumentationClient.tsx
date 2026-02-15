@@ -10,7 +10,7 @@ export function DocumentationClient() {
     const [activeSection, setActiveSection] = useState('getting-started');
 
     return (
-        <div className="container mx-auto px-4 lg:px-8 py-12 max-w-7xl relative min-h-screen bg-background text-foreground overflow-x-hidden">
+        <div className="container mx-auto px-6 lg:px-8 py-12 max-w-6xl relative min-h-screen bg-background text-foreground overflow-x-hidden">
             {/* Dynamic Background (Subtle Grid like Landing Page) */}
             <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-top opacity-[0.03] dark:opacity-[0.1] pointer-events-none" />
 
@@ -90,7 +90,7 @@ export function DocumentationClient() {
 
                 {/* Content */}
                 <main className="lg:col-span-9 min-w-0">
-                    <div className="prose prose-slate max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-code:text-brand-from prose-code:bg-brand-from/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
+                    <div className="prose prose-slate max-w-4xl dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-code:text-brand-from prose-code:bg-brand-from/10 prose-code:px-1 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none">
 
                         {/* Getting Started */}
                         {activeSection === 'getting-started' && (

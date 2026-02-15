@@ -59,7 +59,7 @@ export function FeaturesCreative() {
             <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-6">
                     <div className="max-w-2xl">
-                        <h2 className="text-2xl md:text-5xl lg:text-6xl font-black tracking-tighter text-foreground mb-6 leading-[0.9]">
+                        <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter text-foreground mb-6 leading-tight">
                             {tFeatures('creativeTitlePrefix')} <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-from to-brand-to">{tFeatures('creativeTitleHighlight')}</span>
                         </h2>
                         <p className="text-sm md:text-xl text-muted-foreground">

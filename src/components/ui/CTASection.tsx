@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export function CTASection() {
     const t = useTranslations('cta');
@@ -22,44 +23,67 @@ export function CTASection() {
             </div>
 
             <div className="relative mx-auto max-w-5xl px-6 text-center">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent border border-border mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700 backdrop-blur-sm">
-                    <span className="flex h-2 w-2 rounded-full bg-brand-from"></span>
-                    <span className="text-xs font-semibold text-muted-foreground">Copy. Paste. Ship.</span>
-                </div>
-
                 <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
+                    <span className="text-foreground">{t('title')}</span>{" "}
                     <span className="bg-gradient-to-r from-brand-from to-brand-to bg-clip-text text-transparent">
-                        {t('title')}
+                        {t('titleHighlight')}
                     </span>
                 </h2>
 
-                <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
+                <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
                     {t('description')}
                 </p>
 
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-in fade-in slide-in-from-bottom-7 duration-700 delay-300">
-                    <Link href="/library">
-                        <Button size="lg" className="rounded-xl px-8 h-12 text-base gap-2 shadow-lg shadow-brand-from/20 bg-gradient-to-r from-brand-from to-brand-to hover:opacity-90 transition-opacity border-0 text-white">
-                            {t('primary')}
-                            <ArrowRight className="w-4 h-4" />
-                        </Button>
-                    </Link>
-                    <Link href="/templates">
-                        <div className="group relative rounded-xl p-[1px] bg-gradient-to-r from-brand-from to-brand-to overflow-hidden">
-                            {/* Inner background that fades out on hover */}
-                            <div className="absolute inset-[1px] rounded-xl bg-background group-hover:bg-opacity-0 transition-all duration-300" />
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6 animate-in fade-in slide-in-from-bottom-7 duration-700 delay-300">
+                    {/* Primary Button */}
+                    <Link href="/library" className="w-full sm:w-auto">
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="relative group cursor-pointer"
+                        >
+                            <Button size="lg" className="rounded-xl px-6 md:px-10 h-11 md:h-14 w-full sm:w-auto text-base gap-3 shadow-[0_0_20px_-5px_rgba(var(--brand-from-rgb),0.5)] bg-gradient-to-r from-brand-from to-brand-to border-0 text-white relative overflow-hidden">
+                                {/* Shimmer Effect */}
+                                <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 z-10" />
 
-                            <Button size="lg" className="relative rounded-xl px-8 h-[46px] text-base bg-transparent hover:bg-transparent border-0 ring-0 shadow-none">
-                                {/* Text Gradient (Default) */}
-                                <span className="bg-gradient-to-r from-brand-from to-brand-to bg-clip-text text-transparent font-medium group-hover:opacity-0 transition-opacity duration-300 absolute inset-0 flex items-center justify-center">
-                                    {t('templates')}
-                                </span>
-                                {/* White Text (Hover) */}
-                                <span className="text-white font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                                    {t('templates')}
+                                <span className="relative z-0 flex items-center justify-center gap-3 font-semibold">
+                                    {t('primary')}
+                                    <motion.span
+                                        animate={{ x: [0, 5, 0] }}
+                                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                                    >
+                                        <ArrowRight className="w-5 h-5" />
+                                    </motion.span>
                                 </span>
                             </Button>
-                        </div>
+                        </motion.div>
+                    </Link>
+
+                    {/* Secondary Button */}
+                    <Link href="/templates" className="w-full sm:w-auto">
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.98 }}
+                            className="group h-11 md:h-14 p-[1.5px] rounded-xl bg-gradient-to-r from-brand-from to-brand-to shadow-[0_0_15px_-5px_rgba(var(--brand-to-rgb),0.3)] cursor-pointer relative"
+                        >
+                            <div className="h-full w-full bg-background rounded-[11px] flex items-center justify-center px-6 md:px-10 relative overflow-hidden transition-colors group-hover:bg-transparent duration-300">
+                                {/* Text Content */}
+                                <div className="relative z-10 flex items-center gap-3 font-semibold">
+                                    <span className="bg-gradient-to-r from-brand-from to-brand-to bg-clip-text text-transparent group-hover:text-white transition-colors duration-300">
+                                        {t('templates')}
+                                    </span>
+                                    <motion.div
+                                        animate={{
+                                            x: [0, 5, 0],
+                                            opacity: [0.7, 1, 0.7]
+                                        }}
+                                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+                                    >
+                                        <ArrowRight className="w-5 h-5 text-brand-to group-hover:text-white" />
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </motion.div>
                     </Link>
                 </div>
             </div>

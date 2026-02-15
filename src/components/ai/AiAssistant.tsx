@@ -63,13 +63,13 @@ export function AiAssistant() {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setIsOpen(true)}
                 className={cn(
-                    "fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-3 rounded-full shadow-lg transition-all duration-300",
+                    "fixed bottom-6 right-6 z-50 flex items-center gap-2 px-3 py-2 md:px-4 md:py-3 rounded-full shadow-lg transition-all duration-300",
                     "bg-gradient-to-r from-brand-from to-brand-to text-white hover:shadow-brand-from/25",
                     isOpen && "hidden"
                 )}
             >
-                <Sparkles className="w-5 h-5" />
-                <span className="font-semibold text-sm">Ask AI</span>
+                <Sparkles className="w-4 h-4 md:w-5 md:h-5" />
+                <span className="font-semibold text-xs md:text-sm">Ask AI</span>
             </motion.button>
 
             {/* Chat Window */}

@@ -125,10 +125,10 @@ export function HeroIllustration() {
                         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                         className="absolute -inset-1 bg-gradient-to-tr from-brand-to to-brand-from rounded-2xl blur"
                     />
-                    <div className="relative rounded-xl border border-white/10 bg-black/40 backdrop-blur-md shadow-2xl overflow-hidden h-[300px] sm:h-[340px] w-full flex flex-col ring-1 ring-white/5">
+                    <div className="relative rounded-xl border border-border bg-background/80 backdrop-blur-md shadow-2xl overflow-hidden h-[300px] sm:h-[340px] w-full flex flex-col ring-1 ring-white/5">
 
                         {/* Header */}
-                        <div className="flex items-center justify-between px-4 py-3 border-b border-white/5 bg-white/5">
+                        <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-muted/40">
                             <div className="flex gap-2">
                                 <div className="w-3 h-3 rounded-full bg-red-500/80" />
                                 <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
@@ -140,8 +140,8 @@ export function HeroIllustration() {
                         {/* Library Content */}
                         <div className="p-4 sm:p-6 flex flex-col gap-4 sm:gap-6">
                             <div className="space-y-2">
-                                <div className="h-4 w-1/3 bg-white/10 rounded animate-pulse" />
-                                <div className="h-2 w-1/2 bg-white/5 rounded" />
+                                <div className="h-4 w-1/3 bg-muted/20 rounded animate-pulse" />
+                                <div className="h-2 w-1/2 bg-muted/20 rounded" />
                             </div>
 
                             {/* The Component Card being "Copied" */}
@@ -149,29 +149,29 @@ export function HeroIllustration() {
                                 whileHover={{ scale: 1.02 }}
                                 className="relative group/card cursor-pointer"
                             >
-                                <div className="absolute inset-0 bg-brand-from/20 rounded-xl blur-xl transition-all opacity-0 group-hover/card:opacity-100" />
-                                <div className="relative bg-[#0F172A] border border-white/10 rounded-xl p-3 sm:p-4 transition-all group-hover/card:border-brand-from/50 group-hover/card:shadow-lg hover:-translate-y-1">
+                                <div className="absolute inset-0 bg-brand-from/10 rounded-xl blur-xl transition-all opacity-0 group-hover/card:opacity-100" />
+                                <div className="relative bg-background/20 border border-border rounded-xl p-3 sm:p-4 transition-all group-hover/card:border-brand-from/50 group-hover/card:shadow-lg hover:-translate-y-1">
                                     <div className="flex items-center justify-between mb-3">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-8 h-8 rounded-lg bg-brand-from/20 flex items-center justify-center text-brand-from">
+                                            <div className="w-8 h-8 rounded-lg bg-brand-from/10 flex items-center justify-center text-brand-from">
                                                 <Layout className="w-4 h-4" />
                                             </div>
                                             <div>
-                                                <div className="font-semibold text-sm text-white">Hero Section</div>
-                                                <div className="text-[10px] text-zinc-400">Layouts</div>
+                                                <div className="font-semibold text-sm text-foreground">Hero Section</div>
+                                                <div className="text-[10px] text-muted-foreground">Layouts</div>
                                             </div>
                                         </div>
-                                        <div className="h-6 w-16 bg-brand-from text-white rounded-md text-[10px] font-bold flex items-center justify-center shadow-lg shadow-brand-from/20">
+                                        <div className="h-6 w-16 bg-gradient-to-r from-brand-from to-brand-to text-white rounded-md text-[10px] font-bold flex items-center justify-center shadow-lg shadow-brand-from/20">
                                             Copy
                                         </div>
                                     </div>
-                                    <div className="h-16 sm:h-20 bg-black/20 rounded-lg border border-white/5 border-dashed flex items-center justify-center">
-                                        <div className="w-1/2 h-2 bg-white/10 rounded-full" />
+                                    <div className="h-16 sm:h-20 bg-muted/10 rounded-lg border border-border border-dashed flex items-center justify-center">
+                                        <div className="w-1/2 h-2 bg-muted/20 rounded-full" />
                                     </div>
                                 </div>
                             </motion.div>
 
-                            <div className="h-20 sm:h-24 bg-white/5 rounded-xl border border-white/5 border-dashed" />
+                            <div className="h-20 sm:h-24 bg-muted/20 rounded-xl border border-border border-dashed" />
                         </div>
                     </div>
                 </motion.div>
@@ -180,7 +180,7 @@ export function HeroIllustration() {
                 <>
                     {/* React Icon */}
                     <motion.div
-                        className="absolute z-30 top-[-10%] right-[-10%] bg-[#0F172A] p-2 rounded-full border border-cyan-500/30 shadow-lg shadow-cyan-500/20"
+                        className="absolute z-30 top-[-10%] right-[-10%] bg-background p-2 rounded-full border border-cyan-500/20 dark:border-cyan-500/30 shadow-lg shadow-cyan-500/10 dark:shadow-cyan-500/20"
                         animate={{
                             y: [0, -15, 0],
                             rotate: [0, 10, 0],
@@ -203,7 +203,7 @@ export function HeroIllustration() {
 
                     {/* Tailwind Icon */}
                     <motion.div
-                        className="absolute z-30 bottom-[20%] left-[-15%] bg-[#0F172A] p-2 rounded-full border border-sky-500/30 shadow-lg shadow-sky-500/20"
+                        className="absolute z-30 bottom-[20%] left-[-15%] bg-background p-2 rounded-full border border-sky-500/20 dark:border-sky-500/30 shadow-lg shadow-sky-500/10 dark:shadow-sky-500/20"
                         animate={{
                             y: [0, 15, 0],
                             rotate: [0, -10, 0],
@@ -222,7 +222,7 @@ export function HeroIllustration() {
 
                     {/* TypeScript Icon */}
                     <motion.div
-                        className="absolute z-30 bottom-[-5%] right-[20%] bg-[#0F172A] p-2 rounded-full border border-blue-500/30 shadow-lg shadow-blue-500/20"
+                        className="absolute z-30 bottom-[-5%] right-[20%] bg-background p-2 rounded-full border border-blue-500/20 dark:border-blue-500/30 shadow-lg shadow-blue-500/10 dark:shadow-blue-500/20"
                         animate={{
                             y: [0, -10, 0],
                             rotate: [0, 5, 0],
@@ -248,29 +248,29 @@ export function HeroIllustration() {
                     transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                     className="relative z-10 translate-x-4 -translate-y-10 sm:translate-x-12 sm:-translate-y-24 lg:translate-x-40 lg:-translate-y-48 transform-gpu"
                 >
-                    <div className="absolute -inset-1 bg-gradient-to-r from-brand-from to-brand-to rounded-2xl blur opacity-30" />
-                    <div className="relative rounded-xl border border-white/10 bg-[#0F172A] shadow-2xl overflow-hidden h-[260px] sm:h-[300px] w-full max-w-[340px] flex flex-col ring-1 ring-white/5 mx-auto">
-                        <div className="flex items-center justify-between px-4 py-3 bg-[#0F172A] border-b border-white/5">
+                    <div className="absolute -inset-1 bg-gradient-to-r from-brand-from to-brand-to rounded-2xl blur opacity-20" />
+                    <div className="relative rounded-xl border border-border bg-background shadow-2xl overflow-hidden h-[260px] sm:h-[300px] w-full max-w-[340px] flex flex-col ring-1 ring-border/5 mx-auto">
+                        <div className="flex items-center justify-between px-4 py-3 bg-muted/50 border-b border-border">
                             <div className="flex gap-1.5">
                                 <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
                                 <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
                             </div>
                             <div className="text-[10px] text-slate-400 font-mono">page.tsx</div>
                         </div>
-                        <div className="p-4 text-left font-mono text-[10px] sm:text-xs overflow-hidden flex-1 relative bg-[#0F172A]">
-                            <div className="flex flex-col text-slate-400">
-                                <span><span className="text-purple-400">import</span> <span className="text-blue-300">&#123; Button &#125;</span> <span className="text-purple-400">from</span> <span className="text-green-300">'@ui'</span>;</span>
+                        <div className="p-4 text-left font-mono text-[10px] sm:text-xs overflow-hidden flex-1 relative bg-background/50">
+                            <div className="flex flex-col text-muted-foreground">
+                                <span><span className="text-purple-500 dark:text-purple-400">import</span> <span className="text-blue-600 dark:text-blue-300">&#123; Button &#125;</span> <span className="text-purple-500 dark:text-purple-400">from</span> <span className="text-green-600 dark:text-green-300">'@ui'</span>;</span>
                                 <span className="h-4" />
-                                <span><span className="text-purple-400">export default</span> <span className="text-blue-400">function</span> <span className="text-yellow-400">Page</span>() &#123;</span>
-                                <span className="pl-4"><span className="text-purple-400">return</span> (</span>
-                                <span className="pl-8 text-slate-300">&lt;<span className="text-pink-400">main</span>&gt;</span>
+                                <span><span className="text-purple-500 dark:text-purple-400">export default</span> <span className="text-blue-600 dark:text-blue-400">function</span> <span className="text-yellow-600 dark:text-yellow-400">Page</span>() &#123;</span>
+                                <span className="pl-4"><span className="text-purple-500 dark:text-purple-400">return</span> (</span>
+                                <span className="pl-8 text-foreground/70">&lt;<span className="text-pink-600 dark:text-pink-400">main</span>&gt;</span>
 
                                 {/* Typing Effect Area */}
-                                <div className="pl-12 py-1 my-1 bg-brand-from/10 border-l-2 border-brand-from animate-[pulse_4s_ease-in-out_infinite]">
-                                    <span className="text-yellow-300">&lt;HeroSection /&gt;</span>
+                                <div className="pl-12 py-1 my-1 bg-brand-from/5 dark:bg-brand-from/10 border-l-2 border-brand-from animate-[pulse_4s_ease-in-out_infinite]">
+                                    <span className="text-yellow-600 dark:text-yellow-300">&lt;HeroSection /&gt;</span>
                                 </div>
 
-                                <span className="pl-8 text-slate-300">&lt;/<span className="text-pink-400">main</span>&gt;</span>
+                                <span className="pl-8 text-foreground/70">&lt;/<span className="text-pink-600 dark:text-pink-400">main</span>&gt;</span>
                                 <span className="pl-4">);</span>
                                 <span>&#125;</span>
                             </div>
@@ -280,7 +280,7 @@ export function HeroIllustration() {
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: [0, 1, 1, 0], y: [10, 0, 0, -10] }}
                             transition={{ duration: 4, repeat: Infinity, times: [0, 0.1, 0.8, 1], repeatDelay: 1 }}
-                            className="absolute bottom-4 right-4 bg-green-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5"
+                            className="absolute bottom-4 right-4 bg-gradient-to-r from-brand-from to-brand-to text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5"
                         >
                             <CheckCircle2 className="w-3 h-3" />
                             Pasted!

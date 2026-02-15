@@ -23,6 +23,7 @@ interface TemplatesClientProps {
 }
 
 export function TemplatesClient({ templates }: TemplatesClientProps) {
+    const t = useTranslations('templates');
     const locale = useLocale() as 'id' | 'en';
     const router = useRouter();
     const pathname = usePathname();
@@ -78,21 +79,18 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
     return (
         <div className="py-16 md:py-24">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                {/* Header */}
-                {/* Header */}
-                <div className="text-center mb-12 relative">
+                <div className="text-center mb-16 relative">
                     {/* Ambient Glow */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[100px] bg-brand-from/20 blur-[100px] rounded-full pointer-events-none" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[150px] bg-brand-from/20 blur-[120px] rounded-full pointer-events-none" />
 
-                    <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight relative z-10">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 relative z-10">
+                        <span className="text-foreground">{t('title')}</span>{" "}
                         <span className="bg-gradient-to-r from-brand-from to-brand-to bg-clip-text text-transparent">
-                            {locale === 'id' ? 'Template Landing Page' : 'Landing Page Templates'}
+                            {t('titleHighlight')}
                         </span>
                     </h1>
-                    <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed relative z-10">
-                        {locale === 'id'
-                            ? 'Template halaman landing page siap pakai dalam satu file. Copy-paste, langsung jalan!'
-                            : 'Ready-to-use landing page templates in a single file. Copy-paste and go!'}
+                    <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed relative z-10">
+                        {t('subtitle')}
                     </p>
                 </div>
 
