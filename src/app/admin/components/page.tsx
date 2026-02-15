@@ -1,7 +1,8 @@
 import { getUIComponents } from '@/lib/actions/components';
 import Link from 'next/link';
-import { Plus, Search, LayoutGrid } from 'lucide-react';
+import { Plus, LayoutGrid } from 'lucide-react';
 import { AdminTable } from './AdminTable';
+import { SearchInput } from './SearchInput';
 
 export default async function ComponentsListPage() {
     const components = await getUIComponents();
@@ -20,14 +21,7 @@ export default async function ComponentsListPage() {
                     </p>
                 </div>
                 <div className="flex items-center gap-3">
-                    <div className="relative hidden md:block group">
-                        <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400 group-focus-within:text-primary transition-colors" />
-                        <input
-                            type="text"
-                            placeholder="Search components..."
-                            className="bg-white border border-slate-200 rounded-lg py-2.5 pl-10 pr-4 text-sm w-64 shadow-sm outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50 transition-all text-slate-700 placeholder:text-slate-400"
-                        />
-                    </div>
+                    <SearchInput placeholder="Search components..." />
                     <Link
                         href="/admin/components/new"
                         className="flex items-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition shadow-lg shadow-primary/25 font-medium active:scale-95"

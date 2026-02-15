@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import { DeleteButton } from './DeleteButton';
 import { bulkUpdatePublishStatus, bulkDeleteComponents } from '@/lib/actions/components';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 interface AdminTableProps {
     items: any[];
@@ -29,14 +29,23 @@ export function AdminTable({ items, type }: AdminTableProps) {
     const [selectedIds, setSelectedIds] = useState<Set<number>>(new Set());
     const [isPending, startTransition] = useTransition();
     const router = useRouter();
+    const searchParams = useSearchParams();
+    const query = searchParams.get('q')?.toLowerCase() || '';
 
-    const isAllSelected = items.length > 0 && selectedIds.size === items.length;
+    const filteredItems = items.filter(item =>
+        item.name.en?.toLowerCase().includes(query) ||
+        item.name.id?.toLowerCase().includes(query) ||
+        item.slug.toLowerCase().includes(query) ||
+        item.category.toLowerCase().includes(query)
+    );
+
+    const isAllSelected = filteredItems.length > 0 && selectedIds.size === filteredItems.length;
 
     const toggleSelectAll = () => {
         if (isAllSelected) {
             setSelectedIds(new Set());
         } else {
-            setSelectedIds(new Set(items.map(i => i.id)));
+            setSelectedIds(new Set(filteredItems.map(i => i.id)));
         }
     };
 
@@ -110,7 +119,7 @@ export function AdminTable({ items, type }: AdminTableProps) {
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100">
-                            {items.length === 0 ? (
+                            {filteredItems.length === 0 ? (
                                 <tr>
                                     <td colSpan={6} className="px-6 py-20 text-center text-slate-500">
                                         <div className="flex flex-col items-center gap-4">
@@ -126,7 +135,7 @@ export function AdminTable({ items, type }: AdminTableProps) {
                                     </td>
                                 </tr>
                             ) : (
-                                items.map((item) => {
+                                filteredItems.map((item) => {
                                     const isSelected = selectedIds.has(item.id);
                                     return (
                                         <tr key={item.id} className={`group transition-colors ${isSelected ? 'bg-primary/5' : 'hover:bg-slate-50/80'}`}>

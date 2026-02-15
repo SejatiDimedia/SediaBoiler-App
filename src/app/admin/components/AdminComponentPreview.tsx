@@ -89,10 +89,25 @@ export const AdminComponentPreview = forwardRef<AdminComponentPreviewRef, AdminC
 					scale: 2,
 					backgroundColor: bgColor,
 					windowWidth: captureWidth, // Simulates 1280px screen (Tailwind lg breakpoint)
+					// width: captureWidth,    // REMOVED: This causes empty space if element is smaller
 					x: 0,
 					y: 0,
+					scrollX: 0,
+					scrollY: 0,
 					foreignObjectRendering: true,
 					removeContainer: true,
+					// Resize the CLONED document to ensure 1280px layout
+					onclone: (clonedDoc) => {
+						const clonedRoot = clonedDoc.getElementById('root');
+						if (clonedRoot) {
+							clonedRoot.style.width = `${captureWidth}px`;
+							clonedRoot.style.height = 'auto'; // allow expansion
+							clonedRoot.style.overflow = 'hidden'; // prevent scrollbars showing up
+						}
+						// Also ensure body/html are wide enough
+						clonedDoc.body.style.width = `${captureWidth}px`;
+						clonedDoc.documentElement.style.width = `${captureWidth}px`;
+					},
 					// Try to wait for images to load
 					imageTimeout: 15000,
 				});

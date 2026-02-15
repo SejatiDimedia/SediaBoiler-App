@@ -79,11 +79,17 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
         <div className="py-16 md:py-24">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="text-center mb-12">
-                    <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-                        {locale === 'id' ? 'Template Landing Page' : 'Landing Page Templates'}
+                {/* Header */}
+                <div className="text-center mb-12 relative">
+                    {/* Ambient Glow */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[100px] bg-brand-from/20 blur-[100px] rounded-full pointer-events-none" />
+
+                    <h1 className="text-4xl md:text-5xl font-extrabold mb-6 tracking-tight relative z-10">
+                        <span className="bg-gradient-to-r from-brand-from to-brand-to bg-clip-text text-transparent">
+                            {locale === 'id' ? 'Template Landing Page' : 'Landing Page Templates'}
+                        </span>
                     </h1>
-                    <p className="text-lg text-muted max-w-2xl mx-auto">
+                    <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed relative z-10">
                         {locale === 'id'
                             ? 'Template halaman landing page siap pakai dalam satu file. Copy-paste, langsung jalan!'
                             : 'Ready-to-use landing page templates in a single file. Copy-paste and go!'}
@@ -93,13 +99,13 @@ export function TemplatesClient({ templates }: TemplatesClientProps) {
                 {/* Search */}
                 <div className="flex justify-center mb-10">
                     <div className="relative w-full max-w-md">
-                        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted" />
+                        <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground/50" />
                         <input
                             type="text"
                             placeholder={locale === 'id' ? 'Cari template...' : 'Search templates...'}
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
-                            className="w-full pl-9 pr-4 h-11 text-sm rounded-lg border border-border bg-background text-foreground placeholder:text-muted focus:border-brand-from focus:ring-2 focus:ring-brand-from/20 transition"
+                            className="w-full pl-10 pr-4 h-12 text-sm rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground placeholder:text-muted-foreground/60 focus:border-brand-from focus:ring-4 focus:ring-brand-from/10 transition-all shadow-sm hover:border-brand-from/50 hover:shadow-md"
                         />
                     </div>
                 </div>
