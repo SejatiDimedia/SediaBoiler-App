@@ -12,14 +12,12 @@ import {
     Heart,
     ArrowRight,
     Sparkles,
-    CheckCircle2,
     Zap,
     Code2,
     Database,
     LayoutTemplate,
     Shield,
-    Box,
-    Layout
+    Box
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { TechStack } from '@/components/ui/TechStack';
@@ -27,6 +25,9 @@ import { FeaturesCreative } from '@/components/ui/FeaturesCreative';
 import { FAQ } from '@/components/ui/FAQ';
 import { CTASection } from '@/components/ui/CTASection';
 import { NewsletterSection } from '@/components/ui/NewsletterSection';
+import { HeroIllustration } from '@/components/ui/HeroIllustration';
+import { SocialProof } from '@/components/ui/SocialProof';
+import { FeaturedTemplates } from '@/components/ui/FeaturedTemplates';
 
 export function HomePageClient({ locale }: { locale: string }) {
     const t = useTranslations('hero');
@@ -116,6 +117,11 @@ export function HomePageClient({ locale }: { locale: string }) {
                                 {t('description')}
                             </p>
 
+                            {/* Social Proof */}
+                            <div className="animate-in fade-in slide-in-from-left-6 duration-700 delay-350 mb-8 mx-auto lg:mx-0 flex justify-center lg:justify-start">
+                                <SocialProof />
+                            </div>
+
                             {/* CTAs */}
                             <div className="animate-in fade-in zoom-in duration-700 delay-400 flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center justify-center lg:justify-start">
                                 <Link href="/library">
@@ -127,140 +133,10 @@ export function HomePageClient({ locale }: { locale: string }) {
                             </div>
                         </div>
 
+
+
                         {/* RIGHT: Visual / Illustration */}
-                        <div className="relative w-full perspective-1000 lg:h-[600px] flex items-center justify-center lg:justify-end mt-8 lg:mt-0">
-                            <div className="relative w-full max-w-[340px] sm:max-w-[440px] lg:max-w-[600px] transform lg:rotate-y-[-12deg] lg:rotate-x-[5deg] transition-transform duration-500 hover:rotate-0 preserve-3d scale-[0.95] sm:scale-100">
-
-                                {/* Glow behind illustration */}
-                                <div className="absolute inset-0 bg-brand-from/20 blur-[100px] -z-10 rounded-full" />
-
-                                {/* Moving Transfer Element (The "Copy-Paste" Action) */}
-                                <div className="absolute z-50 top-[30%] left-[30%] animate-[transfer_4s_ease-in-out_infinite] hidden md:block pointer-events-none">
-                                    <div className="flex items-center gap-2 bg-white text-black text-[10px] font-bold px-3 py-1.5 rounded-full shadow-xl border border-white/20">
-                                        <Copy className="w-3 h-3" />
-                                        <span>Component.tsx</span>
-                                    </div>
-                                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-20 bg-gradient-to-b from-white/50 to-transparent blur-[1px]" />
-                                </div>
-
-                                {/* Top Layer: Component Library (Source) */}
-                                <div className="relative group z-20 translate-x-0 translate-y-0 lg:translate-x-0 lg:translate-y-0 animate-in fade-in slide-in-from-bottom-12 duration-1000 delay-500">
-                                    <div className="absolute -inset-1 bg-gradient-to-tr from-brand-to to-brand-from rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000" />
-                                    <div className="relative rounded-xl border border-border/50 bg-background/95 backdrop-blur-xl shadow-2xl overflow-hidden h-[300px] sm:h-[340px] w-full flex flex-col ring-1 ring-white/10">
-                                        {/* Header */}
-                                        <div className="flex items-center justify-between px-4 py-3 border-b border-border/50 bg-muted/30">
-                                            <div className="flex gap-2">
-                                                <div className="w-3 h-3 rounded-full bg-red-400/20" />
-                                                <div className="w-3 h-3 rounded-full bg-yellow-400/20" />
-                                            </div>
-                                            <div className="text-[10px] font-medium text-muted-foreground uppercase tracking-wider">Sapa Lib</div>
-                                        </div>
-
-                                        {/* Library Content */}
-                                        <div className="p-4 sm:p-6 flex flex-col gap-4 sm:gap-6">
-                                            <div className="space-y-2">
-                                                <div className="h-4 w-1/3 bg-muted rounded animate-pulse" />
-                                                <div className="h-2 w-1/2 bg-muted/50 rounded" />
-                                            </div>
-
-                                            {/* The Component Card being "Copied" */}
-                                            <div className="relative group/card cursor-pointer">
-                                                <div className="absolute inset-0 bg-brand-from/10 rounded-xl blur-xl group-hover/card:bg-brand-from/20 transition-all" />
-                                                <div className="relative bg-card border border-border rounded-xl p-3 sm:p-4 transition-all group-hover/card:border-brand-from/50 group-hover/card:shadow-lg hover:-translate-y-1">
-                                                    <div className="flex items-center justify-between mb-3">
-                                                        <div className="flex items-center gap-3">
-                                                            <div className="w-8 h-8 rounded-lg bg-brand-from/10 flex items-center justify-center text-brand-from">
-                                                                <Layout className="w-4 h-4" />
-                                                            </div>
-                                                            <div>
-                                                                <div className="font-semibold text-sm">Hero Section</div>
-                                                                <div className="text-[10px] text-muted-foreground">Layouts</div>
-                                                            </div>
-                                                        </div>
-                                                        <div className="h-6 w-16 bg-brand-from text-white rounded-md text-[10px] font-bold flex items-center justify-center shadow-lg shadow-brand-from/20">
-                                                            Copy
-                                                        </div>
-                                                    </div>
-                                                    <div className="h-16 sm:h-20 bg-muted/10 rounded-lg border border-border/50 border-dashed flex items-center justify-center">
-                                                        <div className="w-1/2 h-2 bg-muted/20 rounded-full" />
-                                                    </div>
-                                                </div>
-
-                                                {/* Fake Cursor clicking Copy */}
-                                                <div className="absolute top-4 right-8 w-6 h-6 z-50 pointer-events-none animate-[cursor_click_4s_ease-in-out_infinite]">
-                                                    <svg className="w-full h-full text-foreground drop-shadow-md" viewBox="0 0 24 24" fill="currentColor">
-                                                        <path d="M5.5 3.21l12.7 10.9-6.3.7-2.7 7.5L5.5 3.2z" />
-                                                    </svg>
-                                                </div>
-                                            </div>
-
-                                            <div className="h-20 sm:h-24 bg-muted/5 rounded-xl border border-border/30 border-dashed" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Bottom Layer: Code Editor (Destination) */}
-                                <div className="relative z-10 translate-x-4 -translate-y-10 sm:translate-x-12 sm:-translate-y-24 lg:translate-x-20 lg:-translate-y-32 animate-in fade-in slide-in-from-right-12 duration-1000 delay-300">
-                                    <div className="absolute -inset-1 bg-gradient-to-r from-brand-from to-brand-to rounded-2xl blur opacity-30" />
-                                    <div className="relative rounded-xl border border-white/10 bg-[#0F172A] shadow-2xl overflow-hidden h-[260px] sm:h-[300px] w-full max-w-[340px] flex flex-col ring-1 ring-white/5 mx-auto">
-                                        <div className="flex items-center justify-between px-4 py-3 bg-[#0F172A] border-b border-white/5">
-                                            <div className="flex gap-1.5">
-                                                <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                                                <div className="w-2.5 h-2.5 rounded-full bg-slate-600" />
-                                            </div>
-                                            <div className="text-[10px] text-slate-400 font-mono">page.tsx</div>
-                                        </div>
-                                        <div className="p-4 text-left font-mono text-[10px] sm:text-xs overflow-hidden flex-1 relative bg-[#0F172A]">
-                                            <div className="flex flex-col text-slate-400">
-                                                <span><span className="text-purple-400">import</span> <span className="text-blue-300">&#123; Button &#125;</span> <span className="text-purple-400">from</span> <span className="text-green-300">'@ui'</span>;</span>
-                                                <span className="h-4" />
-                                                <span><span className="text-purple-400">export default</span> <span className="text-blue-400">function</span> <span className="text-yellow-400">Page</span>() &#123;</span>
-                                                <span className="pl-4"><span className="text-purple-400">return</span> (</span>
-                                                <span className="pl-8 text-slate-300">&lt;<span className="text-pink-400">main</span>&gt;</span>
-
-                                                {/* Typing Effect Area */}
-                                                <div className="pl-12 py-1 my-1 bg-brand-from/10 border-l-2 border-brand-from animate-[pulse_4s_ease-in-out_infinite]">
-                                                    <span className="text-yellow-300">&lt;HeroSection /&gt;</span>
-                                                </div>
-
-                                                <span className="pl-8 text-slate-300">&lt;/<span className="text-pink-400">main</span>&gt;</span>
-                                                <span className="pl-4">);</span>
-                                                <span>&#125;</span>
-                                            </div>
-                                        </div>
-                                        {/* Pasted Toast */}
-                                        <div className="absolute bottom-4 right-4 bg-green-500 text-white text-[10px] font-bold px-3 py-1.5 rounded-full shadow-lg flex items-center gap-1.5 animate-[intro_pop_4s_ease-in-out_infinite]">
-                                            <CheckCircle2 className="w-3 h-3" />
-                                            Pasted!
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {/* Custom Styles for Keyframes (Inline for simplicity in this component) */}
-                                <style jsx>{`
-                                    @keyframes transfer {
-                                        0%, 15% { opacity: 0; transform: translate(0, 0) scale(0.5); }
-                                        20% { opacity: 1; transform: translate(10px, -20px) scale(1); }
-                                        40% { transform: translate(60px, 40px) scale(1.1); }
-                                        50% { opacity: 1; transform: translate(120px, 80px) scale(0.8); }
-                                        70%, 100% { opacity: 0; transform: translate(140px, 100px) scale(0); }
-                                    }
-                                    @keyframes cursor_click {
-                                        0%, 10% { transform: translate(0, 0); }
-                                        15% { transform: scale(0.9); }
-                                        20% { transform: scale(1); }
-                                        100% { transform: translate(0, 0); }
-                                    }
-                                    @keyframes intro_pop {
-                                        0%, 45% { transform: translateY(10px); opacity: 0; }
-                                        50% { transform: translateY(0); opacity: 1; }
-                                        70% { transform: translateY(0); opacity: 1; }
-                                        80%, 100% { transform: translateY(-10px); opacity: 0; }
-                                    }
-                                `}</style>
-
-                            </div>
-                        </div>
+                        <HeroIllustration />
 
                     </div>
                 </div>
@@ -273,6 +149,9 @@ export function HomePageClient({ locale }: { locale: string }) {
 
             {/* Features Section - Creative Grid */}
             <FeaturesCreative />
+
+            {/* Featured Templates Section */}
+            <FeaturedTemplates />
 
             {/* FAQ Section */}
             <FAQ />

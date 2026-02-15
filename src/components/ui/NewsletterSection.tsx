@@ -150,7 +150,6 @@ export function NewsletterSection() {
                                                 style={{ outline: 'none', boxShadow: 'none' }}
                                                 className="bg-transparent border-none outline-none text-zinc-100 flex-1 p-0 focus:ring-0 ring-0 focus:border-none placeholder:text-zinc-700 font-mono caret-white"
                                                 placeholder="user@example.com"
-                                                autoFocus
                                                 disabled={isPending}
                                                 autoComplete="off"
                                                 spellCheck="false"

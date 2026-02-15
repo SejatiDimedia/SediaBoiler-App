@@ -295,5 +295,28 @@
                 }
             }
         }
+    },
+    "featuredTemplates": {
+        "title": "Featured",
+        "titleHighlight": "Collections",
+        "description": "Production-ready layouts. Start building in seconds.",
+        "cta": "Explore Template",
+        "items": {
+            "dashboard": {
+                "title": "SaaS Dashboard",
+                "category": "Admin & Analytics",
+                "description": "A data-heavy powerhouse with charts, tables, and roles."
+            },
+            "landing": {
+                "title": "Modern Landing",
+                "category": "Marketing",
+                "description": "High-conversion layout with hero slides and pricing."
+            },
+            "ecommerce": {
+                "title": "E-Commerce",
+                "category": "Storefront",
+                "description": "Complete shopping flow with cart and checkout."
+            }
+        }
     }
 }

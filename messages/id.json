@@ -295,5 +295,28 @@
         }
       }
     }
+  },
+  "featuredTemplates": {
+    "title": "Koleksi",
+    "titleHighlight": "Unggulan",
+    "description": "Layout siap pakai. Mulai membangun dalam hitungan detik.",
+    "cta": "Jelajahi Template",
+    "items": {
+      "dashboard": {
+        "title": "SaaS Dashboard",
+        "category": "Admin & Analitik",
+        "description": "Pusat data yang kuat dengan grafik, tabel, dan peran pengguna."
+      },
+      "landing": {
+        "title": "Landing Modern",
+        "category": "Pemasaran",
+        "description": "Layout konversi tinggi dengan slide hero dan harga."
+      },
+      "ecommerce": {
+        "title": "E-Commerce",
+        "category": "Toko Online",
+        "description": "Alur belanja lengkap dengan keranjang dan checkout."
+      }
+    }
   }
 }
