@@ -27,7 +27,7 @@ async function main() {
                 // Find ArrowRight usage
                 const matches = code.match(/<ArrowRight[^>]*>/g);
                 if (matches) {
-                    matches.forEach(m => console.log(m));
+                    matches.forEach((m: string) => console.log(m));
                 } else {
                     console.log('No ArrowRight found.');
                 }
